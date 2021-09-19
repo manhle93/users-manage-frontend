@@ -150,7 +150,7 @@
       <!-- SIGN IN CONTENT -->
       <div class="col align-items-center flex-col">
         <div class="text sign-in">
-          <h2>Quản Lý Nhân Sự</h2>
+          <h2>WELCOME BACK</h2>
           <p>Hãy làm việc hết mình, thành công sẽ tìm đến bạn!</p>
         </div>
         <div class="img sign-in">
