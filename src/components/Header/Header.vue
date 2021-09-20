@@ -1,5 +1,12 @@
 <template>
-  <v-app-bar class="main-header" style="box-shadow: none" height="45" fixed color="indigo darken-4" dark>
+  <v-app-bar
+    class="main-header"
+    style="box-shadow: none"
+    height="45"
+    fixed
+    color="indigo darken-4"
+    dark
+  >
     <v-progress-linear
       indeterminate
       color="yellow darken-2"
@@ -7,13 +14,15 @@
       height="4"
       v-show="loadingBar"
     ></v-progress-linear>
-
+    <v-avatar size="38" class="mr-3">
+      <img :src="Logo" alt="John" />
+    </v-avatar>
+    <v-toolbar-title style="font-size: 16px">Application</v-toolbar-title>
     <v-btn icon class="mx-1" @click.stop="TOGGLE_DRAWER">
       <template>
         <v-icon style="font-size: 20px">mdi-menu</v-icon>
       </template>
     </v-btn>
-    <v-toolbar-title>My Application</v-toolbar-title>
     <v-spacer></v-spacer>
     <!-- <Search /> -->
 
@@ -182,12 +191,14 @@ import config from "../../config";
 
 import store from "../../store/index";
 import { getThongBao, docThongBao } from "@/api/thongbao";
+import Logo from "@/assets/Logo.png";
 
 export default {
   name: "Header",
   // components: {Search},
   data: () => ({
     config,
+    Logo,
     imageEndpoint: process.env.VUE_APP_BASE,
     searchCollapse: true,
     thongBaos: [],
@@ -210,7 +221,7 @@ export default {
     },
   },
   created() {
-  //  this.getDataThongBao();
+    //  this.getDataThongBao();
   },
   methods: {
     ...mapActions(["TOGGLE_DRAWER"]),
@@ -252,7 +263,7 @@ export default {
       if (this.$route.name !== "Thông tin") {
         this.$router.push("/users/profile");
       }
-      return
+      return;
     },
   },
 };

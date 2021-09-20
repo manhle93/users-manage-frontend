@@ -1,20 +1,43 @@
 <template>
   <v-dialog v-model="show" persistent width="800">
     <v-card>
-      <v-card-title class="headline">{{ edit ? "CẬP NHẬT THÔNG TIN NGƯỜI DÙNG" : "THÊM MỚI NGƯỜI DÙNG" }}</v-card-title>
+      <v-card-title class="headline">{{
+        edit ? "CẬP NHẬT THÔNG TIN NGƯỜI DÙNG" : "THÊM MỚI NGƯỜI DÙNG"
+      }}</v-card-title>
       <br />
       <v-card-text>
         <v-form ref="form" lazy-validation>
           <v-row>
-            <v-col xs="12" sm="5" md="5" class="d-flex flex-column align-center">
+            <v-col
+              xs="12"
+              sm="5"
+              md="5"
+              class="d-flex flex-column align-center"
+            >
               <v-img height="200px" :src="masterialPic">
                 <v-card-text>
                   <v-layout column class="align-center">
                     <v-tooltip top>
-                      <template v-slot:activator="{on, attrs}">
-                        <v-avatar size="180" v-bind="attrs" v-on="on" @click="uploadAvatar">
-                          <v-img :src="form.url_image ? imageEndpoint + form.url_image : avatarNone"></v-img>
-                          <v-btn color="blue" fab x-small style="position: absolute; top: 130px; right: 40px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-avatar
+                          size="180"
+                          v-bind="attrs"
+                          v-on="on"
+                          @click="uploadAvatar"
+                        >
+                          <v-img
+                            :src="
+                              form.url_image
+                                ? imageEndpoint + form.url_image
+                                : avatarNone
+                            "
+                          ></v-img>
+                          <v-btn
+                            color="blue"
+                            fab
+                            x-small
+                            style="position: absolute; top: 130px; right: 40px"
+                          >
                             <v-icon color="white">mdi-pencil</v-icon>
                           </v-btn>
                         </v-avatar>
@@ -68,10 +91,10 @@
                 prepend-inner-icon="mdi-wrench"
                 placeholder="Chọn quyền quản trị"
               >
-                <template v-slot:selection="{item}">
+                <template v-slot:selection="{ item }">
                   {{ item.name + " - " + item.description }}
                 </template>
-                <template v-slot:item="{item, attrs, on}">
+                <template v-slot:item="{ item, attrs, on }">
                   <v-list-item v-on="on" v-bind="attrs" #default="{ active }">
                     <v-list-item-action>
                       <v-checkbox :input-value="active"></v-checkbox>
@@ -81,7 +104,9 @@
                         <v-row no-gutters align="center">
                           <span>{{ item.name }}</span>
                           <v-spacer></v-spacer>
-                          <v-chip text-color="white" color="green" small>{{ item.description }}</v-chip>
+                          <v-chip text-color="white" color="green" small>{{
+                            item.description
+                          }}</v-chip>
                         </v-row>
                       </v-list-item-title>
                     </v-list-item-content>
@@ -89,19 +114,37 @@
                 </template>
               </v-select>
               <br />
-              <div class="label-form" style="font-weight: bold">Mật khẩu đăng nhập</div>
+              <div class="label-form" style="font-weight: bold">
+                Mật khẩu đăng nhập
+              </div>
               <v-row>
                 <v-col cols="6"
-                  ><v-text-field
+                  ><v-combobox
                     v-model="form.password"
                     placeholder="Mật khẩu"
                     outlined
+                    :items="passwords"
                     dense
                     :rules="edit ? [] : formValidate.password"
                     type="password"
                     prepend-inner-icon="mdi-lock"
-                  ></v-text-field
-                ></v-col>
+                  >
+                    <template v-slot:item="{ item }">
+                      <v-layout align-end @click="selectPass(item)">
+                        <div style="height: 24px">{{ item }}</div>
+                        <v-spacer/>
+                        <div
+                          style="
+                            font-size: 12px;
+                            color: gray;
+                            height: 20px;"
+                        >
+                          Đề xuất
+                        </div>
+                      </v-layout>
+                    </template>
+                  </v-combobox></v-col
+                >
                 <v-col cols="6"
                   ><v-text-field
                     v-model="form.confirmPassword"
@@ -121,7 +164,12 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text @click="show = false" class="mr-4">Đóng</v-btn>
-        <v-btn :loading="btnLoading" color="primary" @click="addUser" v-if="!edit">
+        <v-btn
+          :loading="btnLoading"
+          color="primary"
+          @click="addUser"
+          v-if="!edit"
+        >
           <v-icon left>mdi-plus</v-icon>
           Thêm mới
         </v-btn>
@@ -136,7 +184,7 @@
 <script>
 import avatarNone from "../../../../docs/img/avatar_none.png";
 import masterialPic from "../../../../docs/img/masterial.png";
-import {updateUser, createUser, uploadAvatar} from "@/api/user";
+import { updateUser, createUser, uploadAvatar } from "@/api/user";
 export default {
   props: ["roles"],
   data: () => ({
@@ -148,6 +196,7 @@ export default {
     imageEndpoint: process.env.VUE_APP_BASE,
     btnLoading: false,
     src: null,
+    passwords: ["Abc@2021", "123456@Dk"],
     form: {
       role_id: null,
       email: "",
@@ -159,21 +208,26 @@ export default {
     },
     formValidate: {
       name: [
-        v => !!v || "Tên người dùng không thể bỏ trống",
-        v => (v && v.length >= 3) || "Tên người dùng tối thiểu 3 ký tự",
+        (v) => !!v || "Tên người dùng không thể bỏ trống",
+        (v) => (v && v.length >= 3) || "Tên người dùng tối thiểu 3 ký tự",
       ],
-      email: [v => !!v || "E-Mail không thể bỏ trống", v => /.+@.+\..+/.test(v) || "E-mail không hợp lệ"],
-      role_id: [v => !!v || "Hãy chọn một quyền quản trị!"],
-      password: [v => !!v || "Mật khẩu không thể bỏ trống"],
+      email: [
+        (v) => !!v || "E-Mail không thể bỏ trống",
+        (v) => /.+@.+\..+/.test(v) || "E-mail không hợp lệ",
+      ],
+      role_id: [(v) => !!v || "Hãy chọn một quyền quản trị!"],
+      password: [(v) => !!v || "Mật khẩu không thể bỏ trống"],
       user_name: [
-        v => !!v || "Tên đăng nhập không thể bỏ trống",
-        v => (v && v.length >= 3) || "Tên đăng nhập tối thiểu 3 ký tự",
+        (v) => !!v || "Tên đăng nhập không thể bỏ trống",
+        (v) => (v && v.length >= 3) || "Tên đăng nhập tối thiểu 3 ký tự",
       ],
     },
   }),
   computed: {
     confirmPassword() {
-      return () => this.form.confirmPassword === this.form.password || "Mật khẩu không trùng khớp";
+      return () =>
+        this.form.confirmPassword === this.form.password ||
+        "Mật khẩu không trùng khớp";
     },
     USER() {
       return this.$store.state.User.me;
@@ -199,9 +253,14 @@ export default {
     async showFormEdit(data) {
       this.edit = true;
       this.show = true;
-      this.form = {...data};
+      this.form = { ...data };
     },
+    selectPass(item){
+      this.form.confirmPassword = item
+      this.form.password = this.form.confirmPassword
 
+      console.log(this.form.password, this.form.confirmPassword)
+    },
     async addUser() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
@@ -255,7 +314,7 @@ export default {
         });
         return false;
       }
-      if (!dinhDangChoPhep.find(el => el == filePath.toLowerCase())) {
+      if (!dinhDangChoPhep.find((el) => el == filePath.toLowerCase())) {
         this.loadingUpload = false;
         this.listLoading = false;
         this.iconUpload = "el-icon-bottom";
@@ -274,10 +333,10 @@ export default {
         return;
       }
       uploadAvatar(data)
-        .then(res => {
-          this.form.url_image = res
+        .then((res) => {
+          this.form.url_image = res;
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
 

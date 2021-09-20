@@ -214,11 +214,12 @@ export default {
     async login() {
       try {
         this.loading = true;
+        this.verify = true
         await store.dispatch("User/login", this.formLogin);
         this.loading = false;
-        this.verify = true
       } catch (error) {
         this.loading = false;
+        this.verify = false
       }
     },
    async verifyLogin() {

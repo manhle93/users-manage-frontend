@@ -29,7 +29,6 @@ const actions = {
         .then(response => {
           let mainRouter = data.find(el => el.children);
           let menu = [];
-          console.log(response.data)
           response.data.map(el => {
             const exist = mainRouter.children.find(it => it.name == el.name);
             if (exist) {
@@ -44,6 +43,7 @@ const actions = {
                     });
                   }
                 });
+
                 menu.push({
                   ...el,
                   path: mainRouter.path + exist.path,
