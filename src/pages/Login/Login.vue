@@ -8,7 +8,7 @@
           <div class="form sign-up">
             <div class="input-group">
               <i class="bx bxs-user"></i>
-              <input type="text" placeholder="Username hoặc Email" />
+              <input type="text" placeholder="代表者名 / Eメールアドレス" />
             </div>
             <div class="input-group">
               <i class="bx bx-mail-send"></i>
@@ -22,10 +22,10 @@
               <i class="bx bxs-lock-alt"></i>
               <input type="password" placeholder="Confirm password" />
             </div>
-            <button>Đăng ký</button>
+            <button>登録</button>
             <p>
               <span style="margin-right: 5px">Bạn đã có tài khoản ?</span>
-              <b @click="sign" class="pointer">Đăng nhập ngay</b>
+              <b @click="sign" class="pointer">ログイン</b>
             </p>
           </div>
         </div>
@@ -52,7 +52,7 @@
         <div class="form-wrapper align-items-center">
           <div class="form sign-in">
             <div class="input-group">
-              {{ verify ? "XÁC THỰC" : "ĐĂNG NHẬP" }}
+              {{ verify ? "登録" : "ログイン" }}
               <v-progress-linear
                 v-if="loading"
                 indeterminate
@@ -60,11 +60,11 @@
               ></v-progress-linear>
             </div>
             <div v-if="verify">
-              <p>Chúng tôi đã gửi một mã xác thực đến địa chỉ Email của bạn</p>
-              <p>Mã xác thực có hiệu lực trong 6 phút</p>
+              <p>あなたのEメールアドレスに認証コードをお送りました。ご確認してください。</p>
+              <p>認証コードの有効期限は6分となります</p>
               <div class="input-group">
                 <i class="bx bxs-key"></i>
-                <input v-model="code" placeholder="Mã xác thực" />
+                <input v-model="code" placeholder="郵便番号" />
               </div>
             </div>
             <div v-else>
@@ -73,7 +73,7 @@
                 <input
                   v-model="formLogin.email_username"
                   type="text"
-                  placeholder="Username hoặc Email"
+                  placeholder="代表者名 / メールアドレス"
                 />
               </div>
               <div class="input-group">
@@ -81,7 +81,7 @@
                 <input
                   v-model="formLogin.password"
                   type="password"
-                  placeholder="Password"
+                  placeholder="パスワード"
                 />
               </div>
             </div>
@@ -98,7 +98,7 @@
                 indeterminate
                 color="primary"
               ></v-progress-circular>
-              <span v-else>Xác thực</span>
+              <span v-else>認証</span>
             </v-btn>
 
             <v-btn
@@ -113,14 +113,14 @@
                 indeterminate
                 color="primary"
               ></v-progress-circular>
-              <span v-else>Đăng nhập</span>
+              <span v-else>ログイン</span>
             </v-btn>
             <p>
-              <b class="pointer">Quên mật khẩu ?</b>
+              <b class="pointer">Forgot password ?</b>
             </p>
             <p>
-              <span style="margin-right: 5px">Bạn chưa có tài khoản ?</span>
-              <b @click="sign" class="pointer">Đăng ký ngay</b>
+              <span style="margin-right: 5px">Do you have an account?</span>
+              <b @click="sign" class="pointer">登録</b>
             </p>
           </div>
         </div>
@@ -150,8 +150,8 @@
       <!-- SIGN IN CONTENT -->
       <div class="col align-items-center flex-col">
         <div class="text sign-in">
-          <h2>WELCOME BACK</h2>
-          <p>Hãy làm việc hết mình, thành công sẽ tìm đến bạn!</p>
+          <h2>TENTECH</h2>
+          <p>Lead today, Pioneer tomorrow...</p>
         </div>
         <div class="img sign-in">
           <img src="./assets/undraw_Data_re_80ws.svg" alt="welcome" />
