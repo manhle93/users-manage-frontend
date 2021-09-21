@@ -21,7 +21,7 @@
         <div class="pt-3">
           <v-btn color="indigo" dark @click="addUser">
             <v-icon left> mdi-plus </v-icon>
-            ADD USER
+            新規作成
           </v-btn>
         </div>
       </v-layout>
