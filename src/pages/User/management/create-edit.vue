@@ -62,7 +62,7 @@
                   :rules="formValidate.email"
                 ></v-text-field>
                 <v-text-field
-                  placeholder="Tên đăng nhập"
+                  placeholder="代表者名"
                   prepend-inner-icon="mdi-account"
                   v-model="form.user_name"
                   :rules="formValidate.user_name"
@@ -115,13 +115,13 @@
               </v-select>
               <br />
               <div class="label-form" style="font-weight: bold">
-                Mật khẩu đăng nhập
+                パスワード
               </div>
               <v-row>
                 <v-col cols="6"
                   ><v-combobox
                     v-model="form.password"
-                    placeholder="Mật khẩu"
+                    placeholder="パスワード"
                     outlined
                     :items="passwords"
                     dense

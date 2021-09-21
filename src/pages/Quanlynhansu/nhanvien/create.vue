@@ -8,12 +8,12 @@
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
             <v-toolbar-title>Thông tin nhân sự</v-toolbar-title>
           </v-toolbar> -->
-            <v-card-title class="pt-4 pl-6">Thông tin cá nhân</v-card-title>
+            <v-card-title class="pt-4 pl-6">情報</v-card-title>
             <v-layout column class="pl-6 pr-6">
               <v-row>
                 <v-col cols="5" class="zero-vertical">
                   <div class="label-form">
-                    Họ tên nhân viên <span style="color: red">(*)</span>
+                    ユーザ名 <span style="color: red">(*)</span>
                   </div>
                   <v-text-field
                     v-model="form.name"
@@ -25,7 +25,7 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">Ngày sinh</div>
+                  <div class="label-form">Date of birth</div>
                   <v-menu
                     v-model="showPickNgaySinh"
                     :close-on-content-click="false"
@@ -52,7 +52,7 @@
                   </v-menu>
                 </v-col>
                 <v-col cols="3" class="zero-vertical">
-                  <div class="label-form">Giới tính</div>
+                  <div class="label-form">Sex</div>
                   <v-select
                     prepend-inner-icon="mdi-human"
                     v-model="form.gioi_tinh"
@@ -65,7 +65,7 @@
                   </v-select>
                 </v-col>
                 <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">Nơi sinh</div>
+                  <div class="label-form">Place of birth</div>
                   <v-text-field
                     v-model="form.noi_sinh"
                     placeholder="Nơi sinh, quê quán"
@@ -75,7 +75,7 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="7" class="zero-vertical">
-                  <div class="label-form">Địa chỉ hiện tại</div>
+                  <div class="label-form">Adress</div>
                   <v-text-field
                     v-model="form.dia_chi_hien_tai"
                     placeholder="Chỗ ở hiện nay"
@@ -85,7 +85,7 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">Số điện thoại</div>
+                  <div class="label-form">Phone</div>
                   <v-text-field
                     v-model="form.so_dien_thoai"
                     placeholder="Số điện thoại"
@@ -95,7 +95,7 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">Số CMND</div>
+                  <div class="label-form">ID number</div>
                   <v-text-field
                     v-model="form.so_cmt"
                     placeholder="Số CMND"
@@ -337,7 +337,7 @@
               <v-layout align-center>
                 <v-text-field
                   style="width: 70%"
-                  placeholder="Tên đăng nhập"
+                  placeholder="代表者名"
                   prepend-inner-icon="mdi-account"
                   v-model="form.user_name"
                   :rules="userNameRules"

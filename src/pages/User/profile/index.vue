@@ -11,10 +11,10 @@
         ></v-img>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            THÔNG TIN TÀI KHOẢN</v-list-item-title
+            情報</v-list-item-title
           >
           <v-list-item-subtitle
-            >Cập nhật thông tin cá nhân</v-list-item-subtitle
+            >設定 情報</v-list-item-subtitle
           >
         </v-list-item-content>
       </v-layout>
@@ -60,7 +60,7 @@
                       </v-btn>
                     </v-avatar>
                   </template>
-                  <span>Upload Ảnh đại diện</span>
+                  <span>Upload your images</span>
                 </v-tooltip>
               </v-layout>
               <input
@@ -77,19 +77,19 @@
             <v-card-subtitle>{{ USER.email }}</v-card-subtitle>
             <v-btn rounded color="primary" dark small @click="changePass()">
               <v-icon left small> mdi-key </v-icon>
-              Đổi mật khẩu
+              Change password
             </v-btn>
           </v-layout>
-          <v-card-title class="pt-0 pb-2 pl-8">Thông tin</v-card-title>
+          <v-card-title class="pt-0 pb-2 pl-8">情報</v-card-title>
           <v-layout column class="pl-8 pb-6">
             <div class="mb-2">
-              Ngày tham gia: <strong>{{ formatDate(USER.created_at) }}</strong>
+              Date created: <strong>{{ formatDate(USER.created_at) }}</strong>
             </div>
             <div class="mb-2">
-              Tên đăng nhập: <strong>{{ USER.user_name }}</strong>
+              代表者名: <strong>{{ USER.user_name }}</strong>
             </div>
             <div class="mb-2">
-              Quyền quản trị:
+              権限:
               {{
                 USER && USER.role
                   ? USER.role.name + " - " + USER.role.description
@@ -104,7 +104,7 @@
         <v-card>
           <v-toolbar color="indigo darken-3" dark flat>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
-            <v-toolbar-title>Văn Thư Của Bạn</v-toolbar-title>
+            <v-toolbar-title>Your Office</v-toolbar-title>
             <v-spacer></v-spacer>
             <!-- <v-btn icon>
               <v-icon>mdi-magnify</v-icon>
@@ -115,9 +115,9 @@
             <template v-slot:extension>
               <v-tabs v-model="tab" align-with-title>
                 <v-tabs-slider color="yellow"></v-tabs-slider>
-                <v-tab>CẬP NHẬT THÔNG TIN</v-tab>
-                <v-tab>HỘP THƯ</v-tab>
-                <v-tab>NHÓM</v-tab>
+                <v-tab>Update your information</v-tab>
+                <v-tab>Office</v-tab>
+                <v-tab>Group</v-tab>
               </v-tabs>
             </template>
           </v-toolbar>
@@ -130,7 +130,7 @@
                   style="width: 100%; justify-content: center"
                 >
                   <div column class="pt-6" style="width: 50%">
-                    <div class="label-form">Họ tên</div>
+                    <div class="label-form">代表者名</div>
                     <v-text-field
                       placeholder="Nhập họ và tên"
                       :rules="nameRules"
@@ -139,9 +139,9 @@
                       prepend-inner-icon="mdi-account"
                       v-model="form.name"
                     ></v-text-field>
-                    <div class="label-form">Tên đăng nhập</div>
+                    <div class="label-form">ユーザ名</div>
                     <v-text-field
-                      placeholder="Nhập tên đăng nhập"
+                      placeholder="代表者名"
                       :rules="userNameRules"
                       outlined
                       dense
@@ -157,7 +157,7 @@
                       prepend-inner-icon="mdi-mail"
                       v-model="form.email"
                     ></v-text-field>
-                    <div class="label-form">Company Name</div>
+                    <div class="label-form">会社名</div>
                     <v-text-field
                       placeholder="Nhập tên công ty"
                       outlined
@@ -172,7 +172,7 @@
                       dark
                       @click="updateUser"
                     >
-                      Cập nhật
+                      Update
                     </v-btn>
                   </div>
                 </div>
@@ -194,11 +194,11 @@
     </v-row>
     <v-dialog v-model="showFormChangePass" persistent width="500">
       <v-card>
-        <v-card-title class="headline">THAY ĐỔI MẬT KHẨU</v-card-title>
+        <v-card-title class="headline">Change your password</v-card-title>
         <br />
         <v-card-text>
           <v-form ref="form">
-            <div class="label-form">Mật khẩu hiện tại</div>
+            <div class="label-form">Current Password</div>
             <v-text-field
               type="password"
               v-model="changePassWord.currentPass"
@@ -208,7 +208,7 @@
               dense
               prepend-inner-icon="mdi-account-key"
             ></v-text-field>
-            <div class="label-form">Mật khẩu mới</div>
+            <div class="label-form">New Password</div>
             <v-text-field
               type="password"
               v-model="changePassWord.newPassWord"
@@ -218,7 +218,7 @@
               dense
               prepend-inner-icon="mdi-lock"
             ></v-text-field>
-            <div class="label-form">Xác nhận mật khẩu mới</div>
+            <div class="label-form">Retype Password</div>
             <v-text-field
               type="password"
               v-model="changePassWord.reNewPassWord"
@@ -233,11 +233,11 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn text @click="showFormChangePass = false" class="mr-4"
-            >Đóng</v-btn
+            >Close</v-btn
           >
           <v-btn :loading="btnLoading" color="primary" @click="updatePass">
             <v-icon left>mdi-pencil</v-icon>
-            Cập nhật
+            Update
           </v-btn>
         </v-card-actions>
       </v-card>

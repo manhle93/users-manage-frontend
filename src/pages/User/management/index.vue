@@ -196,7 +196,7 @@ export default {
         // { text: "STT", width: "100", sortable: false, value: "stt" },
         { text: "Người dùng", value: "name", sortable: false, width: "220", },
         {
-          text: "Tên đăng nhập",
+          text: "代表者名",
           align: "start",
           sortable: false,
           value: "user_name",
