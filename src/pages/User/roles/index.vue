@@ -11,7 +11,7 @@
         ></v-img>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            PHÂN QUYỀN</v-list-item-title
+           権限</v-list-item-title
           >
           <v-list-item-subtitle
             >Thiết lập quyền truy cập và thực hiện chức năng hệ
@@ -52,14 +52,14 @@
               Thiết lập
             </v-btn>
           </template>
-          <span>Thiết lập phân quyền</span>
+          <span>権限</span>
         </v-tooltip>
       </template>
     </v-data-table>
     <v-dialog v-model="showConfig" max-width="500px">
       <v-card>
         <v-card-title class="headline grey lighten-2">
-          Phân quyền
+          権限
         </v-card-title>
 
         <v-card-text>

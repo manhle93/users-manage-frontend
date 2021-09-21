@@ -11,17 +11,17 @@
         ></v-img>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            QUẢN LÝ NGƯỜI DÙNG</v-list-item-title
+            ユーザー管理</v-list-item-title
           >
           <v-list-item-subtitle
-            >Danh sách người dùng hệ thống</v-list-item-subtitle
+            >ユーザー一覧</v-list-item-subtitle
           >
         </v-list-item-content>
 
         <div class="pt-3">
           <v-btn color="indigo" dark @click="addUser">
             <v-icon left> mdi-plus </v-icon>
-            ADD USER
+            新規作成
           </v-btn>
         </div>
       </v-layout>

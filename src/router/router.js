@@ -72,17 +72,17 @@ export const routes = [
           {
             path: "role",
             component: () => import("@/pages/User/roles/index"),
-            name: "Phân quyền",
+            name: "権限",
           },
           {
             path: "profile",
             component: () => import("@/pages/User/profile/index"),
-            name: "Thông tin",
+            name: "情報",
           },
           {
             path: "management",
             component: () => import("@/pages/User/management/index"),
-            name: "Quản lý người dùng",
+            name: "ユーザー管理",
           },
         ],
       },
