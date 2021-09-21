@@ -2,7 +2,7 @@
   <v-dialog v-model="show" persistent width="800">
     <v-card>
       <v-card-title class="headline">{{
-        edit ? "CẬP NHẬT THÔNG TIN NGƯỜI DÙNG" : "THÊM MỚI NGƯỜI DÙNG"
+        edit ? "ユーザー情報編集" : "新規ユーザー作成"
       }}</v-card-title>
       <br />
       <v-card-text>
@@ -42,7 +42,7 @@
                           </v-btn>
                         </v-avatar>
                       </template>
-                      <span>Upload Ảnh đại diện</span>
+                      <span>アバターアップロード</span>
                     </v-tooltip>
                   </v-layout>
                   <input
@@ -56,7 +56,7 @@
               </v-img>
               <v-layout column class="align-center">
                 <v-text-field
-                  placeholder="E-Mail"
+                  placeholder="Eメールアドレス"
                   prepend-inner-icon="mdi-email"
                   v-model="form.email"
                   :rules="formValidate.email"
@@ -70,16 +70,16 @@
               </v-layout>
             </v-col>
             <v-col xs="12" sm="7" md="7">
-              <div class="label-form">Tên người dùng</div>
+              <div class="label-form">ユーザー名</div>
               <v-text-field
-                placeholder="Nhập tên người dùng"
+                placeholder="ユーザー名を入力してください。"
                 :rules="formValidate.name"
                 outlined
                 dense
                 prepend-inner-icon="mdi-account"
                 v-model="form.name"
               ></v-text-field>
-              <div class="label-form">Quyền quản trị</div>
+              <div class="label-form">権限</div>
               <v-select
                 v-model="form.role_id"
                 :items="roles"
@@ -89,7 +89,7 @@
                 item-text="name"
                 item-value="id"
                 prepend-inner-icon="mdi-wrench"
-                placeholder="Chọn quyền quản trị"
+                placeholder="権限を選択してください。"
               >
                 <template v-slot:selection="{ item }">
                   {{ item.name + " - " + item.description }}
@@ -139,7 +139,7 @@
                             color: gray;
                             height: 20px;"
                         >
-                          Đề xuất
+                          おすすめ
                         </div>
                       </v-layout>
                     </template>
@@ -148,7 +148,7 @@
                 <v-col cols="6"
                   ><v-text-field
                     v-model="form.confirmPassword"
-                    placeholder="Nhập lại mật khẩu"
+                    placeholder="パスワードを再度入力してください。"
                     outlined
                     type="password"
                     :rules="[confirmPassword]"
@@ -163,7 +163,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="show = false" class="mr-4">Đóng</v-btn>
+        <v-btn text @click="show = false" class="mr-4">キャンセル</v-btn>
         <v-btn
           :loading="btnLoading"
           color="primary"
@@ -171,11 +171,11 @@
           v-if="!edit"
         >
           <v-icon left>mdi-plus</v-icon>
-          Thêm mới
+          登録
         </v-btn>
         <v-btn :loading="btnLoading" color="primary" @click="updateUser" v-else>
           <v-icon left>mdi-pencil</v-icon>
-          Cập nhật
+          更新
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -208,18 +208,18 @@ export default {
     },
     formValidate: {
       name: [
-        (v) => !!v || "Tên người dùng không thể bỏ trống",
-        (v) => (v && v.length >= 3) || "Tên người dùng tối thiểu 3 ký tự",
+        (v) => !!v || "ユーザー名を入力してください。",
+        (v) => (v && v.length >= 3) || "ユーザー名は最低３文字で入力してください。",
       ],
       email: [
-        (v) => !!v || "E-Mail không thể bỏ trống",
-        (v) => /.+@.+\..+/.test(v) || "E-mail không hợp lệ",
+        (v) => !!v || "Eメールアドレスを入力してください。",
+        (v) => /.+@.+\..+/.test(v) || "Eメールアドバイスは正しく入力してください。",
       ],
-      role_id: [(v) => !!v || "Hãy chọn một quyền quản trị!"],
-      password: [(v) => !!v || "Mật khẩu không thể bỏ trống"],
+      role_id: [(v) => !!v || "権限を選択してください。"],
+      password: [(v) => !!v || "パスワードを入力してください。"],
       user_name: [
-        (v) => !!v || "Tên đăng nhập không thể bỏ trống",
-        (v) => (v && v.length >= 3) || "Tên đăng nhập tối thiểu 3 ký tự",
+        (v) => !!v || "ユーザー名を入力してください。",
+        (v) => (v && v.length >= 3) || "ユーザー名は最低３文字で入力してください。",
       ],
     },
   }),
@@ -227,7 +227,7 @@ export default {
     confirmPassword() {
       return () =>
         this.form.confirmPassword === this.form.password ||
-        "Mật khẩu không trùng khớp";
+        "パスワード確認はパスワードと一致していません。";
     },
     USER() {
       return this.$store.state.User.me;
@@ -270,7 +270,7 @@ export default {
           this.show = false;
           this.btnLoading = false;
           this.$emit("on-done");
-          this.$toast.info("Tạo người dùng thành công", {
+          this.$toast.info("ユーザー登録は完了しました。", {
             position: "top-center",
             timeout: 2000,
             closeOnClick: true,
@@ -300,7 +300,7 @@ export default {
       const isLt2M = files[0].size / 1024 / 1024 < 20;
       if (!isLt2M) {
         this.form.fileList.pop();
-        this.$toast.warning("Kích thước file ảnh tối đa 20Mb!", {
+        this.$toast.warning("ファイルのサイズは最大２０MBでアップロードしてください。", {
           position: "top-center",
           timeout: 2000,
           closeOnClick: true,
@@ -318,7 +318,7 @@ export default {
         this.loadingUpload = false;
         this.listLoading = false;
         this.iconUpload = "el-icon-bottom";
-        this.$toast.warning("Tập tin không hợp lệ!", {
+        this.$toast.warning("正しくファイルをアップロードしてください。", {
           position: "top-center",
           timeout: 2000,
           closeOnClick: true,
@@ -351,7 +351,7 @@ export default {
           this.show = false;
           this.btnLoading = false;
           this.$emit("on-done");
-          this.$toast.info("Cập nhật thành công", {
+          this.$toast.info("ユーザー更新は完了しました。", {
             position: "top-center",
             timeout: 2000,
             closeOnClick: true,

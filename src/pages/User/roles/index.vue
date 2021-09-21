@@ -11,11 +11,10 @@
         ></v-img>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            PHÂN QUYỀN</v-list-item-title
+            権限</v-list-item-title
           >
           <v-list-item-subtitle
-            >Thiết lập quyền truy cập và thực hiện chức năng hệ
-            thống</v-list-item-subtitle
+            >システムのアクセス権限を設定する</v-list-item-subtitle
           >
         </v-list-item-content>
       </v-layout>
@@ -35,7 +34,7 @@
       :loading="loading"
       :items-per-page="5"
       class="elevation-1"
-      loading-text="Đang tải dữ liệu ..."
+      loading-text="データを取得しています ..."
     >
       <template v-slot:[`item.action`]="{ item }">
         <v-tooltip right>
@@ -49,17 +48,17 @@
               @click="config(item)"
             >
               <v-icon left size="20"> mdi-wrench </v-icon>
-              Thiết lập
+              設定
             </v-btn>
           </template>
-          <span>Thiết lập phân quyền</span>
+          <span>権限設定</span>
         </v-tooltip>
       </template>
     </v-data-table>
     <v-dialog v-model="showConfig" max-width="500px">
       <v-card>
         <v-card-title class="headline grey lighten-2">
-          Phân quyền
+          権限
         </v-card-title>
 
         <v-card-text>
@@ -118,7 +117,7 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" dark @click="updateRole"> Cập nhật </v-btn>
+          <v-btn color="primary" dark @click="updateRole"> 更新 </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -132,10 +131,10 @@ export default {
   data: () => ({
     PhanQuyenPic,
     headers: [
-      { text: "Tên quyền", value: "name" },
-      { text: "Mã quyền", value: "code" },
-      { text: "Mô tả", value: "description" },
-      { text: "Cấu hình", value: "action" },
+      { text: "権限名", value: "name" },
+      { text: "権限コード", value: "code" },
+      { text: "アクセス権限", value: "description" },
+      { text: "詳細設定", value: "action" },
     ],
     tableData: [],
     loading: false,
@@ -181,7 +180,7 @@ export default {
         await updateMenuRole(form);
         this.showConfig = false;
         this.roleId = null;
-        this.$toast.info("Cập nhật thành công", {
+        this.$toast.info("更新は完了しました", {
           position: "top-center",
           timeout: 2000,
           closeOnClick: true,

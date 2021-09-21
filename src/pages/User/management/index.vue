@@ -11,10 +11,10 @@
         ></v-img>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            QUẢN LÝ NGƯỜI DÙNG</v-list-item-title
+            ユーザー管理</v-list-item-title
           >
           <v-list-item-subtitle
-            >Danh sách người dùng hệ thống</v-list-item-subtitle
+            >ユーザー一覧</v-list-item-subtitle
           >
         </v-list-item-content>
 
@@ -43,7 +43,7 @@
               item-text="name"
               item-value="id"
               :items="roles"
-              placeholder="Quyền"
+              placeholder="権限"
               hide-details
               clearable
               @change="changeRoleSearch"
@@ -55,7 +55,7 @@
               item-text="name"
               item-value="value"
               :items="trangThais"
-              placeholder="Trạng thái"
+              placeholder="ステータス"
               hide-details
               clearable
               @change="changeRoleSearch"
@@ -66,7 +66,7 @@
             <v-text-field
               append-icon="mdi-magnify"
               v-model="search"
-              label="Tìm kiếm"
+              label="検索"
               clearable
               single-line
               hide-details
@@ -83,7 +83,7 @@
       hide-default-footer
       :loading="loading"
       class="elevation-1"
-      loading-text="Đang tải dữ liệu ..."
+      loading-text="データを取得しています ..."
     >
       <template v-slot:[`item.name`]="{ item }">
         <v-layout>
@@ -126,7 +126,7 @@
             <v-list-item @click="editMenu(item)">
               <v-list-item-title>
                 <v-icon class="mr-2"> mdi-pencil </v-icon>
-                Cập nhật</v-list-item-title
+                編集</v-list-item-title
               >
             </v-list-item>
             <v-list-item
@@ -135,7 +135,7 @@
             >
               <v-list-item-title>
                 <v-icon class="mr-2"> mdi-lock-outline </v-icon>
-                Hủy kích hoạt</v-list-item-title
+                無効</v-list-item-title
               >
             </v-list-item>
             <v-list-item
@@ -144,7 +144,7 @@
             >
               <v-list-item-title>
                 <v-icon class="mr-2"> mdi-lock-open-outline </v-icon>
-                Kích hoạt tài khoản</v-list-item-title
+                有効</v-list-item-title
               >
             </v-list-item>
           </v-list>
@@ -179,8 +179,8 @@ export default {
       itemsPerPage: 10,
       options: {},
       trangThais: [
-        { name: "Đang hoạt đông", value: true },
-        { name: "Ngừng hoạt đông", value: false },
+        { name: "有効", value: true },
+        { name: "無効", value: false },
       ],
       totalDesserts: 0,
       tableData: [],
@@ -194,7 +194,7 @@ export default {
       trang_thai: null,
       headers: [
         // { text: "STT", width: "100", sortable: false, value: "stt" },
-        { text: "Người dùng", value: "name", sortable: false, width: "220", },
+        { text: "ユーザー", value: "name", sortable: false, width: "220", },
         {
           text: "代表者名",
           align: "start",
@@ -202,15 +202,15 @@ export default {
           value: "user_name",
         },
         {
-          text: "E-Mail",
+          text: "Eメールアドレス",
           align: "start",
           sortable: false,
           value: "email",
         },
-        { text: "Quyền", value: "role" },
-        { text: "Company", value: "company_name" },
+        { text: "権限", value: "role" },
+        { text: "会社", value: "company_name" },
         {
-          text: "Hành động",
+          text: "アクション",
           value: "action",
           sortable: false,
           align: "center",
@@ -269,36 +269,36 @@ export default {
     },
     async activeUser(user) {
       this.$confirmBox.show({
-        title: "Kích hoạt tài khoản người dùng",
+        title: "ユーザーのアカウントを有効にします",
         width: 500,
         body:
-          "Bạn có chắc chắn muốn kích hoạt khoản người dùng " +
           "<strong>" +
           user.name +
+          "のアカウントを有効にしますか" +
           " ?" +
           "</strong><br>" +
           "<strong>" +
           user.name +
           "</strong>" +
-          " có thể đăng nhập và sử dụng hệ thống",
+          "はシステムにログイン可能になります",
         action: () => activeUser({ userId: user.id, active: true }),
         onDone: this.getDataUsers,
       });
     },
     async deactivateUser(user) {
       this.$confirmBox.show({
-        title: "Hủy kích hoạt tài khoản người dùng",
+        title: "ユーザーのアカウントを無効にします",
         width: 480,
         body:
-          "Bạn có chắc chắn muốn hủy kích hoạt tài khoản của người dùng " +
           "<strong>" +
           user.name +
+          "のアカウントを無効にしますか" +
           " ?" +
           "</strong><br>" +
           "<strong>" +
           user.name +
           "</strong>" +
-          " sẽ không đăng nhập hệ thống",
+          "はシステムにログイン不可能になります",
         action: () => activeUser({ userId: user.id, active: false }),
         onDone: this.getDataUsers,
       });

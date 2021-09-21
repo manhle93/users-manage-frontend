@@ -34,7 +34,7 @@ export const routes = [
       //Dashboard Router write here
       {
         path: "dashboard",
-        name: "概要",
+        name: "ダッシュボード",
         component: Dashboard,
       },
       {

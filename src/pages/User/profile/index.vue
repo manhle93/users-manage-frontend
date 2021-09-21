@@ -11,10 +11,10 @@
         ></v-img>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            情報</v-list-item-title
+            プロファイル</v-list-item-title
           >
           <v-list-item-subtitle
-            >設定 情報</v-list-item-subtitle
+            >プロファイル編集</v-list-item-subtitle
           >
         </v-list-item-content>
       </v-layout>
@@ -60,7 +60,7 @@
                       </v-btn>
                     </v-avatar>
                   </template>
-                  <span>Upload your images</span>
+                  <span>アバター変更</span>
                 </v-tooltip>
               </v-layout>
               <input
@@ -80,10 +80,10 @@
               Change password
             </v-btn>
           </v-layout>
-          <v-card-title class="pt-0 pb-2 pl-8">情報</v-card-title>
+          <v-card-title class="pt-0 pb-2 pl-8">プロファイル</v-card-title>
           <v-layout column class="pl-8 pb-6">
             <div class="mb-2">
-              Date created: <strong>{{ formatDate(USER.created_at) }}</strong>
+              登録日: <strong>{{ formatDate(USER.created_at) }}</strong>
             </div>
             <div class="mb-2">
               代表者名: <strong>{{ USER.user_name }}</strong>
@@ -104,7 +104,7 @@
         <v-card>
           <v-toolbar color="indigo darken-3" dark flat>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
-            <v-toolbar-title>Your Office</v-toolbar-title>
+            <v-toolbar-title>プロファイル情報</v-toolbar-title>
             <v-spacer></v-spacer>
             <!-- <v-btn icon>
               <v-icon>mdi-magnify</v-icon>
@@ -115,9 +115,7 @@
             <template v-slot:extension>
               <v-tabs v-model="tab" align-with-title>
                 <v-tabs-slider color="yellow"></v-tabs-slider>
-                <v-tab>Update your information</v-tab>
-                <v-tab>Office</v-tab>
-                <v-tab>Group</v-tab>
+                <v-tab>情報変更</v-tab>
               </v-tabs>
             </template>
           </v-toolbar>
@@ -132,25 +130,25 @@
                   <div column class="pt-6" style="width: 50%">
                     <div class="label-form">代表者名</div>
                     <v-text-field
-                      placeholder="Nhập họ và tên"
+                      placeholder="代表者名を入力してください"
                       :rules="nameRules"
                       outlined
                       dense
                       prepend-inner-icon="mdi-account"
                       v-model="form.name"
                     ></v-text-field>
-                    <div class="label-form">ユーザ名</div>
+                    <div class="label-form">ユーザー名</div>
                     <v-text-field
-                      placeholder="代表者名"
+                      placeholder="ユーザー名を入力してください"
                       :rules="userNameRules"
                       outlined
                       dense
                       prepend-inner-icon="mdi-account"
                       v-model="form.user_name"
                     ></v-text-field>
-                    <div class="label-form">E-Mail</div>
+                    <div class="label-form">Eメールアドレス</div>
                     <v-text-field
-                      placeholder="Nhập địa chỉ email"
+                      placeholder="Eメールアドレスを入力してください"
                       :rules="emailRules"
                       outlined
                       dense
@@ -159,7 +157,7 @@
                     ></v-text-field>
                     <div class="label-form">会社名</div>
                     <v-text-field
-                      placeholder="Nhập tên công ty"
+                      placeholder="会社名を入力してください"
                       outlined
                       dense
                       prepend-inner-icon="mdi-home-modern"
@@ -194,36 +192,36 @@
     </v-row>
     <v-dialog v-model="showFormChangePass" persistent width="500">
       <v-card>
-        <v-card-title class="headline">Change your password</v-card-title>
+        <v-card-title class="headline">パスワード変更</v-card-title>
         <br />
         <v-card-text>
           <v-form ref="form">
-            <div class="label-form">Current Password</div>
+            <div class="label-form">旧パスワード</div>
             <v-text-field
               type="password"
               v-model="changePassWord.currentPass"
               :rules="rulePass.currentPass"
-              placeholder="Nhập mật khẩu hiện tại"
+              placeholder="旧パスワードを入力してください"
               outlined
               dense
               prepend-inner-icon="mdi-account-key"
             ></v-text-field>
-            <div class="label-form">New Password</div>
+            <div class="label-form">新パスワード</div>
             <v-text-field
               type="password"
               v-model="changePassWord.newPassWord"
               :rules="rulePass.newPassWord"
-              placeholder="Nhập mật khẩu mới"
+              placeholder="新パスワードを入力してください"
               outlined
               dense
               prepend-inner-icon="mdi-lock"
             ></v-text-field>
-            <div class="label-form">Retype Password</div>
+            <div class="label-form">新パスワード確認</div>
             <v-text-field
               type="password"
               v-model="changePassWord.reNewPassWord"
               :rules="[reNewPassWord]"
-              placeholder="Nhập lại mật khẩu mới"
+              placeholder="新パスワードを再度入力してください"
               outlined
               dense
               prepend-inner-icon="mdi-lock"
@@ -265,8 +263,8 @@ export default {
     },
     btnLoading: false,
     rulePass: {
-      currentPass: [(v) => !!v || "Hãy nhập mật khẩu hiện tại"],
-      newPassWord: [(v) => !!v || "Hãy nhập mật khẩu mới"],
+      currentPass: [(v) => !!v || "旧パスワードを入力してください"],
+      newPassWord: [(v) => !!v || "新パスワードを入力してください"],
     },
     form: {
       user_name: "",
@@ -275,16 +273,16 @@ export default {
       company_name: "",
     },
     nameRules: [
-      (v) => !!v || "Tên nhân viên không thể bỏ trống",
-      (v) => (v && v.length >= 2) || "Tên Nhân viên tối thiểu 2 ký tự",
+      (v) => !!v || "代表者名を入力してください",
+      (v) => (v && v.length >= 2) || "代表者名は最低２文字で入力してください",
     ],
     userNameRules: [
-      (v) => !!v || "Tên đăng nhập không thể bỏ trống",
-      (v) => (v && v.length >= 3) || "Tên đăng nhập tối thiểu 3 ký tự",
+      (v) => !!v || "ユーザー名を入力してください",
+      (v) => (v && v.length >= 3) || "ユーザー名は最低３文字で入力してください",
     ],
     emailRules: [
-      (v) => !!v || "E-Mail không thể bỏ trống",
-      (v) => /.+@.+\..+/.test(v) || "E-mail không hợp lệ",
+      (v) => !!v || "Eメールアドレスを入力してください",
+      (v) => /.+@.+\..+/.test(v) || "Eメールアドレスは正しく入力してください",
     ],
   }),
   computed: {
@@ -293,10 +291,10 @@ export default {
     },
     reNewPassWord() {
       if (!this.changePassWord.reNewPassWord)
-        return () => "Hãy nhập lại mật khẩu mới";
+        return () => "新パスワードを再度入力してください";
       return () =>
         this.changePassWord.newPassWord === this.changePassWord.reNewPassWord ||
-        "Mật khẩu không trùng khớp";
+        "新パスワード確認は新パスワードと一致していません";
     },
   },
   mounted() {
@@ -332,7 +330,7 @@ export default {
       const isLt2M = files[0].size / 1024 / 1024 < 20;
       if (!isLt2M) {
         this.form.fileList.pop();
-        this.$toast.warning("Kích thước file ảnh tối đa 20Mb!", {
+        this.$toast.warning("ファイルのサイズは最大２０MBでアップロードしてください", {
           position: "top-center",
           timeout: 2000,
           closeOnClick: true,
@@ -350,7 +348,7 @@ export default {
         this.loadingUpload = false;
         this.listLoading = false;
         this.iconUpload = "el-icon-bottom";
-        this.$toast.warning("Tập tin không hợp lệ!", {
+        this.$toast.warning("正しくファイルをアップロードしてください", {
           position: "top-center",
           timeout: 2000,
           closeOnClick: true,
@@ -393,7 +391,7 @@ export default {
             newPassWord: null,
             reNewPassWord: null,
           };
-          this.$toast.info("Đổi mật khẩu thành công!", {
+          this.$toast.info("パスワード変更は完了しました", {
             position: "top-center",
             timeout: 2000,
             closeOnClick: true,
@@ -420,7 +418,7 @@ export default {
           this.show = false;
           this.btnLoading = false;
           this.$emit("on-done");
-          this.$toast.info("Cập nhật thành công", {
+          this.$toast.info("プロファイル更新は完了しました", {
             position: "top-center",
             timeout: 2000,
             closeOnClick: true,
