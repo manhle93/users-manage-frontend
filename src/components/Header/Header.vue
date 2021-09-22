@@ -78,7 +78,7 @@
       </template>
       <v-list max-height="500" min-height="200">
         <v-layout class="px-4 pt-3 pb-4" align-center style="width: 390px">
-          <div class="text-h5 grey--text text--darken-3">Thông báo</div>
+          <div class="text-h5 grey--text text--darken-3">お知らせ</div>
           <v-spacer></v-spacer>
           <router-link
             class="pr-4"
@@ -131,7 +131,7 @@
           <v-btn icon color="pink">
             <v-icon style="font-size: 30px">mdi-bell</v-icon>
           </v-btn>
-          <div class="pt-2" style="font-size: 16px">Bạn chưa có thông báo</div>
+          <div class="pt-2" style="font-size: 16px">お知らせがありません</div>
         </v-layout>
       </v-list>
     </v-menu>
@@ -162,7 +162,7 @@
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>Thông tin</v-list-item-title>
+              <v-list-item-title>プロファイル</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item @click="logOut">
@@ -170,7 +170,7 @@
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>Đăng xuất</v-list-item-title>
+              <v-list-item-title>ログアウト</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
