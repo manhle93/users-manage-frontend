@@ -100,8 +100,8 @@
           </v-avatar>
           <v-layout column class="pl-3">
             <div style="font-size: 15px; font-weight: bold">{{ item.name }}</div>
-            <div style="font-size: 13px; color: green" v-if="item.active">Active</div>
-             <div style="font-size: 13px; color: red" v-else>Not Active</div>
+            <div style="font-size: 13px; color: green" v-if="item.active">有効</div>
+             <div style="font-size: 13px; color: red" v-else>無効</div>
           </v-layout>
         </v-layout>
       </template>

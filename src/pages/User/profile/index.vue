@@ -77,7 +77,7 @@
             <v-card-subtitle>{{ USER.email }}</v-card-subtitle>
             <v-btn rounded color="primary" dark small @click="changePass()">
               <v-icon left small> mdi-key </v-icon>
-              Change password
+              パスワード変更
             </v-btn>
           </v-layout>
           <v-card-title class="pt-0 pb-2 pl-8">プロファイル</v-card-title>
@@ -170,7 +170,7 @@
                       dark
                       @click="updateUser"
                     >
-                      Update
+                      更新
                     </v-btn>
                   </div>
                 </div>
