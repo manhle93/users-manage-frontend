@@ -107,9 +107,9 @@
       </template>
       <template v-slot:[`item.role`]="{ item }">
         <v-list style="background-color: rgba(0, 0, 0, 0)">
-          <v-list-item-title>{{
+          <!-- <v-list-item-title>{{
             item.role ? item.role.description : ""
-          }}</v-list-item-title>
+          }}</v-list-item-title> -->
           <v-list-item-subtitle>{{
             item.role ? item.role.name : ""
           }}</v-list-item-subtitle>
