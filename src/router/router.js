@@ -77,7 +77,7 @@ export const routes = [
           {
             path: "profile",
             component: () => import("@/pages/User/profile/index"),
-            name: "情報",
+            name: "プロファイル",
           },
           {
             path: "management",
