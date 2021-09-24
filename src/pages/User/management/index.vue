@@ -17,7 +17,6 @@
             >ユーザー一覧</v-list-item-subtitle
           >
         </v-list-item-content>
-
         <div class="pt-3">
           <v-btn color="indigo" dark @click="addUser">
             <v-icon left> mdi-plus </v-icon>
@@ -195,6 +194,12 @@ export default {
       headers: [
         // { text: "STT", width: "100", sortable: false, value: "stt" },
         { text: "ユーザー", value: "name", sortable: false, width: "220", },
+        {
+          text: "ID",
+          align: "start",
+          sortable: false,
+          value: "id",
+        },
         {
           text: "代表者名",
           align: "start",

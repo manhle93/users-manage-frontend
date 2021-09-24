@@ -113,6 +113,14 @@
                   </v-list-item>
                 </template>
               </v-select>
+              <div class="label-form">会社名</div>
+                <v-text-field
+                  placeholder="会社名を入力してください"
+                  outlined
+                  dense
+                  prepend-inner-icon="mdi-home-modern"
+                  v-model="form.company_name"
+                ></v-text-field>
               <br />
               <div class="label-form" style="font-weight: bold">
                 パスワード
