@@ -114,9 +114,7 @@
                 </template>
               </v-select>
               <br />
-              <div class="label-form" style="font-weight: bold">
-                パスワード
-              </div>
+              <div class="label-form" style="font-weight: bold">パスワード</div>
               <v-row>
                 <v-col cols="6"
                   ><v-combobox
@@ -128,17 +126,13 @@
                     :rules="edit ? [] : formValidate.password"
                     type="password"
                     prepend-inner-icon="mdi-lock"
+                    @focus="showText = true"
                   >
                     <template v-slot:item="{ item }">
                       <v-layout align-end @click="selectPass(item)">
                         <div style="height: 24px">{{ item }}</div>
-                        <v-spacer/>
-                        <div
-                          style="
-                            font-size: 12px;
-                            color: gray;
-                            height: 20px;"
-                        >
+                        <v-spacer />
+                        <div style="font-size: 12px; color: gray; height: 20px">
                           おすすめ
                         </div>
                       </v-layout>
@@ -156,6 +150,10 @@
                     prepend-inner-icon="mdi-lock"
                   ></v-text-field
                 ></v-col>
+                <div class="pl-3" v-if="showText">
+                  Mật khẩu tối thiểu 8 ký tự bao gồm chữ viết hoa, chữ thường,
+                  ký thự đặc biệt và số
+                </div>
               </v-row>
             </v-col>
           </v-row>
@@ -196,6 +194,7 @@ export default {
     imageEndpoint: process.env.VUE_APP_BASE,
     btnLoading: false,
     src: null,
+    showText: false,
     passwords: ["Abc@2021", "123456@Dk"],
     form: {
       role_id: null,
@@ -209,18 +208,27 @@ export default {
     formValidate: {
       name: [
         (v) => !!v || "ユーザー名を入力してください。",
-        (v) => (v && v.length >= 3) || "ユーザー名は最低３文字で入力してください。",
+        (v) =>
+          (v && v.length >= 3) || "ユーザー名は最低３文字で入力してください。",
       ],
       email: [
         (v) => !!v || "Eメールアドレスを入力してください。",
-        (v) => /.+@.+\..+/.test(v) || "Eメールアドバイスは正しく入力してください。",
+        (v) =>
+          /.+@.+\..+/.test(v) || "Eメールアドバイスは正しく入力してください。",
       ],
       role_id: [(v) => !!v || "権限を選択してください。"],
       password: [(v) => !!v || "パスワードを入力してください。"],
       user_name: [
         (v) => !!v || "ユーザー名を入力してください。",
-        (v) => (v && v.length >= 3) || "ユーザー名は最低３文字で入力してください。",
+        (v) =>
+          (v && v.length >= 3) || "ユーザー名は最低３文字で入力してください。",
       ],
+    },
+    rulesPassword: {
+      length: { value: 8, pass: false },
+      digit: { value: 1, pass: false },
+      lower: { value: 1, pass: false },
+      upper: { value: 1, pass: false },
     },
   }),
   computed: {
@@ -249,17 +257,17 @@ export default {
       if (this.$refs.form) {
         this.$refs.form.resetValidation();
       }
+      this.showText = false
     },
     async showFormEdit(data) {
       this.edit = true;
       this.show = true;
       this.form = { ...data };
     },
-    selectPass(item){
-      this.form.confirmPassword = item
-      this.form.password = this.form.confirmPassword
-
-      console.log(this.form.password, this.form.confirmPassword)
+    selectPass(item) {
+      this.form.confirmPassword = item;
+      this.form.password = this.form.confirmPassword;
+      this.showText = false
     },
     async addUser() {
       this.$refs.form.validate();
@@ -300,18 +308,21 @@ export default {
       const isLt2M = files[0].size / 1024 / 1024 < 20;
       if (!isLt2M) {
         this.form.fileList.pop();
-        this.$toast.warning("ファイルのサイズは最大２０MBでアップロードしてください。", {
-          position: "top-center",
-          timeout: 2000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: true,
-          closeButton: "button",
-          icon: true,
-        });
+        this.$toast.warning(
+          "ファイルのサイズは最大２０MBでアップロードしてください。",
+          {
+            position: "top-center",
+            timeout: 2000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            draggablePercent: 0.6,
+            showCloseButtonOnHover: false,
+            hideProgressBar: true,
+            closeButton: "button",
+            icon: true,
+          }
+        );
         return false;
       }
       if (!dinhDangChoPhep.find((el) => el == filePath.toLowerCase())) {
@@ -371,7 +382,7 @@ export default {
           }
         } catch (error) {
           this.btnLoading = false;
-          this.show = false;
+          // this.show = false;
         }
       }
     },
