@@ -300,7 +300,7 @@ export default {
           });
         } catch (error) {
           this.btnLoading = false;
-          this.show = false;
+          // this.show = false;
         }
       }
     },

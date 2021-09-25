@@ -160,7 +160,7 @@ export default {
         { title: "Starred", icon: "mdi-circle-medium", color: "primary" },
         { title: "Background", icon: "mdi-circle-medium", color: "error" },
       ],
-      sidebarWidth: 200,
+      sidebarWidth: 230,
       sidebarMinWidth: 55,
     };
   },
@@ -185,12 +185,6 @@ export default {
   },
   methods: {
     ...mapActions(["TOGGLE_DRAWER"]),
-    handleDrawerCollapse() {
-      this.drawerWidth =
-        this.drawerWidth === this.sidebarWidth
-          ? this.sidebarMinWidth
-          : this.sidebarWidth;
-    },
   },
 };
 </script>

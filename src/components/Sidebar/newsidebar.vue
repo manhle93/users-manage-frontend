@@ -1,90 +1,133 @@
+<template>
+  <!-- :permanent="$vuetify.breakpoint.mdAndUp"  bỏ thuộc tính này trong <v-navigation-drawer sẽ ẩn toàn bộ  sidebar-->
+
   <v-navigation-drawer
-    v-model="DRAWER_STATE"
+    app
     :mini-variant="!DRAWER_STATE"
     :width="drawerWidth"
-    :class="{'drawer-mini': !DRAWER_STATE}"
-    style="top: 64px!important; height: calc(100vh - 64px)!important;"
-    >
-    <v-list :dense="drawerWidth !== 64" class="pa-0">
-      <template v-for="(item, key) in menus">
-        <template v-if="item.children && item.children.length > 0">
-          <v-list-group :key="key" no-action :to="item.path">
-            <template v-slot:prependIcon>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon v-bind="attrs" v-on="on" v-text="item.icon" />
-                </template>
-                <span>{{ item.name }}</span>
-              </v-tooltip>
-            </template>
-            <template v-slot:activator>
-              <v-list-item-content>
-                <v-list-item-title v-text="item.name" />
-              </v-list-item-content>
-            </template>
-            <v-list-item
-              :class="drawerWidth === 64 ? 'pl-4' : ''"
-              v-for="subItem in item.children"
-              :key="subItem.name"
-              :to="subItem.path"
-            >
-              <template v-if="drawerWidth === 64">
-                <v-list-item-icon>
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-icon v-bind="attrs" v-on="on" v-text="subItem.icon" />
-                    </template>
-                    <span>{{subItem.name}}</span>
-                  </v-tooltip>
-                </v-list-item-icon>
-              </template>
-              <template v-else>
-                <v-list-item-content>
-                  <v-list-item-title v-text="subItem.name" />
-                </v-list-item-content>
-              </template>
-            </v-list-item>
-          </v-list-group>
+    class="drawer-menu"
+    style="
+      top: 45px !important;
+      height: calc(100vh - 45px) !important;
+      background-color: #f0f0f0;
+    "
+  >
+    <v-list v-for="item in menus" :key="item.id" style="font-size: 14px">
+      <v-list-item :title="item.name"
+        v-if="(!item.children || item.children.length == 0) && !item.hidden"
+        :to="item.path"
+      >
+        <v-icon size="21" color="black">{{ item.icon }}</v-icon>
+        <div class="pl-2 title-menu" :title="item.name">{{ item.name }}</div>
+      </v-list-item>
+
+      <v-list-group no-action v-else :title="item.name">
+        <template v-slot:activator>
+          <v-icon size="21" color="black">{{ item.icon }}</v-icon>
+          <div class="pl-2 title-menu" style="flex: 1" :title="item.name">
+            {{ item.name }}
+          </div>
         </template>
-        <template v-else>
-          <v-list-item :key="key" :to="item.path">
-            <v-list-item-icon>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon v-bind="attrs" v-on="on" v-text="item.icon" />
-                </template>
-                <span>{{item.name}}</span>
-              </v-tooltip>
-            </v-list-item-icon>
-            <v-list-item-content v-if="drawerWidth !== 64">
-              <v-list-item-title v-text="item.name" />
-            </v-list-item-content>
+
+        <v-list
+          v-for="child in item.children.filter((el) => !el.hidden)"
+          :key="child.id"
+        >
+          <v-list-item :to="child.path">
+            <v-icon size="20" class="ml-6">{{ child.icon }}</v-icon>
+            <div class="pl-3" :title="child.name">{{ child.name }}</div>
           </v-list-item>
-        </template>
-      </template>
+        </v-list>
+
+      </v-list-group>
     </v-list>
-
-    <template v-slot:append>
-      <div class="grey lighten-3">
-        <template v-if="drawerWidth === 64">
-          <div class="d-flex">
-            <v-btn width="64" icon tile @click="handleDrawerCollapse" class="mx-auto">
-              <v-icon>mdi-arrow-collapse-right</v-icon>
-            </v-btn>
-          </div>
-        </template>
-        <template v-else>
-          <div class="d-flex">
-            <v-spacer />
-            <v-btn icon tile @click="handleDrawerCollapse" class="mr-2">
-              <v-icon>mdi-arrow-collapse-left</v-icon>
-            </v-btn>
-          </div>
-        </template>
-      </div>
-    </template>
   </v-navigation-drawer>
+</template>
 
+<script>
+import { mapActions, mapState } from "vuex";
+import "perfect-scrollbar/css/perfect-scrollbar.css";
+export default {
+  props: {
+    source: String,
+  },
+  data() {
+    return {
+      drawerWidth: 0,
+      scrollSettings: {
+        maxScrollbarLength: 160,
+      },
+      sponsor: {
+        href: "https://www.theopticalfiber.com/",
+        src: "https://www.theopticalfiber.com/logo/logo.png",
+        srcMini: "https://www.theopticalfiber.com/logo/logo_mini.png",
+      },
+      mini: false,
+      ps: null,
+      clipped: true,
+      temporary: false,
+      sidebarWidth: 225,
+      sidebarMinWidth: 55,
+    };
+  },
 
-
-  <style src="./Sidebar.scss" lang="scss"/>
+  created() {
+    this.drawerWidth = this.sidebarWidth;
+  },
+  watch: {
+    DRAWER_STATE(val){
+      console.log(val)
+    }
+  },
+  computed: {
+    ...mapState(["drawer"]),
+    menus() {
+      return this.$store.state.routerRole.routes;
+    },
+    DRAWER_STATE: {
+      get() {
+        return this.drawer;
+      },
+      set(newValue) {
+        if (newValue === this.drawer) return;
+        this.TOGGLE_DRAWER();
+      },
+    },
+  },
+  methods: {
+    ...mapActions(["TOGGLE_DRAWER"]),
+    handleDrawerCollapse() {
+      this.drawerWidth =
+        this.drawerWidth === this.sidebarWidth
+          ? this.sidebarMinWidth
+          : this.sidebarWidth;
+    },
+  },
+};
+</script>
+<style lang="css">
+.drawer-menu .v-list-item {
+  min-height: 40px;
+}
+.drawer-menu .v-list {
+  padding: 0px;
+}
+.drawer-menu
+  .v-application--is-ltr
+  .v-list-item__action:last-of-type:not(:only-child),
+.v-application--is-ltr .v-list-item__avatar:last-of-type:not(:only-child),
+.v-application--is-ltr .v-list-item__icon:last-of-type:not(:only-child) {
+  margin-left: 5px;
+}
+.drawer-menu
+  .v-list-group
+  .v-list-group__header
+  .v-list-item__icon.v-list-group__header__append-icon {
+  min-width: 5px;
+}
+.drawer-menu .title-menu {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
