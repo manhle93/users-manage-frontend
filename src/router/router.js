@@ -34,8 +34,7 @@ export const routes = [
       //Dashboard Router write here
       {
         path: "dashboard",
-        // name: "ダッシュボード",
-        name: "Tổng quan",
+        name: "ダッシュボード",
         component: Dashboard,
       },
       {
@@ -62,8 +61,7 @@ export const routes = [
       },
       {
         path: "users",
-        // name: "ユーザー",
-        name: "Người dùng",
+        name: "ユーザー",
         component: Blank,
         children: [
           {
