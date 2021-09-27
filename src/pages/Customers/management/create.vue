@@ -4,59 +4,104 @@
       <v-row>
         <v-col lg="8" sm="12" md="8" xs="12">
           <v-card>
-            <!-- <v-toolbar color="primary" dark flat>
-            <v-app-bar-nav-icon></v-app-bar-nav-icon>
-            <v-toolbar-title>Thông tin nhân sự</v-toolbar-title>
-          </v-toolbar> -->
-            <v-card-title class="pt-4 pl-6">情報</v-card-title>
+            <v-card-title class="pt-4 pl-6">Customer Infomation</v-card-title>
             <v-layout column class="pl-6 pr-6">
               <v-row>
                 <v-col cols="5" class="zero-vertical">
                   <div class="label-form">
-                    ユーザ名 <span style="color: red">(*)</span>
+                    Company Name <span style="color: red">(*)</span>
                   </div>
                   <v-text-field
-                    v-model="form.name"
+                    v-model="form.company_name"
                     :rules="nameRules"
-                    placeholder="Nhập họ tên nhân viên"
+                    placeholder="Company name"
                     outlined
                     dense
                     prepend-inner-icon="mdi-account"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">Date of birth</div>
-                  <v-menu
-                    v-model="showPickNgaySinh"
-                    :close-on-content-click="false"
-                    :nudge-right="40"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="auto"
+                  <div class="label-form">
+                    Industry <span style="color: red">(*)</span>
+                  </div>
+                  <v-select
+                    prepend-inner-icon="mdi-home"
+                    :rules="industryRules"
+                    v-model="form.industry_id"
+                    :items="Industries"
+                    outlined
+                    dense
+                    item-text="name"
+                    item-value="id"
                   >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="form.ngay_sinh"
-                        prepend-inner-icon="mdi-calendar"
-                        readonly
-                        outlined
-                        dense
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker
-                      v-model="form.ngay_sinh"
-                      @input="showPickNgaySinh = false"
-                    ></v-date-picker>
-                  </v-menu>
+                  </v-select>
                 </v-col>
                 <v-col cols="3" class="zero-vertical">
-                  <div class="label-form">Sex</div>
+                  <div class="label-form">
+                    Postal Code <span style="color: red">(*)</span>
+                  </div>
+                  <v-text-field
+                    v-model="form.postal_code"
+                    placeholder="Postal code"
+                    :rules="poscodeRules"
+                    outlined
+                    type="number"
+                    dense
+                    prepend-inner-icon="mdi-map-marker"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="5" class="zero-vertical">
+                  <div class="label-form">Representative name</div>
+                  <v-text-field
+                    v-model="form.representative_name"
+                    placeholder="Representative name"
+                    outlined
+                    dense
+                    prepend-inner-icon="mdi-home-modern"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="7" class="zero-vertical">
+                  <div class="label-form">
+                    Address <span style="color: red">(*)</span>
+                  </div>
+                  <v-text-field
+                    v-model="form.address"
+                    placeholder="address"
+                    :rules="addressRules"
+                    outlined
+                    dense
+                    prepend-inner-icon="mdi-map"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="5" class="zero-vertical">
+                  <div class="label-form">Phone number</div>
+                  <v-text-field
+                    v-model="form.phone_number"
+                    placeholder="Phone number"
+                    outlined
+                    dense
+                    prepend-inner-icon="mdi-phone"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="4" class="zero-vertical">
+                  <div class="label-form">Home page Url</div>
+                  <v-text-field
+                    v-model="form.homepage_url"
+                    placeholder="homepage Url"
+                    outlined
+                    dense
+                    prepend-inner-icon="mdi-web"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="3" class="zero-vertical">
+                  <div class="label-form">
+                    Status <span style="color: red">(*)</span>
+                  </div>
                   <v-select
-                    prepend-inner-icon="mdi-human"
-                    v-model="form.gioi_tinh"
-                    :items="gioiTinhs"
+                    prepend-inner-icon="mdi-pen"
+                    v-model="form.signed"
+                    :rules="statusRules"
+                    :items="status"
                     outlined
                     dense
                     item-text="name"
@@ -64,82 +109,32 @@
                   >
                   </v-select>
                 </v-col>
-                <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">Place of birth</div>
-                  <v-text-field
-                    v-model="form.noi_sinh"
-                    placeholder="Nơi sinh, quê quán"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-map-marker"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="7" class="zero-vertical">
-                  <div class="label-form">Adress</div>
-                  <v-text-field
-                    v-model="form.dia_chi_hien_tai"
-                    placeholder="Chỗ ở hiện nay"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-map"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">Phone</div>
-                  <v-text-field
-                    v-model="form.so_dien_thoai"
-                    placeholder="Số điện thoại"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-phone"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">ID number</div>
-                  <v-text-field
-                    v-model="form.so_cmt"
-                    placeholder="Số CMND"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-code-brackets"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="3" class="zero-vertical">
-                  <div class="label-form">Nơi cấp</div>
-                  <v-text-field
-                    v-model="form.noi_cap"
-                    placeholder="Nơi cấp CMT"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-map-marker"
-                  ></v-text-field>
-                </v-col>
 
                 <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">SĐT Người thân</div>
+                  <div class="label-form">Manager name</div>
                   <v-text-field
-                    v-model="form.so_dien_thoai_nguoi_than"
-                    placeholder="Số điện thoại người thân"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-phone"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">Người giới thiệu</div>
-                  <v-text-field
-                    v-model="form.nguoi_gioi_thieu"
-                    placeholder="Tên người giới thiệu"
+                    v-model="form.manager_name"
+                    placeholder="Manager name"
                     outlined
                     dense
                     prepend-inner-icon="mdi-account"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="3" class="zero-vertical">
-                  <div class="label-form">SĐT Người giới thiệu</div>
+                <v-col cols="4" class="zero-vertical">
+                  <div class="label-form">Manager email</div>
                   <v-text-field
-                    v-model="form.so_dien_thoai_nguoi_gioi_thieu"
-                    placeholder="SĐT Người giới thiệu"
+                    v-model="form.manager_email"
+                    placeholder="Manager email"
+                    outlined
+                    dense
+                    prepend-inner-icon="mdi-email"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="3" class="zero-vertical">
+                  <div class="label-form">Manager phone</div>
+                  <v-text-field
+                    v-model="form.manager_phone"
+                    placeholder="Manager Phone"
                     outlined
                     dense
                     prepend-inner-icon="mdi-phone"
@@ -147,141 +142,132 @@
                 </v-col>
 
                 <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">Ngày vào công ty</div>
-                  <v-menu
-                    v-model="showPickNgayLamViec"
-                    :close-on-content-click="false"
-                    :nudge-right="40"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="auto"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="form.ngay_vao_cong_ty"
-                        prepend-inner-icon="mdi-calendar"
-                        readonly
-                        outlined
-                        dense
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker
-                      v-model="form.ngay_vao_cong_ty"
-                      @input="showPickNgayLamViec = false"
-                    ></v-date-picker>
-                  </v-menu>
-                </v-col>
-                <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">Trình độ chuyên môn</div>
+                  <div class="label-form">Person in charge name</div>
                   <v-text-field
-                    v-model="form.trinh_do_chuyen_mon"
-                    placeholder="Trình độ chuyên môn"
+                    v-model="form.person_in_charge_name"
+                    placeholder="Person in charge name"
                     outlined
                     dense
-                    prepend-inner-icon="mdi-decagram-outline"
+                    prepend-inner-icon="mdi-account"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="4" class="zero-vertical">
+                  <div class="label-form">Person in charge email</div>
+                  <v-text-field
+                    v-model="form.person_in_charge_email"
+                    placeholder="Person in charge email"
+                    outlined
+                    dense
+                    prepend-inner-icon="mdi-email"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3" class="zero-vertical">
-                  <div class="label-form">Chuyên ngành</div>
+                  <div class="label-form">Person in charge phone</div>
                   <v-text-field
-                    v-model="form.chuyen_nganh"
-                    placeholder="Số CMND"
+                    v-model="form.person_in_charge_phone"
+                    placeholder="Manager Phone"
                     outlined
                     dense
-                    prepend-inner-icon="mdi-book"
+                    prepend-inner-icon="mdi-phone"
                   ></v-text-field>
                 </v-col>
               </v-row>
             </v-layout>
-            <v-card-title class="pl-6">Vị trí làm việc</v-card-title>
+            <br />
+            <v-layout class="pr-6" align-center>
+              <v-card-title class="pl-6"
+                >Comments
+                <span class="pl-3" style="color: red; font-weight: bold"
+                  >({{ comments ? comments.length : 0 }})</span
+                ></v-card-title
+              >
+              <v-spacer></v-spacer>
+              <v-btn
+                depressed
+                color="primary"
+                @click="pushComment"
+                :loading="btnLoading"
+                v-if="editing && form.comment && form.comment.length > 0"
+              >
+                Comment
+              </v-btn>
+            </v-layout>
             <v-layout column class="pl-6 pr-6">
-              <v-row>
-                <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">
-                    Phòng ban <span style="color: red">(*)</span>
+              <hr />
+              <v-card-text>
+                <v-textarea
+                  class="mx-2"
+                  v-model="form.comment"
+                  filled
+                  rows="2"
+                  prepend-icon="mdi-comment"
+                ></v-textarea>
+              </v-card-text>
+              <v-layout
+                column
+                class="pl-8 pr-6 pb-5"
+                v-if="editing && comments && comments.length > 0"
+              >
+                <v-layout
+                  class="py-2"
+                  v-for="item in comments"
+                  :key="item.key"
+                >
+                  <v-avatar size="40">
+                    <v-img
+                      src="https://cdn.vuetifyjs.com/images/lists/2.jpg"
+                    ></v-img>
+                  </v-avatar>
+                  <div
+                    class="ml-4"
+                    style="
+                      min-height: 50px;
+                      width: 100%;
+                      background-color: #edeef2;
+                      border-radius: 5px;
+                    "
+                  >
+                    <v-layout column style="width: 100%" class="pa-3">
+                      <v-layout style="width: 100%" align-end>
+                        <span
+                          style="
+                            font-size: 15px;
+                            font-weight: bold;
+                            color: #0870bf;
+                          "
+                          >{{
+                            item.user_comment ? item.user_comment.name : null
+                          }}</span
+                        >
+                        <span
+                          class="pl-2"
+                          style="
+                            font-size: 13px;
+                            font-weight: bold;
+                            color: #d9aa00;
+                          "
+                          >{{ item.company_name }}</span
+                        >
+                        <span
+                          class="pl-2"
+                          style="font-size: 11px; color: #b5b5b5"
+                          >{{item.thoi_gian}}</span
+                        >
+                      </v-layout>
+                      <v-layout class="pt-3">
+                        <p>
+                          {{ item.content }}
+                        </p>
+                      </v-layout>
+                    </v-layout>
                   </div>
-                  <v-select
-                    prepend-inner-icon="mdi-home"
-                    :rules="phongBanRules"
-                    v-model="form.phong_ban_id"
-                    :items="phongBans"
-                    outlined
-                    dense
-                    item-text="name"
-                    item-value="id"
-                    @change="getNhomTo"
-                  >
-                  </v-select>
-                </v-col>
-                <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">Chức vụ</div>
-                  <v-select
-                    prepend-inner-icon="mdi-account-convert"
-                    v-model="form.chuc_vu_id"
-                    :items="chucVus"
-                    outlined
-                    dense
-                    item-text="name"
-                    item-value="id"
-                  >
-                  </v-select>
-                </v-col>
-                <v-col cols="3" class="zero-vertical">
-                  <div class="label-form">Nhóm tổ</div>
-                  <v-select
-                    prepend-inner-icon="mdi-account-multiple-outline"
-                    v-model="form.nhom_to_id"
-                    :items="nhomTos"
-                    outlined
-                    dense
-                    item-text="name"
-                    item-value="id"
-                  >
-                  </v-select>
-                </v-col>
-
-                <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">Mã số thuế</div>
-                  <v-text-field
-                    v-model="form.ma_so_thue"
-                    placeholder="Mã số thuế"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-barcode"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">Tài khoản ngân hàng</div>
-                  <v-text-field
-                    v-model="form.tai_khoan_ngan_hang"
-                    placeholder="Số TK ngân hàng"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-code-braces"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="3" class="zero-vertical">
-                  <div class="label-form">Ngân hàng</div>
-                  <v-text-field
-                    v-model="form.ngan_hang"
-                    placeholder="Tên ngân hàng - Chi nhánh"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-bank"
-                  ></v-text-field>
-                </v-col>
-              </v-row>
+                </v-layout>
+              </v-layout>
             </v-layout>
           </v-card>
         </v-col>
         <v-col sm="12" lg="4" md="4" xs="12">
           <v-card>
-            <!-- <v-toolbar color="primary" dark flat>
-            <v-app-bar-nav-icon></v-app-bar-nav-icon>
-            <v-toolbar-title>Tài khoản người dùng</v-toolbar-title>
-          </v-toolbar> -->
             <v-img height="230px" :src="masterialPic">
               <v-card-text>
                 <v-layout column class="align-center">
@@ -337,7 +323,7 @@
               <v-layout align-center>
                 <v-text-field
                   style="width: 70%"
-                  placeholder="代表者名"
+                  placeholder="Tên đăng nhập"
                   prepend-inner-icon="mdi-account"
                   v-model="form.user_name"
                   :rules="userNameRules"
@@ -354,14 +340,14 @@
             </v-layout>
           </v-card>
           <v-card class="mx-auto mt-3">
-            <v-card-title>Ghi chú</v-card-title>
+            <v-card-title>Note</v-card-title>
             <v-card-text>
               <v-textarea
                 class="mx-2"
-                v-model="form.ghi_chu"
+                v-model="form.note"
                 filled
                 rows="2"
-                prepend-icon="mdi-comment"
+                prepend-icon="mdi-note"
               ></v-textarea>
             </v-card-text>
           </v-card>
@@ -373,11 +359,23 @@
               </v-btn>
             </router-link>
             <v-spacer></v-spacer>
-            <v-btn tile color="success" @click="submitUpdate" v-if="editing">
+            <v-btn
+              tile
+              color="success"
+              @click="submitUpdate"
+              v-if="editing"
+              :loading="btnLoading"
+            >
               <v-icon left>mdi-account-edit</v-icon>
               Cập nhật
             </v-btn>
-            <v-btn tile color="success" @click="submit" v-else>
+            <v-btn
+              tile
+              color="success"
+              @click="submit"
+              v-else
+              :loading="btnLoading"
+            >
               <v-icon left>mdi-account-plus </v-icon>
               Thêm mới
             </v-btn>
@@ -391,34 +389,43 @@
 import avatarNone from "../../../../docs/img/avatar_none.png";
 import masterialPic from "../../../../docs/img/masterial.png";
 import { uploadAvatar } from "@/api/user";
-import { getPhongBan } from "@/api/phongban";
-import { getDanhMucCon } from "@/api/danhmuc";
-import { getNhomToTrucThuoc } from "@/api/nhomto";
-import { addNhanVien, showNhanVien, editNhanVien } from "@/api/nhanvien";
+import {
+  addCustomer,
+  getCategories,
+  getCustomerInfo,
+  editCustomerInfo,
+  addComment,
+  getComments,
+} from "@/api/customer";
 
 export default {
   data: () => ({
-    showPickNgaySinh: false,
-    date: null,
-    showPickNgayLamViec: false,
-    gioiTinhs: [
-      { name: "Nam", value: true },
-      { name: "Nữ", value: false },
-    ],
     editing: false,
-    phongBans: [],
-    nhomTos: [],
-    chucVus: [],
+    Industries: [],
+    status: [
+      { value: false, name: "未契約" },
+      { value: true, name: "契約済" },
+    ],
+    comments: [],
     avatarNone,
     masterialPic,
     tab: null,
     imageEndpoint: process.env.VUE_APP_BASE,
     btnLoading: false,
     nameRules: [
-      (v) => !!v || "Tên nhân viên không thể bỏ trống",
-      (v) => (v && v.length >= 2) || "Tên Nhân viên tối thiểu 2 ký tự",
+      (v) => !!v || "Tên công ty không thể bỏ trống",
+      (v) => (v && v.length >= 2) || "Tên công ty tối thiểu 2 ký tự",
     ],
-    phongBanRules: [(v) => !!v || "Hãy chọn một phòng ban!"],
+    poscodeRules: [
+      (v) => !!v || "Postal code không thể bỏ trống",
+      (v) => (v && v.length >= 2) || "Postal code tối thiểu 2 ký tự",
+    ],
+    addressRules: [
+      (v) => !!v || "Address không thể bỏ trống",
+      (v) => (v && v.length >= 5) || "Address tối thiểu 5 ký tự",
+    ],
+    statusRules: [(v) => v != null || "Hãy chọn một loại hình!"],
+    industryRules: [(v) => !!v || "Hãy chọn một loại hình!"],
     userNameRules: [
       (v) => !!v || "Tên đăng nhập không thể bỏ trống",
       (v) => (v && v.length >= 3) || "Tên đăng nhập tối thiểu 3 ký tự",
@@ -430,37 +437,41 @@ export default {
     form: {
       email: "",
       user_name: "",
-      name: "",
-      ngay_sinh: null,
-      gioi_tinh: true,
-      noi_sinh: "",
-      dia_chi_hien_tai: "",
-      so_dien_thoai: "",
-      so_cmt: "",
-      noi_cap: "",
-      ngay_vao_cong_ty: "",
-      trinh_do_truyen_mon: null,
-      chuyen_nganh: null,
-      phong_ban_id: null,
-      chuc_vu_id: null,
-      nhom_to_id: null,
-      ma_so_thue: "",
-      tai_khoan_ngan_hang: "",
-      ngan_hang: "",
-      url_image: "",
-      trinh_do_chuyen_mon: "",
-      ghi_chu: "",
-      so_dien_thoai_nguoi_gioi_thieu: "",
-      nguoi_gioi_thieu: "",
-      so_dien_thoai_nguoi_than: "",
+      company_name: "",
+      industry_id: null,
+      postal_code: null,
+      representative_name: null,
+      address: null,
+      phone_number: null,
+      homepage_url: null,
+      signed: false,
+      manager_name: null,
+      manager_email: null,
+      manager_phone: null,
+      person_in_charge_name: null,
+      person_in_charge_email: null,
+      person_in_charge_phone: null,
+      comment: null,
+      url_image: null,
+      note: null,
     },
   }),
 
   mounted() {
-    this.getDanhMuc();
-    this.getNhanVienEdit();
+    // this.getDanhMuc();
+    // this.getNhanVienEdit();
+    this.getIndustries();
+    this.getCustomer();
   },
   methods: {
+    async getIndustries() {
+      let data = await getCategories({ group: "industry" });
+      this.Industries = data;
+    },
+    async fetchComments() {
+      let data = await getComments({ user_id: this.form.user_id });
+      this.comments = data;
+    },
     uploadAvatar() {
       this.$refs["upload-image"].click();
     },
@@ -519,7 +530,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.btnLoading = true;
         try {
-          await addNhanVien(this.form);
+          await addCustomer(this.form);
           this.show = false;
           this.btnLoading = false;
           this.$emit("on-done");
@@ -541,37 +552,36 @@ export default {
         }
       }
     },
-    async getDanhMuc() {
-      let phongbans = await getPhongBan({
-        perPage: 999,
-      });
-      this.chucVus = await getDanhMucCon({ code: "CHUCVU" });
-      this.phongBans = phongbans.data;
-    },
-    async getNhomTo() {
-      let data = await getNhomToTrucThuoc({
-        phong_ban_id: this.form.phong_ban_id,
-      });
-      this.nhomTos = data;
-    },
-    async getNhanVienEdit() {
+    async getCustomer() {
       let id = this.$route.params.id;
       this.editing = false;
       if (id) {
         this.editing = true;
-        let data = await showNhanVien({ nhanVienId: id });
-        this.form = { ...data.data };
-        this.$emit("set-name", this.form.name);
-        await this.getDanhMuc();
-        await this.getNhomTo();
+        let data = await getCustomerInfo({ customer_id: id });
+        this.form = { ...data };
+        this.form.user_name = data.user.user_name;
+        this.form.email = data.user.email;
+        this.fetchComments()
       } else return;
+    },
+    async pushComment() {
+      if (this.form.comment) {
+        this.btnLoading = true;
+        await addComment({
+          user_id: this.form.user_id,
+          content: this.form.comment,
+        });
+        this.form.comment = null;
+        this.fetchComments();
+        this.btnLoading = false;
+      }
     },
     async submitUpdate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
         this.btnLoading = true;
         try {
-          await editNhanVien(this.form);
+          await editCustomerInfo(this.form);
           this.show = false;
           this.btnLoading = false;
           this.$emit("on-done");
