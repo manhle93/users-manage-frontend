@@ -86,53 +86,59 @@
         ></v-col>
       </v-row>
     </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="tableData"
-      :page.sync="page"
-      :items-per-page="itemsPerPage"
-      hide-default-footer
-      :loading="loading"
-      class="elevation-1"
-      @click:row="editMenu"
-      loading-text="データを取得しています ..."
-    >
-      <template v-slot:[`item.company_name`]="{ item }">
-        <v-layout align-center>
-          <v-avatar color="indigo" size="38">
-            <img
-              v-if="item && item.url_image"
-              :src="imageEndpoint + item.url_image"
-              alt="John"
-            />
-            <span style="color: white" v-else-if="item && item.company_name">{{
-              item.company_name.charAt(0).toUpperCase()
-            }}</span>
-            <v-icon v-else dark>mdi-account</v-icon>
-          </v-avatar>
-          <v-layout column class="pl-3">
-            <div style="font-size: 15px; font-weight: bold">
-              {{ item.company_name }}
-            </div>
+    <v-hover v-slot="{ hover }">
+      <v-data-table
+          :style="{'cursor': hover ? 'pointer': ''}"
+          :headers="headers"
+          :items="tableData"
+          :page.sync="page"
+          :items-per-page="itemsPerPage"
+          hide-default-footer
+          :loading="loading"
+          class="elevation-1"
+          @click:row="editMenu"
+          loading-text="データを取得しています ..."
+      >
+        <template v-slot:[`item.company_name`]="{ item }">
+          <v-layout align-center>
+            <v-avatar color="indigo" size="38">
+              <img
+                  v-if="item && item.url_image"
+                  :src="imageEndpoint + item.url_image"
+                  alt="John"
+              />
+              <span style="color: white" v-else-if="item && item.company_name">{{
+                  item.company_name.charAt(0).toUpperCase()
+                }}</span>
+              <v-icon v-else dark>mdi-account</v-icon>
+            </v-avatar>
+            <v-layout column class="pl-3">
+              <div style="font-size: 15px; font-weight: bold">
+                {{ item.company_name }}
+              </div>
+            </v-layout>
           </v-layout>
-        </v-layout>
-      </template>
-      <template v-slot:[`item.role`]="{ item }">
-        <v-list style="background-color: rgba(0, 0, 0, 0)">
-          <v-list-item-subtitle>{{
-            item.role ? item.role.name : ""
-          }}</v-list-item-subtitle>
-        </v-list>
-      </template>
-      <template v-slot:[`item.created_at`]="{ item }">
-        {{ item.created_at.substr(0, 10) }}
-      </template>
-      <template v-slot:[`item.status`]="{ item }">
-        <v-chip :color="item.status ? 'green' : 'red'" small>
-          {{ item.status ? 'Active' : 'Inactive' }}
-        </v-chip>
-      </template>
-    </v-data-table>
+        </template>
+        <template v-slot:[`item.role`]="{ item }">
+          <v-list style="background-color: rgba(0, 0, 0, 0)">
+            <v-list-item-subtitle>{{
+                item.role ? item.role.name : ""
+              }}</v-list-item-subtitle>
+          </v-list>
+        </template>
+        <template v-slot:[`item.print_count`]="{ item }">
+          <b>{{ item.print_count }}</b>
+        </template>
+        <template v-slot:[`item.created_at`]="{ item }">
+          {{ item.created_at.substr(0, 10) }}
+        </template>
+        <template v-slot:[`item.signed`]="{ item }">
+          <v-chip dark :color="item.signed ? 'green' : 'red'" small>
+            {{ item.signed ? 'Signed' : 'Not sign' }}
+          </v-chip>
+        </template>
+      </v-data-table>
+    </v-hover>
     <div class="pt-2">
       <v-pagination v-model="page" :length="pageCount" @input="changePage"
         >></v-pagination
@@ -188,11 +194,12 @@ export default {
           sortable: false,
           value: "phone_number",
         },
-        { text: "Manager name", value: "signed" },
+        { text: "Manager name", value: "manager_name" },
         { text: "Industry", value: "industry" },
         { text: "Representative name", value: "representative_name" },
+        { text: "Print count", align: "start", value: "print_count" },
         { text: "Created at", value: "created_at" },
-        { text: "Status", value: "status" }
+        { text: "Status",  sortable: false, align: "center", value: "signed" }
       ],
     };
   },
