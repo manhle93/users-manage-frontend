@@ -21,6 +21,47 @@
             Thêm khách hàng
           </v-btn>
         </div>
+        <div class="pl-3 pt-3">
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                  title="Tool"
+                  color="indigo"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+              >
+                <v-icon>mdi-toolbox</v-icon>
+              </v-btn>
+            </template>
+            <v-list dense>
+              <v-list-item>
+                <v-list-item-title>
+                  <v-list-item-icon>
+                    <v-icon>mdi-database-import</v-icon>
+                  </v-list-item-icon>
+                  Import data
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>
+                  <v-list-item-icon>
+                    <v-icon>mdi-database-export</v-icon>
+                  </v-list-item-icon>
+                  Export data
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>
+                  <v-list-item-icon>
+                    <v-icon>mdi-printer</v-icon>
+                  </v-list-item-icon>
+                  Print data
+                </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
       </v-layout>
     </v-list-item>
     <v-progress-linear
@@ -53,10 +94,11 @@
       hide-default-footer
       :loading="loading"
       class="elevation-1"
+      @click:row="editMenu"
       loading-text="データを取得しています ..."
     >
       <template v-slot:[`item.company_name`]="{ item }">
-        <v-layout>
+        <v-layout align-center>
           <v-avatar color="indigo" size="38">
             <img
               v-if="item && item.url_image"
@@ -82,40 +124,13 @@
           }}</v-list-item-subtitle>
         </v-list>
       </template>
-      <template v-slot:[`item.action`]="{ item }">
-        <v-menu>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on">
-              <v-icon color="textColor">mdi-dots-vertical</v-icon>
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-item @click="editMenu(item)">
-              <v-list-item-title>
-                <v-icon class="mr-2"> mdi-pencil </v-icon>
-                編集</v-list-item-title
-              >
-            </v-list-item>
-            <v-list-item
-              v-if="item.active && item.id !== USER.id"
-              @click="deactivateUser(item)"
-            >
-              <v-list-item-title>
-                <v-icon class="mr-2"> mdi-lock-outline </v-icon>
-                無効</v-list-item-title
-              >
-            </v-list-item>
-            <v-list-item
-              v-if="!item.active && item.id !== USER.id"
-              @click="activeUser(item)"
-            >
-              <v-list-item-title>
-                <v-icon class="mr-2"> mdi-lock-open-outline </v-icon>
-                有効</v-list-item-title
-              >
-            </v-list-item>
-          </v-list>
-        </v-menu>
+      <template v-slot:[`item.created_at`]="{ item }">
+        {{ item.created_at.substr(0, 10) }}
+      </template>
+      <template v-slot:[`item.status`]="{ item }">
+        <v-chip :color="item.status ? 'green' : 'red'" small>
+          {{ item.status ? 'Active' : 'Inactive' }}
+        </v-chip>
       </template>
     </v-data-table>
     <div class="pt-2">
@@ -174,13 +189,10 @@ export default {
           value: "phone_number",
         },
         { text: "Manager name", value: "signed" },
-        {
-          text: "アクション",
-          value: "action",
-          sortable: false,
-          align: "center",
-          width: "150",
-        },
+        { text: "Industry", value: "industry" },
+        { text: "Representative name", value: "representative_name" },
+        { text: "Created at", value: "created_at" },
+        { text: "Status", value: "status" }
       ],
     };
   },

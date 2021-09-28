@@ -246,13 +246,17 @@
                             font-weight: bold;
                             color: #d9aa00;
                           "
-                          >{{ item.company_name }}</span
-                        >
+                          >
+                          {{ item.company_name }}
+                        </span>
                         <span
                           class="pl-2"
                           style="font-size: 11px; color: #b5b5b5"
-                          >{{item.thoi_gian}}</span
-                        >
+                          >{{item.thoi_gian}}
+                        </span>
+                        <v-spacer/>
+                        <v-btn v-if="currentUser.id === item.from_user_id" icon x-small @click="openEditCommentForm(item)"><v-icon>mdi-pencil</v-icon></v-btn>
+                        <v-btn v-if="currentUser.id === item.from_user_id" icon x-small @click="openDeleteCommentForm(item)"><v-icon>mdi-delete</v-icon></v-btn>
                       </v-layout>
                       <v-layout class="pt-3">
                         <p>
@@ -383,6 +387,8 @@
         </v-col>
       </v-row>
     </v-form>
+    <UpdateComment ref="editCommentForm"/>
+    <DeleteComment ref="deleteCommentForm"/>
   </v-container>
 </template>
 <script>
@@ -397,8 +403,11 @@ import {
   addComment,
   getComments,
 } from "@/api/customer";
+import UpdateComment from "@/pages/Customers/management/comment/update";
+import DeleteComment from "@/pages/Customers/management/comment/delete";
 
 export default {
+  components: {DeleteComment, UpdateComment},
   data: () => ({
     editing: false,
     Industries: [],
@@ -462,6 +471,11 @@ export default {
     // this.getNhanVienEdit();
     this.getIndustries();
     this.getCustomer();
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.User.me;
+    }
   },
   methods: {
     async getIndustries() {
@@ -603,6 +617,12 @@ export default {
         }
       }
     },
+    openEditCommentForm (comment) {
+      this.$refs.editCommentForm.openDialog(comment)
+    },
+    openDeleteCommentForm (comment) {
+      this.$refs.deleteCommentForm.openDialog(comment)
+    }
   },
 };
 </script>
