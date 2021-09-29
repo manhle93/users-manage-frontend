@@ -24,6 +24,7 @@
     "vue": "^2.6.12",
     "vue-apexcharts": "^1.6.0",
     "vue-google-autocomplete": "^1.1.0",
+    "vue-json-csv": "^1.2.12",
     "vue-router": "^3.4.6",
     "vue-toastification": "^1.7.8",
     "vue2-google-maps": "^0.10.7",

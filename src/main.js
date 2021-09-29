@@ -11,7 +11,7 @@ import './app.css'
 import confirmBoxPlugin from './plugins/confirmBox';
 import DatetimePicker from 'vuetify-datetime-picker'
 import CKEditor from 'ckeditor4-vue';
-
+import JsonCSV from 'vue-json-csv'
 Vue.use( CKEditor );
 Vue.use(DatetimePicker)
 Vue.use(confirmBoxPlugin, { store })
@@ -22,7 +22,7 @@ Vue.use(VueGoogleMaps, {
     key: "AIzaSyCRlcMGhWz1WPJfGCkzfbtKV7BfT60Qu5w",
   },
 });
-
+Vue.component('downloadCsv', JsonCSV)
 Vue.config.productionTip = false;
 
 new Vue({

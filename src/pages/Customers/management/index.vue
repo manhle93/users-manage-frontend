@@ -37,26 +37,35 @@
             <v-list dense>
               <v-list-item>
                 <v-list-item-title>
-                  <v-list-item-icon>
-                    <v-icon>mdi-database-import</v-icon>
-                  </v-list-item-icon>
-                  Import data
+                  <v-layout align-center>
+                    <v-list-item-icon>
+                      <v-icon>mdi-database-import</v-icon>
+                    </v-list-item-icon>
+                    Import data
+                  </v-layout>
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item style="cursor: pointer">
+                <v-list-item-title>
+                    <v-layout align-center>
+                    <v-list-item-icon>
+                      <v-icon>mdi-database-export</v-icon>
+                    </v-list-item-icon>
+                    <download-csv
+                        :data="tableData">
+                      Export data
+                    </download-csv>
+                  </v-layout>
                 </v-list-item-title>
               </v-list-item>
               <v-list-item>
                 <v-list-item-title>
-                  <v-list-item-icon>
-                    <v-icon>mdi-database-export</v-icon>
-                  </v-list-item-icon>
-                  Export data
-                </v-list-item-title>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>
-                  <v-list-item-icon>
-                    <v-icon>mdi-printer</v-icon>
-                  </v-list-item-icon>
-                  Print data
+                  <v-layout align-center>
+                    <v-list-item-icon>
+                      <v-icon>mdi-printer</v-icon>
+                    </v-list-item-icon>
+                    Print data
+                  </v-layout>
                 </v-list-item-title>
               </v-list-item>
             </v-list>
