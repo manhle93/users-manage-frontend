@@ -58,7 +58,7 @@
                   </v-layout>
                 </v-list-item-title>
               </v-list-item>
-              <v-list-item>
+              <v-list-item @click="printPDF">
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
@@ -156,6 +156,46 @@
         >></v-pagination
       >
     </div>
+    <v-dialog v-model="printForm" width="900">
+      <v-card>
+        <v-card-title></v-card-title>
+        <v-card-text id="GFG">
+          <v-simple-table>
+            <template v-slot:default>
+              <thead>
+              <th>
+                Company name
+              </th>
+              <th>
+                Address
+              </th>
+              <th>
+                Phone number
+              </th>
+              <th>
+                Home page Url
+              </th>
+              <th>
+                Manager name
+              </th>
+              </thead>
+              <tbody>
+              <tr v-for="(item, index) of tableData" :key="index">
+                <td style="font-weight: bold">{{ item.company_name }}</td>
+                <td style="font-weight: bold">{{ item.address }}</td>
+                <td style="font-weight: bold">{{ item.phone_number }}</td>
+                <td style="font-weight: bold">{{ item.homepage_url }}</td>
+                <td style="font-weight: bold">{{ item.manager_name }}</td>
+              </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" @click="submitPrint">Print</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 <script>
@@ -169,6 +209,7 @@ import CustomerPic from "@/assets/images/customers.svg";
 export default {
   data() {
     return {
+      printForm: false,
       CustomerPic,
       page: 1,
       pageCount: 1,
@@ -239,6 +280,19 @@ export default {
     }, 300),
   },
   methods: {
+    printPDF () {
+      this.printForm = true
+    },
+    submitPrint () {
+      var divContents = document.getElementById("GFG").innerHTML;
+      var a = window.open('', '', 'height=500, width=500');
+      a.document.write('<html>');
+      a.document.write('<body > <h1><br>');
+      a.document.write(divContents);
+      a.document.write('</body></html>');
+      a.document.close();
+      a.print();
+    },
     async getData() {
       this.loading = true;
       let data = await getCustomers({
