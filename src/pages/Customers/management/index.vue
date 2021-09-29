@@ -137,6 +137,9 @@
             {{ item.signed ? 'Signed' : 'Not sign' }}
           </v-chip>
         </template>
+        <template v-slot:[`item.action`]="{ item }">
+          <v-btn icon color="primary" small @click.prevent.stop="goToEditForm(item)"><v-icon>mdi-pencil</v-icon></v-btn>
+        </template>
       </v-data-table>
     </v-hover>
     <div class="pt-2">
@@ -147,6 +150,7 @@
   </v-container>
 </template>
 <script>
+
 import { debounce } from "lodash";
 import { activeUser } from "@/api/user";
 import { getCustomers } from "@/api/customer";
@@ -198,8 +202,8 @@ export default {
         { text: "Industry", value: "industry" },
         { text: "Representative name", value: "representative_name" },
         { text: "Print count", align: "start", value: "print_count" },
-        { text: "Created at", value: "created_at" },
-        { text: "Status",  sortable: false, align: "center", value: "signed" }
+        { text: "Status",  sortable: false, align: "center", value: "signed" },
+        { text: "", sortable: false, value: "action" }
       ],
     };
   },
@@ -243,6 +247,9 @@ export default {
     },
     editMenu(item) {
       this.$router.push("/customer/show/" + item.id);
+    },
+    goToEditForm(item) {
+      this.$router.push("/customer/edit/" + item.id);
     },
     addUser() {
       this.$router.push("/customer/add");

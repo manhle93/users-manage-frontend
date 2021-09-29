@@ -3,8 +3,30 @@
     <v-form ref="form">
       <v-row>
         <v-col lg="8" sm="12" md="8" xs="12">
-          <v-card>
-            <v-card-title class="pt-4 pl-6">Customer Infomation</v-card-title>
+          <v-card style="height: 100%;">
+            <v-card-title class="pt-4 pl-6 mb-2">
+              <v-btn class="mr-2" @click="gotoLink('/customer/manage')" fab color="primary" x-small><v-icon>mdi-chevron-left</v-icon></v-btn>
+              Customer Infomation
+              <v-spacer/>
+              <v-btn width="120"
+                     class="mr-2"
+                     @click="submitUpdate"
+                     v-if="editing"
+                     :loading="btnLoading" color="success">
+                <v-icon size="18" class="mr-2">mdi-account-edit</v-icon>
+                Update
+              </v-btn>
+              <v-btn width="120"
+                  class="mr-2"
+                  color="success"
+                  @click="submit"
+                  v-else
+                  :loading="btnLoading"
+              >
+                <v-icon size="18" class="mr-2">mdi-account-plus</v-icon>
+                Create
+              </v-btn>
+            </v-card-title>
             <v-layout column class="pl-6 pr-6">
               <v-row>
                 <v-col cols="5" class="zero-vertical">
@@ -174,100 +196,6 @@
               </v-row>
             </v-layout>
             <br />
-            <v-layout class="pr-6" align-center>
-              <v-card-title class="pl-6"
-                >Comments
-                <span class="pl-3" style="color: red; font-weight: bold"
-                  >({{ comments ? comments.length : 0 }})</span
-                ></v-card-title
-              >
-              <v-spacer></v-spacer>
-              <v-btn
-                depressed
-                color="primary"
-                @click="pushComment"
-                :loading="btnLoading"
-                v-if="editing && form.comment && form.comment.length > 0"
-              >
-                Comment
-              </v-btn>
-            </v-layout>
-            <v-layout column class="pl-6 pr-6">
-              <hr />
-              <v-card-text>
-                <v-textarea
-                  class="mx-2"
-                  v-model="form.comment"
-                  filled
-                  rows="2"
-                  prepend-icon="mdi-comment"
-                ></v-textarea>
-              </v-card-text>
-              <v-layout
-                column
-                class="pl-8 pr-6 pb-5"
-                v-if="editing && comments && comments.length > 0"
-              >
-                <v-layout
-                  class="py-2"
-                  v-for="item in comments"
-                  :key="item.key"
-                >
-                  <v-avatar size="40">
-                    <v-img
-                      src="https://cdn.vuetifyjs.com/images/lists/2.jpg"
-                    ></v-img>
-                  </v-avatar>
-                  <div
-                    class="ml-4"
-                    style="
-                      min-height: 50px;
-                      width: 100%;
-                      background-color: #edeef2;
-                      border-radius: 5px;
-                    "
-                  >
-                    <v-layout column style="width: 100%" class="pa-3">
-                      <v-layout style="width: 100%" align-end>
-                        <span
-                          style="
-                            font-size: 15px;
-                            font-weight: bold;
-                            color: #0870bf;
-                          "
-                          >{{
-                            item.user_comment ? item.user_comment.name : null
-                          }}</span
-                        >
-                        <span
-                          class="pl-2"
-                          style="
-                            font-size: 13px;
-                            font-weight: bold;
-                            color: #d9aa00;
-                          "
-                          >
-                          {{ item.company_name }}
-                        </span>
-                        <span
-                          class="pl-2"
-                          style="font-size: 11px; color: #b5b5b5"
-                          >{{item.thoi_gian}}
-                        </span>
-                        <v-spacer/>
-                        <v-btn v-if="currentUser.id === item.from_user_id" icon x-small @click="openEditCommentForm(item)"><v-icon>mdi-pencil</v-icon></v-btn>
-                        <v-btn v-if="currentUser.id === item.from_user_id" icon x-small @click="openDeleteCommentForm(item)"><v-icon>mdi-delete</v-icon></v-btn>
-                      </v-layout>
-                      <v-layout class="pt-3">
-                        <p>
-                          {{ item.content }}
-                        </p>
-                      </v-layout>
-                    </v-layout>
-                  </div>
-                </v-layout>
-              </v-layout>
-            </v-layout>
           </v-card>
         </v-col>
         <v-col sm="12" lg="4" md="4" xs="12">
@@ -355,40 +283,9 @@
               ></v-textarea>
             </v-card-text>
           </v-card>
-          <div class="mt-3 d-flex">
-            <router-link to="/nhansu/nhanvien">
-              <v-btn tile color="orange">
-                <v-icon left>mdi-keyboard-backspace </v-icon>
-                Quay lại
-              </v-btn>
-            </router-link>
-            <v-spacer></v-spacer>
-            <v-btn
-              tile
-              color="success"
-              @click="submitUpdate"
-              v-if="editing"
-              :loading="btnLoading"
-            >
-              <v-icon left>mdi-account-edit</v-icon>
-              Cập nhật
-            </v-btn>
-            <v-btn
-              tile
-              color="success"
-              @click="submit"
-              v-else
-              :loading="btnLoading"
-            >
-              <v-icon left>mdi-account-plus </v-icon>
-              Thêm mới
-            </v-btn>
-          </div>
         </v-col>
       </v-row>
     </v-form>
-    <UpdateComment ref="editCommentForm"/>
-    <DeleteComment ref="deleteCommentForm"/>
   </v-container>
 </template>
 <script>
@@ -400,14 +297,10 @@ import {
   getCategories,
   getCustomerInfo,
   editCustomerInfo,
-  addComment,
   getComments,
 } from "@/api/customer";
-import UpdateComment from "@/pages/Customers/management/comment/update";
-import DeleteComment from "@/pages/Customers/management/comment/delete";
 
 export default {
-  components: {DeleteComment, UpdateComment},
   data: () => ({
     editing: false,
     Industries: [],
@@ -478,6 +371,9 @@ export default {
     }
   },
   methods: {
+    gotoLink (link) {
+      this.$router.push(link)
+    },
     async getIndustries() {
       let data = await getCategories({ group: "industry" });
       this.Industries = data;
@@ -578,18 +474,6 @@ export default {
         this.fetchComments()
       } else return;
     },
-    async pushComment() {
-      if (this.form.comment) {
-        this.btnLoading = true;
-        await addComment({
-          user_id: this.form.user_id,
-          content: this.form.comment,
-        });
-        this.form.comment = null;
-        this.fetchComments();
-        this.btnLoading = false;
-      }
-    },
     async submitUpdate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
@@ -616,12 +500,6 @@ export default {
           this.show = false;
         }
       }
-    },
-    openEditCommentForm (comment) {
-      this.$refs.editCommentForm.openDialog(comment)
-    },
-    openDeleteCommentForm (comment) {
-      this.$refs.deleteCommentForm.openDialog(comment)
     }
   },
 };

@@ -75,8 +75,13 @@ export const routes = [
           },
           {
             path: "show/:id",
-            component: () => import("@/pages/Customers/management/create"),
+            component: () => import("@/pages/Customers/management/detail"),
             name: "Show Customer",
+          },
+          {
+            path: "edit/:id",
+            component: () => import("@/pages/Customers/management/create"),
+            name: "Edit Customer",
           },
           {
             path: "contract",
