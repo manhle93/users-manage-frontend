@@ -5,79 +5,135 @@
         <v-col lg="8" sm="12" md="8" xs="12">
           <v-card>
             <v-card-title class="pt-4 pl-6">
-              <v-btn class="mr-2" @click="gotoLink('/customer/manage')" fab color="primary" x-small><v-icon>mdi-chevron-left</v-icon></v-btn>
+              <v-btn
+                class="mr-2"
+                @click="gotoLink('/customer/manage')"
+                fab
+                color="primary"
+                x-small
+                ><v-icon>mdi-chevron-left</v-icon></v-btn
+              >
               Customer Infomation
-              <v-spacer/>
-              <v-btn width="120" class="mr-2" @click="gotoLink('/customer/edit/' + $route.params.id)" color="primary"><v-icon size="18" class="mr-2">mdi-pencil</v-icon> Edit</v-btn>
+              <v-spacer />
+              <v-btn
+                width="120"
+                class="mr-2"
+                @click="gotoLink('/customer/edit/' + $route.params.id)"
+                color="primary"
+                ><v-icon size="18" class="mr-2">mdi-pencil</v-icon> Edit</v-btn
+              >
             </v-card-title>
             <v-layout column class="pl-6 pr-6">
               <v-simple-table>
                 <template v-slot:default>
                   <tbody>
-                  <tr>
-                    <td width="240px">Company name:</td>
-                    <td style="font-weight: bold">{{ form.company_name }}</td>
-                    <td width="240px">Industry:</td>
-                    <td style="font-weight: bold">{{ Industries.some(val => val.id === form.industry_id) ? Industries.find(val => val.id === form.industry_id).name : ''}}</td>
-                  </tr>
-                  <tr>
-                    <td width="240px">Postal Code:</td>
-                    <td style="font-weight: bold">{{ form.postal_code }}</td>
-                    <td width="240px">Representative name:</td>
-                    <td style="font-weight: bold">{{ form.representative_name }}</td>
-                  </tr>
-                  <tr>
-                    <td width="240px">Address:</td>
-                    <td style="font-weight: bold">{{ form.address }}</td>
-                    <td width="240px">Phone number:</td>
-                    <td style="font-weight: bold">{{ form.phone_number }}</td>
-                  </tr>
-                  <tr>
-                    <td width="240px">Home page Url:</td>
-                    <td style="font-weight: bold">{{ form.homepage_url }}</td>
-                    <td width="240px">Status:</td>
-                    <td style="font-weight: bold">{{ status.some(val => val.value === form.signed) ? status.find(val => val.value === form.signed).name : ''}}</td>
-                  </tr>
-                  <tr>
-                    <td width="240px">Manager name:</td>
-                    <td style="font-weight: bold">{{ form.manager_name }}</td>
-                    <td width="240px">Manager email:</td>
-                    <td style="font-weight: bold">{{ form.manager_email }}</td>
-                  </tr>
-                  <tr>
-                    <td width="240px">Manager phone:</td>
-                    <td style="font-weight: bold">{{ form.manager_phone }}</td>
-                    <td width="240px"></td>
-                    <td style="font-weight: bold"></td>
-                  </tr>
-                  <tr>
-                    <td width="240px">Person in charge nam:e</td>
-                    <td style="font-weight: bold">{{ form.person_in_charge_name }}</td>
-                    <td width="240px">Person in charge email:</td>
-                    <td style="font-weight: bold">{{ form.person_in_charge_email }}</td>
-                  </tr>
-                  <tr>
-                    <td width="240px">Person in charge phone:</td>
-                    <td style="font-weight: bold">{{ form.person_in_charge_phone }}</td>
-                    <td width="240px"></td>
-                    <td style="font-weight: bold"></td>
-                  </tr>
-                  <tr>
-                    <td width="240px">Print count:</td>
-                    <td style="font-weight: bold">{{ form.print_count }}</td>
-                    <td width="240px">Last print date:</td>
-                    <td style="font-weight: bold">{{ form.last_printed_date ? form.last_printed_date.substr(0, 10) : '' }}</td>
-                  </tr>
-                  <tr>
-                    <td width="240px">Note:</td>
-                    <td style="font-weight: bold" colspan="3">{{ form.note }}</td>
-                  </tr>
-                  <tr>
-                    <td width="240px">Created at:</td>
-                    <td style="font-weight: bold">{{ form.created_at ? form.created_at.substr(0, 10) : '' }}</td>
-                    <td width="240px">Updated at:</td>
-                    <td style="font-weight: bold">{{ form.updated_at ? form.updated_at.substr(0, 10) : '' }}</td>
-                  </tr>
+                    <tr>
+                      <td width="240px">Company name:</td>
+                      <td style="font-weight: bold">{{ form.company_name }}</td>
+                      <td width="240px">Industry:</td>
+                      <td style="font-weight: bold">
+                        {{
+                          Industries.some((val) => val.id === form.industry_id)
+                            ? Industries.find(
+                                (val) => val.id === form.industry_id
+                              ).name
+                            : ""
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="240px">Postal Code:</td>
+                      <td style="font-weight: bold">{{ form.postal_code }}</td>
+                      <td width="240px">Representative name:</td>
+                      <td style="font-weight: bold">
+                        {{ form.representative_name }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="240px">Address:</td>
+                      <td style="font-weight: bold">{{ form.address }}</td>
+                      <td width="240px">Phone number:</td>
+                      <td style="font-weight: bold">{{ form.phone_number }}</td>
+                    </tr>
+                    <tr>
+                      <td width="240px">Home page Url:</td>
+                      <td style="font-weight: bold">{{ form.homepage_url }}</td>
+                      <td width="240px">Status:</td>
+                      <td style="font-weight: bold">
+                        {{
+                          status.some((val) => val.value === form.signed)
+                            ? status.find((val) => val.value === form.signed)
+                                .name
+                            : ""
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="240px">Manager name:</td>
+                      <td style="font-weight: bold">{{ form.manager_name }}</td>
+                      <td width="240px">Manager email:</td>
+                      <td style="font-weight: bold">
+                        {{ form.manager_email }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="240px">Manager phone:</td>
+                      <td style="font-weight: bold">
+                        {{ form.manager_phone }}
+                      </td>
+                      <td width="240px"></td>
+                      <td style="font-weight: bold"></td>
+                    </tr>
+                    <tr>
+                      <td width="240px">Person in charge nam:e</td>
+                      <td style="font-weight: bold">
+                        {{ form.person_in_charge_name }}
+                      </td>
+                      <td width="240px">Person in charge email:</td>
+                      <td style="font-weight: bold">
+                        {{ form.person_in_charge_email }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="240px">Person in charge phone:</td>
+                      <td style="font-weight: bold">
+                        {{ form.person_in_charge_phone }}
+                      </td>
+                      <td width="240px"></td>
+                      <td style="font-weight: bold"></td>
+                    </tr>
+                    <tr>
+                      <td width="240px">Print count:</td>
+                      <td style="font-weight: bold">{{ form.print_count }}</td>
+                      <td width="240px">Last print date:</td>
+                      <td style="font-weight: bold">
+                        {{
+                          form.last_printed_date
+                            ? form.last_printed_date.substr(0, 10)
+                            : ""
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="240px">Note:</td>
+                      <td style="font-weight: bold" colspan="3">
+                        {{ form.note }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="240px">Created at:</td>
+                      <td style="font-weight: bold">
+                        {{
+                          form.created_at ? form.created_at.substr(0, 10) : ""
+                        }}
+                      </td>
+                      <td width="240px">Updated at:</td>
+                      <td style="font-weight: bold">
+                        {{
+                          form.updated_at ? form.updated_at.substr(0, 10) : ""
+                        }}
+                      </td>
+                    </tr>
                   </tbody>
                 </template>
               </v-simple-table>
@@ -105,9 +161,11 @@
               <hr />
               <v-card-text>
                 <v-textarea
+                  counter
                   class="mx-2"
                   v-model="form.comment"
                   filled
+                  :rules="rules"
                   rows="2"
                   prepend-icon="mdi-comment"
                 ></v-textarea>
@@ -117,11 +175,7 @@
                 class="pl-8 pr-6 pb-5"
                 v-if="editing && comments && comments.length > 0"
               >
-                <v-layout
-                  class="py-2"
-                  v-for="item in comments"
-                  :key="item.key"
-                >
+                <v-layout class="py-2" v-for="item in comments" :key="item.key">
                   <v-avatar size="40">
                     <v-img
                       src="https://cdn.vuetifyjs.com/images/lists/2.jpg"
@@ -155,17 +209,29 @@
                             font-weight: bold;
                             color: #d9aa00;
                           "
-                          >
+                        >
                           {{ item.company_name }}
                         </span>
                         <span
                           class="pl-2"
                           style="font-size: 11px; color: #b5b5b5"
-                          >{{item.thoi_gian}}
+                          >{{ item.thoi_gian }}
                         </span>
-                        <v-spacer/>
-                        <v-btn v-if="currentUser.id === item.from_user_id" icon x-small @click="openEditCommentForm(item)"><v-icon>mdi-pencil</v-icon></v-btn>
-                        <v-btn v-if="currentUser.id === item.from_user_id" icon x-small @click="openDeleteCommentForm(item)"><v-icon>mdi-delete</v-icon></v-btn>
+                        <v-spacer />
+                        <v-btn
+                          v-if="currentUser.id === item.from_user_id"
+                          icon
+                          x-small
+                          @click="openEditCommentForm(item)"
+                          ><v-icon>mdi-pencil</v-icon></v-btn
+                        >
+                        <v-btn
+                          v-if="currentUser.id === item.from_user_id"
+                          icon
+                          x-small
+                          @click="openDeleteCommentForm(item)"
+                          ><v-icon>mdi-delete</v-icon></v-btn
+                        >
                       </v-layout>
                       <v-layout class="pt-3">
                         <p>
@@ -184,10 +250,7 @@
             <v-img height="230px" :src="masterialPic">
               <v-card-text>
                 <v-layout column class="align-center">
-                  <v-avatar
-                    size="200"
-                    style="border: 4px solid white"
-                  >
+                  <v-avatar size="200" style="border: 4px solid white">
                     <img
                       :src="
                         form.url_image
@@ -204,8 +267,8 @@
         </v-col>
       </v-row>
     </v-form>
-    <UpdateComment ref="editCommentForm"/>
-    <DeleteComment ref="deleteCommentForm"/>
+    <UpdateComment ref="editCommentForm" @get-comment="fetchComments" />
+    <DeleteComment ref="deleteCommentForm" @get-comment="fetchComments" />
   </v-container>
 </template>
 <script>
@@ -221,7 +284,7 @@ import UpdateComment from "@/pages/Customers/management/comment/update";
 import DeleteComment from "@/pages/Customers/management/comment/delete";
 
 export default {
-  components: {DeleteComment, UpdateComment},
+  components: { DeleteComment, UpdateComment },
   data: () => ({
     editing: false,
     Industries: [],
@@ -229,6 +292,7 @@ export default {
       { value: false, name: "未契約" },
       { value: true, name: "契約済" },
     ],
+    rules: [(v) => v.length <= 255 || "Max 255 characters"],
     comments: [],
     avatarNone,
     masterialPic,
@@ -289,11 +353,11 @@ export default {
   computed: {
     currentUser() {
       return this.$store.state.User.me;
-    }
+    },
   },
   methods: {
-    gotoLink (link) {
-      this.$router.push(link)
+    gotoLink(link) {
+      this.$router.push(link);
     },
     async getIndustries() {
       let data = await getCategories({ group: "industry" });
@@ -312,8 +376,8 @@ export default {
         this.form = { ...data };
         this.form.user_name = data.user.user_name;
         this.form.email = data.user.email;
-        console.log(this.form)
-        this.fetchComments()
+        console.log(this.form);
+        this.fetchComments();
       } else return;
     },
     async pushComment() {
@@ -328,12 +392,12 @@ export default {
         this.btnLoading = false;
       }
     },
-    openEditCommentForm (comment) {
-      this.$refs.editCommentForm.openDialog(comment)
+    openEditCommentForm(comment) {
+      this.$refs.editCommentForm.openDialog(comment);
     },
-    openDeleteCommentForm (comment) {
-      this.$refs.deleteCommentForm.openDialog(comment)
-    }
+    openDeleteCommentForm(comment) {
+      this.$refs.deleteCommentForm.openDialog(comment);
+    },
   },
 };
 </script>

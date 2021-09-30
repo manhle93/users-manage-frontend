@@ -24,13 +24,7 @@
         <div class="pl-3 pt-3">
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                  title="Tool"
-                  color="indigo"
-                  dark
-                  v-bind="attrs"
-                  v-on="on"
-              >
+              <v-btn title="Tool" color="indigo" dark v-bind="attrs" v-on="on">
                 <v-icon>mdi-toolbox</v-icon>
               </v-btn>
             </template>
@@ -47,24 +41,31 @@
               </v-list-item>
               <v-list-item style="cursor: pointer">
                 <v-list-item-title>
-                    <v-layout align-center>
+                  <v-layout align-center>
                     <v-list-item-icon>
                       <v-icon>mdi-database-export</v-icon>
                     </v-list-item-icon>
-                    <download-csv
-                        :data="tableData">
-                      Export data
-                    </download-csv>
+                    <download-csv :data="tableData"> Export data </download-csv>
                   </v-layout>
                 </v-list-item-title>
               </v-list-item>
-              <v-list-item @click="printPDF">
+              <v-list-item @click="printPDF(4)">
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
                       <v-icon>mdi-printer</v-icon>
                     </v-list-item-icon>
-                    Print data
+                    Print 8
+                  </v-layout>
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="printPDF(6)">
+                <v-list-item-title>
+                  <v-layout align-center>
+                    <v-list-item-icon>
+                      <v-icon>mdi-printer</v-icon>
+                    </v-list-item-icon>
+                    Print 12
                   </v-layout>
                 </v-list-item-title>
               </v-list-item>
@@ -93,32 +94,81 @@
             hide-details
           ></v-text-field
         ></v-col>
+        <v-col cols="8">
+          <v-layout
+            justify-end
+            align-end
+            class="fill-height"
+            v-if="selectedRow && selectedRow.length > 0"
+          >
+            <v-menu offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  title="Tool"
+                  color="pink"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                  medium
+                  fab
+                >
+                  <v-icon>mdi-pencil-box-outline</v-icon>
+                </v-btn>
+              </template>
+              <v-list dense>
+                <v-list-item
+                  style="cursor: pointer"
+                  @click="signCustomer(true)"
+                >
+                  <v-list-item-title>
+                    <v-layout align-center>
+                      <v-icon class="mr-4">mdi-pencil</v-icon>
+                      契約済
+                    </v-layout>
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title @click="signCustomer(false)">
+                    <v-layout align-center>
+                      <v-icon class="mr-4">mdi-close</v-icon>
+                      未契約
+                    </v-layout>
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-layout>
+        </v-col>
       </v-row>
     </v-card-title>
     <v-hover v-slot="{ hover }">
       <v-data-table
-          :style="{'cursor': hover ? 'pointer': ''}"
-          :headers="headers"
-          :items="tableData"
-          :page.sync="page"
-          :items-per-page="itemsPerPage"
-          hide-default-footer
-          :loading="loading"
-          class="elevation-1"
-          @click:row="editMenu"
-          loading-text="データを取得しています ..."
+        :style="{ cursor: hover ? 'pointer' : '' }"
+        :headers="headers"
+        :items="tableData"
+        :page.sync="page"
+        :items-per-page="itemsPerPage"
+        hide-default-footer
+        :loading="loading"
+        class="elevation-1"
+        show-select
+        v-model="selectedRow"
+        @click:row="editMenu"
+        loading-text="データを取得しています ..."
       >
         <template v-slot:[`item.company_name`]="{ item }">
           <v-layout align-center>
             <v-avatar color="indigo" size="38">
               <img
-                  v-if="item && item.url_image"
-                  :src="imageEndpoint + item.url_image"
-                  alt="John"
+                v-if="item && item.url_image"
+                :src="imageEndpoint + item.url_image"
+                alt="John"
               />
-              <span style="color: white" v-else-if="item && item.company_name">{{
-                  item.company_name.charAt(0).toUpperCase()
-                }}</span>
+              <span
+                style="color: white"
+                v-else-if="item && item.company_name"
+                >{{ item.company_name.charAt(0).toUpperCase() }}</span
+              >
               <v-icon v-else dark>mdi-account</v-icon>
             </v-avatar>
             <v-layout column class="pl-3">
@@ -131,8 +181,8 @@
         <template v-slot:[`item.role`]="{ item }">
           <v-list style="background-color: rgba(0, 0, 0, 0)">
             <v-list-item-subtitle>{{
-                item.role ? item.role.name : ""
-              }}</v-list-item-subtitle>
+              item.role ? item.role.name : ""
+            }}</v-list-item-subtitle>
           </v-list>
         </template>
         <template v-slot:[`item.print_count`]="{ item }">
@@ -143,11 +193,17 @@
         </template>
         <template v-slot:[`item.signed`]="{ item }">
           <v-chip dark :color="item.signed ? 'green' : 'red'" small>
-            {{ item.signed ? 'Signed' : 'Not sign' }}
+            {{ item.signed ? "Signed" : "Not sign" }}
           </v-chip>
         </template>
         <template v-slot:[`item.action`]="{ item }">
-          <v-btn icon color="primary" small @click.prevent.stop="goToEditForm(item)"><v-icon>mdi-pencil</v-icon></v-btn>
+          <v-btn
+            icon
+            color="primary"
+            small
+            @click.prevent.stop="goToEditForm(item)"
+            ><v-icon>mdi-pencil</v-icon></v-btn
+          >
         </template>
       </v-data-table>
     </v-hover>
@@ -156,59 +212,61 @@
         >></v-pagination
       >
     </div>
-    <v-dialog v-model="printForm" width="900">
+    <v-dialog v-model="printForm" width="600">
       <v-card>
-        <v-card-title></v-card-title>
-        <v-card-text id="GFG">
-          <v-simple-table>
-            <template v-slot:default>
-              <thead>
-              <th>
-                Company name
-              </th>
-              <th>
-                Address
-              </th>
-              <th>
-                Phone number
-              </th>
-              <th>
-                Home page Url
-              </th>
-              <th>
-                Manager name
-              </th>
-              </thead>
-              <tbody>
-              <tr v-for="(item, index) of tableData" :key="index">
-                <td style="font-weight: bold">{{ item.company_name }}</td>
-                <td style="font-weight: bold">{{ item.address }}</td>
-                <td style="font-weight: bold">{{ item.phone_number }}</td>
-                <td style="font-weight: bold">{{ item.homepage_url }}</td>
-                <td style="font-weight: bold">{{ item.manager_name }}</td>
-              </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
+        <v-card-title>Print List Customers</v-card-title>
+        <v-card-text v-if="viewPrint">
+          <v-img :src="print8pic" v-if="printRow == 4"></v-img>
+          <v-img :src="print12pic" v-else></v-img>
         </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" @click="submitPrint">Print</v-btn>
+        <v-card-text v-else>
+          <v-layout align-center justify-center>
+            <v-progress-circular
+              :size="70"
+              :width="7"
+              color="purple"
+              indeterminate
+            ></v-progress-circular>
+          </v-layout>
+        </v-card-text>
+
+        <v-card-actions class="pb-4">
+          <v-btn color="orange" @click="printForm = false" class="ml-3" dark>
+            <v-icon left> mdi-close</v-icon>
+            Close</v-btn
+          >
+          <v-spacer> </v-spacer>
+          <v-btn color="primary" @click="submitPrint" class="mr-3">
+            <v-icon left> mdi-printer</v-icon>
+            Print</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <div v-show="false">
+      <div id="printbody">
+        <PrintView :data="dataPrint" :row="printRow" v-if="viewPrint" />
+      </div>
+    </div>
   </v-container>
 </template>
 <script>
-
 import { debounce } from "lodash";
 import { activeUser } from "@/api/user";
-import { getCustomers } from "@/api/customer";
-
+import { getCustomers, setSinged } from "@/api/customer";
 import { getRoles } from "@/api/menu";
 import CustomerPic from "@/assets/images/customers.svg";
+import print8pic from "@/assets/print8.jpg";
+
+import print12pic from "@/assets/print12.png";
+
+import PrintView from "./print.vue";
 export default {
+  components: { PrintView },
   data() {
     return {
+      print8pic,
+      print12pic,
       printForm: false,
       CustomerPic,
       page: 1,
@@ -223,11 +281,16 @@ export default {
       tableData: [],
       btnLoading: false,
       menu: {},
+      selectedRow: [],
       loading: false,
       search: "",
       roleId: null,
       imageEndpoint: process.env.VUE_APP_BASE,
       roles: [],
+      printRow: 4,
+      dataPrint: [],
+      viewPrint: false,
+      loadingPrint: false,
       trang_thai: null,
       headers: [
         {
@@ -252,8 +315,8 @@ export default {
         { text: "Industry", value: "industry" },
         { text: "Representative name", value: "representative_name" },
         { text: "Print count", align: "start", value: "print_count" },
-        { text: "Status",  sortable: false, align: "center", value: "signed" },
-        { text: "", sortable: false, value: "action" }
+        { text: "Status", sortable: false, align: "center", value: "signed" },
+        { text: "", sortable: false, value: "action" },
       ],
     };
   },
@@ -280,16 +343,42 @@ export default {
     }, 300),
   },
   methods: {
-    printPDF () {
-      this.printForm = true
+    async printPDF(row) {
+      this.loadingPrint = true;
+      this.printForm = true;
+      this.viewPrint = false;
+      let data = await getCustomers({
+        perPage: 99999,
+      });
+      this.viewPrint = true;
+      this.loadingPrint = false;
+      this.dataPrint = data.data;
+      this.printRow = row;
     },
-    submitPrint () {
-      var divContents = document.getElementById("GFG").innerHTML;
-      var a = window.open('', '', 'height=500, width=500');
-      a.document.write('<html>');
-      a.document.write('<body > <h1><br>');
+    async signCustomer(status) {
+      let ids = this.selectedRow.map((el) => el.id);
+      await setSinged({ ids: ids, status: status });
+      this.getData();
+      this.$toast.info("Cập nhật thành công", {
+        position: "top-center",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+      });
+    },
+    submitPrint() {
+      var divContents = document.getElementById("printbody").innerHTML;
+      var a = window.open("", "", "height=800, width=1200", "_self");
+      a.document.write("<html>");
+      a.document.write("<body > <h1><br>");
       a.document.write(divContents);
-      a.document.write('</body></html>');
+      a.document.write("</body></html>");
       a.document.close();
       a.print();
     },

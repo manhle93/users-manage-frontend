@@ -52,3 +52,27 @@ export function getCustomers(params) {
         params,
     });
 }
+
+export function setSinged(data) {
+    return request({
+        url: "editsinged",
+        method: "put",
+        data,
+    });
+}
+
+export function editComment(data) {
+    return request({
+        url: "editcomment",
+        method: "put",
+        data,
+    });
+}
+
+export function deleteComment(data) {
+    return request({
+        url: "deletecomment",
+        method: "put",
+        data,
+    });
+}
