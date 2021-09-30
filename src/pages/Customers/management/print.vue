@@ -33,21 +33,24 @@
           v-for="item in items"
           :key="item.id"
         >
-          <div>
-            郵便番号: <span>{{ item.postal_code }}</span>
+          <div style="text-align: center; width: 100%" v-if="item.user_id">
+            <div>
+              郵便番号: <span>{{ item.postal_code }}</span>
+            </div>
+            <div>
+              住所: <span>{{ item.address }}</span>
+            </div>
+            <div>
+              サロン名: <span>{{ item.company_name }}</span>
+            </div>
+            <div>
+              代表者名: <span>{{ item.representative_name }}</span>
+            </div>
+            <div>
+              ユーザID: <span>{{ item.user_id }}</span>
+            </div>
           </div>
-          <div>
-            住所: <span>{{ item.address }}</span>
-          </div>
-          <div>
-            サロン名: <span>{{ item.company_name }}</span>
-          </div>
-          <div>
-            代表者名: <span>{{ item.representative_name }}</span>
-          </div>
-          <div>
-            ユーザID: <span>{{ item.user_id }}</span>
-          </div>
+          <div v-else>NO DATA</div>
         </td>
       </tr>
     </table>
@@ -63,7 +66,7 @@ export default {
   mounted() {
     const data = [...this.data];
     if (data.length % 2 == 1) {
-      data.push(null);
+      data.push({});
     }
     for (let i = 0; i < data.length; i = i + 2) {
       this.tableData.push([data[i], data[i + 1]]);

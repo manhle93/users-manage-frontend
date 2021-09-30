@@ -456,6 +456,7 @@ export default {
             closeButton: "button",
             icon: true,
           });
+          this.gotoLink('/customer/manage')
         } catch (error) {
           this.btnLoading = false;
           this.show = false;
