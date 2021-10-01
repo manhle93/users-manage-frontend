@@ -59,7 +59,7 @@
             @click="clickUpload"
           >
             <v-card-text>
-              <p class="text-h4 text--white">Import data From Excel File</p>
+              <p class="text-h4 text--white">Import customer data from your Excel File</p>
               <p>Click and chose your file to upload</p>
               <v-layout align-center justify-center style="height: 200px">
                 <v-icon size="80">mdi-upload</v-icon>
@@ -95,13 +95,13 @@
             </div>
             <div v-else>{{ item.manager_email }}</div>
           </template>
-          <!-- <template v-slot:[`item.action`]="{ item }">
+          <template v-slot:[`item.action`]="{ item }">
           <div>
-            <v-btn color="primary" fab small dark @click="removeCustomer(item, index)">
-              <v-icon>mdi-pencil</v-icon>
+            <v-btn color="pink" fab x-small dark @click="removeCustomer(item)">
+              <v-icon small>mdi-close</v-icon>
             </v-btn>
           </div>
-        </template> -->
+        </template>
         </v-data-table>
       </div>
     </div>
@@ -153,7 +153,7 @@ export default {
       },
       { text: "HPのURL", align: "start", value: "homepage_url" },
       { text: "Eメールアドレス", sortable: false, value: "manager_email" },
-      //   { text: "Action", sortable: false, value: "action" },
+        { text: "Action", sortable: false, value: "action" },
     ],
   }),
   mounted() {
@@ -205,6 +205,7 @@ export default {
                 this.emails.push(el[6].toLowerCase());
               }
               let item = {
+                id: index,
                 industry: industry ? industry.name : "",
                 industry_id: industry ? industry.id : null,
                 company_name: el[1],
@@ -226,9 +227,9 @@ export default {
         reader.readAsBinaryString(this.file);
       }
     },
-    // removeCustomer(item, index) {
-    //     console.log(item, index)
-    // },
+    removeCustomer(item) {
+         this.dataTable  =  this.dataTable.filter(el => el.id !== item.id)
+    },
     downloadFile(){
         window.open('/importTenTen.xlsx')
     },
