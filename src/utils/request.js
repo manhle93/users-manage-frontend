@@ -32,14 +32,14 @@ service.interceptors.response.use(
     return res;
   },
   async error => {
-    if (error.response.data.code == "token_expire") {
+    if (error && error.response && error.response.data && error.response.data.code == "token_expire") {
       let result = await service.post("/auth/refresh");    //Refresh token khi hết hạn
       setToken(result.access_token);
       error.response.headers["Authorization"] = "Bearer " + getToken();
       return service.request(error.response.config);
     }
 
-    else if(error.response.data.code == "token_not_found" || error.response.data.code == 'unauthorized'){
+    else if(error && error.response && error.response.data && error.response.data.code == "token_not_found" || error.response.data.code == 'unauthorized'){
         removeToken()
         location.assign("/login");
     }

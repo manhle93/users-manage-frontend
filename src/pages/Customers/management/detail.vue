@@ -292,7 +292,7 @@ export default {
       { value: false, name: "未契約" },
       { value: true, name: "契約済" },
     ],
-    rules: [(v) => v.length <= 255 || "Max 255 characters"],
+    rules: [(v) => v && v.length <= 255 || "Max 255 characters"],
     comments: [],
     avatarNone,
     masterialPic,

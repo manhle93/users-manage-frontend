@@ -76,3 +76,11 @@ export function deleteComment(data) {
         data,
     });
 }
+
+export function importCustomer(data) {
+    return request({
+        url: "importcustomers",
+        method: "post",
+        data,
+    });
+}

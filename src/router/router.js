@@ -88,6 +88,11 @@ export const routes = [
             component: () => import("@/pages/Customers/contract/index"),
             name: "Contract",
           },
+          {
+            path: "import",
+            component: () => import("@/pages/Customers/management/import"),
+            name: "Import",
+          },
         ],
       },
     ],

@@ -29,7 +29,7 @@
               </v-btn>
             </template>
             <v-list dense>
-              <v-list-item>
+              <v-list-item @click="goToImport">
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
@@ -304,6 +304,7 @@ export default {
           align: "start",
           sortable: false,
           value: "address",
+          width: "350",
         },
         {
           text: "Phone number",
@@ -312,7 +313,7 @@ export default {
           value: "phone_number",
         },
         { text: "Manager name", value: "manager_name" },
-        { text: "Industry", value: "industry" },
+        { text: "Industry", value: "industry.name" },
         { text: "Representative name", value: "representative_name" },
         { text: "Print count", align: "start", value: "print_count" },
         { text: "Status", sortable: false, align: "center", value: "signed" },
@@ -444,6 +445,9 @@ export default {
     },
     async changeRoleSearch() {
       this.getData();
+    },
+    goToImport() {
+      this.$router.push("/customer/import/");
     },
     async getAllRoles() {
       let data = await getRoles();

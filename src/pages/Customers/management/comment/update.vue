@@ -44,7 +44,7 @@ export default {
   name: "update",
   data() {
     return {
-      rulesLength: (v) => v.length <= 255 || "Max 255 characters",
+      rulesLength: (v) => v&& v.length <= 255 || "Max 255 characters",
       rules: {
         required: (value) =>
           (!!value && value.trim().length >= 2) || "Total character >= 2",
