@@ -176,10 +176,16 @@
                 v-if="editing && comments && comments.length > 0"
               >
                 <v-layout class="py-2" v-for="item in comments" :key="item.key">
-                  <v-avatar size="40">
-                    <v-img
-                      src="https://cdn.vuetifyjs.com/images/lists/2.jpg"
-                    ></v-img>
+                  <v-avatar color="indigo" size="40">
+                    <img
+                        v-if="item.user_comment && item.user_comment.url_image"
+                        :src="imageEndpoint + item.user_comment.url_image"
+                        alt="John"
+                    />
+                    <span style="color: white" v-else-if="item && item.user_comment.name">{{
+                        item.user_comment.name.charAt(0).toUpperCase()
+                      }}</span>
+                    <v-icon v-else dark>mdi-account</v-icon>
                   </v-avatar>
                   <div
                     class="ml-4"
@@ -366,6 +372,7 @@ export default {
     async fetchComments() {
       let data = await getComments({ user_id: this.form.user_id });
       this.comments = data;
+      console.log(this.comments)
     },
     async getCustomer() {
       let id = this.$route.params.id;

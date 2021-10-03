@@ -116,6 +116,7 @@
                 </v-btn>
               </template>
               <v-list dense>
+                <div class="pa-2" style="font-size: 14px">Update status</div>
                 <v-list-item
                   style="cursor: pointer"
                   @click="signCustomer(true)"
@@ -248,6 +249,7 @@
         <PrintView :data="dataPrint" :row="printRow" v-if="viewPrint" />
       </div>
     </div>
+    <popupdetail ref="detail"/>
   </v-container>
 </template>
 <script>
@@ -261,8 +263,9 @@ import print8pic from "@/assets/print8.jpg";
 import print12pic from "@/assets/print12.png";
 
 import PrintView from "./print.vue";
+import Popupdetail from "@/pages/Customers/management/popupdetail";
 export default {
-  components: { PrintView },
+  components: {Popupdetail, PrintView },
   data() {
     return {
       print8pic,
@@ -399,7 +402,8 @@ export default {
       this.getData();
     },
     editMenu(item) {
-      this.$router.push("/customer/show/" + item.id);
+      this.$refs.detail.openDialog(item.id)
+      // this.$router.push("/customer/show/" + item.id);
     },
     goToEditForm(item) {
       this.$router.push("/customer/edit/" + item.id);
