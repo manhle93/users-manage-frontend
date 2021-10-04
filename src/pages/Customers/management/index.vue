@@ -215,7 +215,7 @@
     </div>
     <v-dialog v-model="printForm" width="600">
       <v-card>
-        <v-card-title>Print List Customers</v-card-title>
+        <v-card-title>Customer Temp Information</v-card-title>
         <v-card-text v-if="viewPrint">
           <v-img :src="print8pic" v-if="printRow == 4"></v-img>
           <v-img :src="print12pic" v-else></v-img>
