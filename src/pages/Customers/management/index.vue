@@ -131,7 +131,7 @@
                 <v-list-item>
                   <v-list-item-title @click="signCustomer(false)">
                     <v-layout align-center>
-                      <v-icon class="mr-4">mdi-close</v-icon>
+                      <v-icon class="mr-4">mdi-open-in-new</v-icon>
                       未契約
                     </v-layout>
                   </v-list-item-title>
