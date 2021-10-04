@@ -22,7 +22,7 @@
           </v-btn>
         </div>
         <div class="pl-3 pt-3">
-          <v-menu offset-y>
+          <v-menu offset-y class="menu_print">
             <template v-slot:activator="{ on, attrs }">
               <v-btn title="Tool" color="indigo" dark v-bind="attrs" v-on="on">
                 <v-icon>mdi-toolbox</v-icon>
@@ -33,7 +33,7 @@
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
-                      <v-icon>mdi-database-import</v-icon>
+                      <v-icon color="green">mdi-database-import</v-icon>
                     </v-list-item-icon>
                     Import data
                   </v-layout>
@@ -43,7 +43,7 @@
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
-                      <v-icon>mdi-database-export</v-icon>
+                      <v-icon color="#3949ab">mdi-database-export</v-icon>
                     </v-list-item-icon>
                     <download-csv :data="tableData"> Export data </download-csv>
                   </v-layout>
@@ -53,7 +53,7 @@
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
-                      <v-icon>mdi-printer</v-icon>
+                      <v-icon color="#fb8c00">mdi-printer</v-icon>
                     </v-list-item-icon>
                     Print 8
                   </v-layout>
@@ -63,7 +63,7 @@
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
-                      <v-icon>mdi-printer</v-icon>
+                      <v-icon color="#fb8c00">mdi-printer</v-icon>
                     </v-list-item-icon>
                     Print 12
                   </v-layout>
@@ -140,14 +140,14 @@
                 </v-btn>
               </template>
               <v-list dense>
-                <div class="pa-2" style="font-size: 14px">Update status</div>
+                <div class="pa-2" style="font-size: 14px;font-weight: bold;">Update status</div>
                 <v-list-item
                   style="cursor: pointer"
                   @click="signCustomer(true)"
                 >
                   <v-list-item-title>
                     <v-layout align-center>
-                      <v-icon class="mr-4"> mdi-comment-check</v-icon>
+                      <v-icon class="mr-4" color="green"> mdi-comment-check</v-icon>
                       契約済
                     </v-layout>
                   </v-list-item-title>
@@ -155,7 +155,7 @@
                 <v-list-item>
                   <v-list-item-title @click="signCustomer(false)">
                     <v-layout align-center>
-                      <v-icon class="mr-4">mdi-comment-remove-outline</v-icon>
+                      <v-icon class="mr-4" color="pink">mdi-comment-remove-outline</v-icon>
                       未契約
                     </v-layout>
                   </v-list-item-title>
@@ -499,5 +499,11 @@ export default {
   .btn-add {
     display: none;
   }
+
 }
+</style>
+<style>
+  .menu_print.v-menu__content{
+    box-shadow: 0 3px 11px 0 #101756, 0 3px 3px -2px #b2b2b21a, 0 1px 8px 0 #9a9a9a1a !important;
+  }
 </style>
