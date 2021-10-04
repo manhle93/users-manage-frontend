@@ -123,7 +123,7 @@
                 >
                   <v-list-item-title>
                     <v-layout align-center>
-                      <v-icon class="mr-4">mdi-pencil</v-icon>
+                      <v-icon class="mr-4"> mdi-comment-check</v-icon>
                       契約済
                     </v-layout>
                   </v-list-item-title>
@@ -131,7 +131,7 @@
                 <v-list-item>
                   <v-list-item-title @click="signCustomer(false)">
                     <v-layout align-center>
-                      <v-icon class="mr-4">mdi-open-in-new</v-icon>
+                      <v-icon class="mr-4">mdi-comment-remove-outline</v-icon>
                       未契約
                     </v-layout>
                   </v-list-item-title>
