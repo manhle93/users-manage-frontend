@@ -94,7 +94,31 @@
             hide-details
           ></v-text-field
         ></v-col>
-        <v-col cols="8">
+        <v-col cols="2">
+          <v-select
+            v-model="industry_search"
+            item-text="name"
+            item-value="value"
+            :items="industrys"
+            placeholder="search for industry"
+            hide-details
+            clearable
+            @change="changeIndustrySearch"
+          ></v-select
+        ></v-col>
+        <v-col cols="2">
+          <v-select
+            v-model="search_status"
+            item-text="name"
+            item-value="value"
+            :items="trangThais"
+            placeholder="search for status"
+            hide-details
+            clearable
+            @change="changeRoleSearch"
+          ></v-select
+        ></v-col>
+        <v-col cols="4">
           <v-layout
             justify-end
             align-end
@@ -277,8 +301,14 @@ export default {
       itemsPerPage: 10,
       options: {},
       trangThais: [
-        { name: "有効", value: true },
-        { name: "無効", value: false },
+        { name: "未契約", value: false },
+        { name: "契約済", value: true },
+      ],
+      industrys : [
+        { name: "新規事業", value: 1 },
+        { name: "美容サロン", value: 2 },
+        { name: "美容院", value: 3 },
+        { name: "マッサージ", value: 4 },
       ],
       totalDesserts: 0,
       tableData: [],
@@ -287,6 +317,8 @@ export default {
       selectedRow: [],
       loading: false,
       search: "",
+      industry_search: null,
+      search_status: null,
       roleId: null,
       imageEndpoint: process.env.VUE_APP_BASE,
       roles: [],
@@ -389,6 +421,8 @@ export default {
         page: this.page,
         perPage: this.itemsPerPage,
         search: this.search,
+        search_industry: this.industry_search,
+        search_status: this.search_status,
       });
       this.tableData = data.data;
       this.loading = false;
@@ -445,6 +479,9 @@ export default {
       });
     },
     async changeRoleSearch() {
+      this.getData();
+    },
+    async changeIndustrySearch() {
       this.getData();
     },
     goToImport() {
