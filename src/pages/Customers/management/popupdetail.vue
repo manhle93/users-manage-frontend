@@ -393,7 +393,6 @@ export default {
     async fetchComments() {
       let data = await getComments({user_id: this.form.user_id});
       this.comments = data;
-      console.log(this.comments)
     },
     async getCustomer() {
       this.editing = false;

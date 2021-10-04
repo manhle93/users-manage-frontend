@@ -246,7 +246,7 @@
     </v-dialog>
     <div v-show="false">
       <div id="printbody">
-        <PrintView :data="dataPrint" :row="printRow" v-if="viewPrint" />
+        <PrintView :data="dataPrint" :row="printRow" />
       </div>
     </div>
     <popupdetail ref="detail"/>
@@ -348,15 +348,12 @@ export default {
   },
   methods: {
     async printPDF(row) {
-      this.loadingPrint = true;
       this.printForm = true;
-      this.viewPrint = false;
-      let data = await getCustomers({
-        perPage: 99999,
-      });
+      // this.viewPrint = false;
       this.viewPrint = true;
       this.loadingPrint = false;
-      this.dataPrint = data.data;
+
+      this.dataPrint = this.selectedRow;
       this.printRow = row;
     },
     async signCustomer(status) {

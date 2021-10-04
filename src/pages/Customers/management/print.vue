@@ -35,31 +35,17 @@
           v-for="item in items"
           :key="item.id"
         >
-          <div style="position: absolute; bottom: 20px; right: 20px">{{ item.user_id }} {{item.user ? item.user.company_name : ""}}</div>
+          <div style="position: absolute; bottom: 20px; right: 20px">
+            {{ item.user_id }} {{ item.user ? item.user.company_name : "" }}
+          </div>
           <div style="width: 100%" v-if="item.user_id">
             <div>
-              <div>{{item.postal_code}}</div>
+              <div>{{ item.postal_code }}</div>
               <div>{{ item.address }}</div>
               <div>{{ item.company_name }}</div>
             </div>
-
-<!--            <div>-->
-<!--              郵便番号: <span>{{ item.postal_code }}</span>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--              住所: <span>{{ item.address }}</span>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--              サロン名: <span>{{ item.company_name }}</span>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--              代表者名: <span>{{ item.representative_name }}</span>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--              ユーザID: <span>{{ item.user_id }}</span>-->
-<!--            </div>-->
           </div>
-          <div v-else>NO DATA</div>
+          <div v-else></div>
         </td>
       </tr>
     </table>
@@ -68,19 +54,42 @@
 
 <script>
 export default {
-  props: ["data", "row"],
+  // props: ["data", "row"],
+  props: {
+    data: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+    row: {
+      type: Number,
+      default: 4,
+    },
+  },
   data: () => ({
     tableData: [],
   }),
+  watch: {
+    data(val) {
+      this.tableData = []
+      const data = [...val];
+      if (data.length % 2 == 1) {
+        data.push({});
+      }
+      for (let i = 0; i < data.length; i = i + 2) {
+        this.tableData.push([data[i], data[i + 1]]);
+      }
+    },
+  },
   mounted() {
-    const data = [...this.data];
-    console.log(data)
-    if (data.length % 2 == 1) {
-      data.push({});
-    }
-    for (let i = 0; i < data.length; i = i + 2) {
-      this.tableData.push([data[i], data[i + 1]]);
-    }
+    // const data = [...this.data];
+    //   if (data.length % 2 == 1) {
+    //     data.push({});
+    //   }
+    //   for (let i = 0; i < data.length; i = i + 2) {
+    //     this.tableData.push([data[i], data[i + 1]]);
+    // }
   },
 };
 </script>
