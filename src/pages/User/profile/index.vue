@@ -29,7 +29,7 @@
     <br />
     <v-row>
       <v-col sm="12" lg="4" md="4" xs="12">
-        <v-card>
+        <v-card height="600">
           <v-img height="230px" :src="masterialPic">
             <v-card-text>
               <v-layout column class="align-center">
@@ -101,7 +101,7 @@
         </v-card>
       </v-col>
       <v-col lg="8" sm="12" md="8" xs="12">
-        <v-card>
+        <v-card height="600">
           <v-toolbar color="indigo darken-3" dark flat>
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
             <v-toolbar-title>プロファイル情報</v-toolbar-title>
