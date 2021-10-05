@@ -6,7 +6,7 @@
           <v-card style="height: 100%;">
             <v-card-title class="pt-4 pl-6 mb-2">
               <v-btn class="mr-2" @click="gotoLink('/customer/manage')" fab color="primary" x-small><v-icon>mdi-chevron-left</v-icon></v-btn>
-              Customer Infomation
+              顧客情報作成
               <v-spacer/>
               <v-btn width="120"
                      class="mr-2"
@@ -14,7 +14,7 @@
                      v-if="editing"
                      :loading="btnLoading" color="success">
                 <v-icon size="18" class="mr-2">mdi-account-edit</v-icon>
-                Update
+                更新
               </v-btn>
               <v-btn width="120"
                   class="mr-2"
@@ -24,19 +24,19 @@
                   :loading="btnLoading"
               >
                 <v-icon size="18" class="mr-2">mdi-account-plus</v-icon>
-                Create
+                作成
               </v-btn>
             </v-card-title>
             <v-layout column class="pl-6 pr-6">
               <v-row>
                 <v-col cols="5" class="zero-vertical">
                   <div class="label-form">
-                    Company Name <span style="color: red">(*)</span>
+                    会社名/店名 <span style="color: red">(*)</span>
                   </div>
                   <v-text-field
                     v-model="form.company_name"
                     :rules="nameRules"
-                    placeholder="Company name"
+                    placeholder="REP店名"
                     outlined
                     dense
                     prepend-inner-icon="mdi-account"
@@ -44,7 +44,7 @@
                 </v-col>
                 <v-col cols="4" class="zero-vertical">
                   <div class="label-form">
-                    Industry <span style="color: red">(*)</span>
+                    業種 <span style="color: red">(*)</span>
                   </div>
                   <v-select
                     prepend-inner-icon="mdi-home"
@@ -60,11 +60,11 @@
                 </v-col>
                 <v-col cols="3" class="zero-vertical">
                   <div class="label-form">
-                    Postal Code <span style="color: red">(*)</span>
+                    郵便番号 <span style="color: red">(*)</span>
                   </div>
                   <v-text-field
                     v-model="form.postal_code"
-                    placeholder="Postal code"
+                    placeholder="郵便番号"
                     :rules="poscodeRules"
                     outlined
                     type="number"
@@ -73,10 +73,10 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">Representative name</div>
+                  <div class="label-form">代表者名</div>
                   <v-text-field
                     v-model="form.representative_name"
-                    placeholder="Representative name"
+                    placeholder="代表者名"
                     outlined
                     dense
                     prepend-inner-icon="mdi-home-modern"
@@ -84,11 +84,11 @@
                 </v-col>
                 <v-col cols="7" class="zero-vertical">
                   <div class="label-form">
-                    Address <span style="color: red">(*)</span>
+                    住所 <span style="color: red">(*)</span>
                   </div>
                   <v-text-field
                     v-model="form.address"
-                    placeholder="address"
+                    placeholder="住所"
                     :rules="addressRules"
                     outlined
                     dense
@@ -96,20 +96,20 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">Phone number</div>
+                  <div class="label-form">電話番号</div>
                   <v-text-field
                     v-model="form.phone_number"
-                    placeholder="Phone number"
+                    placeholder="電話番号"
                     outlined
                     dense
                     prepend-inner-icon="mdi-phone"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">Home page Url</div>
+                  <div class="label-form">HPのURL</div>
                   <v-text-field
                     v-model="form.homepage_url"
-                    placeholder="homepage Url"
+                    placeholder="HPのURL"
                     outlined
                     dense
                     prepend-inner-icon="mdi-web"
@@ -117,7 +117,7 @@
                 </v-col>
                 <v-col cols="3" class="zero-vertical">
                   <div class="label-form">
-                    Status <span style="color: red">(*)</span>
+                    ステータス <span style="color: red">(*)</span>
                   </div>
                   <v-select
                     prepend-inner-icon="mdi-pen"
@@ -133,20 +133,20 @@
                 </v-col>
 
                 <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">Manager name</div>
+                  <div class="label-form">管理者名</div>
                   <v-text-field
                     v-model="form.manager_name"
-                    placeholder="Manager name"
+                    placeholder="管理者名"
                     outlined
                     dense
                     prepend-inner-icon="mdi-account"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">Manager email</div>
+                  <div class="label-form">管理者Eメールアドレス</div>
                   <v-text-field
                     v-model="form.manager_email"
-                    placeholder="Manager email"
+                    placeholder="管理者Eメールアドレス"
                     outlined
                     dense
                     prepend-inner-icon="mdi-email"
@@ -164,20 +164,20 @@
                 </v-col>
 
                 <v-col cols="5" class="zero-vertical">
-                  <div class="label-form">Person in charge name</div>
+                  <div class="label-form">担当者名</div>
                   <v-text-field
                     v-model="form.person_in_charge_name"
-                    placeholder="Person in charge name"
+                    placeholder="担当者名"
                     outlined
                     dense
                     prepend-inner-icon="mdi-account"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">Person in charge email</div>
+                  <div class="label-form">担当者Eメールアドレス</div>
                   <v-text-field
                     v-model="form.person_in_charge_email"
-                    placeholder="Person in charge email"
+                    placeholder="担当者Eメールアドレス"
                     outlined
                     dense
                     prepend-inner-icon="mdi-email"
@@ -245,7 +245,7 @@
             <v-layout column class="align-center">
               <v-layout align-center>
                 <v-text-field
-                  placeholder="E-Mail"
+                  placeholder="Eメールアドレス"
                   prepend-inner-icon="mdi-email"
                   v-model="form.email"
                   :rules="emailRules"
@@ -272,7 +272,7 @@
             </v-layout>
           </v-card>
           <v-card class="mx-auto mt-3">
-            <v-card-title>Note</v-card-title>
+            <v-card-title>メモ</v-card-title>
             <v-card-text>
               <v-textarea
                 class="mx-2"
@@ -315,16 +315,16 @@ export default {
     imageEndpoint: process.env.VUE_APP_BASE,
     btnLoading: false,
     nameRules: [
-      (v) => !!v || "Tên công ty không thể bỏ trống",
-      (v) => (v && v.length >= 2) || "Tên công ty tối thiểu 2 ký tự",
+      (v) => !!v || "会社名/店名を入力してください",
+      (v) => (v && v.length >= 2) || "会社名/店名は２文字以上で入力してください",
     ],
     poscodeRules: [
-      (v) => !!v || "Postal code không thể bỏ trống",
-      (v) => (v && v.length >= 2) || "Postal code tối thiểu 2 ký tự",
+      (v) => !!v || "郵便番号を入力してください",
+      (v) => (v && v.length >= 2) || "郵便番号は２文字以上で入力してください",
     ],
     addressRules: [
-      (v) => !!v || "Address không thể bỏ trống",
-      (v) => (v && v.length >= 5) || "Address tối thiểu 5 ký tự",
+      (v) => !!v || "住所を入力してください",
+      (v) => (v && v.length >= 5) || "住所は５文字以上で入力してください",
     ],
     statusRules: [(v) => v != null || "Hãy chọn một loại hình!"],
     industryRules: [(v) => !!v || "Hãy chọn một loại hình!"],
@@ -333,8 +333,8 @@ export default {
       (v) => (v && v.length >= 3) || "Tên đăng nhập tối thiểu 3 ký tự",
     ],
     emailRules: [
-      (v) => !!v || "E-Mail không thể bỏ trống",
-      (v) => /.+@.+\..+/.test(v) || "E-mail không hợp lệ",
+      (v) => !!v || "Eメールアドレスを入力してください",
+      (v) => /.+@.+\..+/.test(v) || "Eメールアドレスは正しく入力してください",
     ],
     form: {
       email: "",
@@ -444,7 +444,7 @@ export default {
           this.show = false;
           this.btnLoading = false;
           this.$emit("on-done");
-          this.$toast.info("Thêm mới thành công", {
+          this.$toast.info("顧客情報作成は完了しました。", {
             position: "top-center",
             timeout: 2000,
             closeOnClick: true,
@@ -484,7 +484,7 @@ export default {
           this.show = false;
           this.btnLoading = false;
           this.$emit("on-done");
-          this.$toast.info("Cập nhật thành công", {
+          this.$toast.info("更新は完了しました。", {
             position: "top-center",
             timeout: 2000,
             closeOnClick: true,

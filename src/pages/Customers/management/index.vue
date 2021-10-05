@@ -11,20 +11,20 @@
         ></v-img>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            Khách hàng</v-list-item-title
+            顧客</v-list-item-title
           >
-          <v-list-item-subtitle>Quản lý khách hàng</v-list-item-subtitle>
+          <v-list-item-subtitle>顧客管理</v-list-item-subtitle>
         </v-list-item-content>
         <div class="pt-3">
           <v-btn color="indigo" dark @click="addUser">
             <v-icon left> mdi-plus </v-icon>
-            Thêm khách hàng
+            新規作成
           </v-btn>
         </div>
         <div class="pl-3 pt-3">
           <v-menu offset-y class="menu_print">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn title="Tool" color="indigo" dark v-bind="attrs" v-on="on">
+              <v-btn title="ツール" color="indigo" dark v-bind="attrs" v-on="on">
                 <v-icon>mdi-toolbox</v-icon>
               </v-btn>
             </template>
@@ -35,7 +35,7 @@
                     <v-list-item-icon>
                       <v-icon color="green">mdi-database-import</v-icon>
                     </v-list-item-icon>
-                    Import data
+                    インポート
                   </v-layout>
                 </v-list-item-title>
               </v-list-item>
@@ -45,7 +45,7 @@
                     <v-list-item-icon>
                       <v-icon color="#3949ab">mdi-database-export</v-icon>
                     </v-list-item-icon>
-                    <download-csv :data="tableData"> Export data </download-csv>
+                    <download-csv :data="tableData"> エクスポート </download-csv>
                   </v-layout>
                 </v-list-item-title>
               </v-list-item>
@@ -55,7 +55,7 @@
                     <v-list-item-icon>
                       <v-icon color="#fb8c00">mdi-printer</v-icon>
                     </v-list-item-icon>
-                    Print 8
+                    宛名出力8
                   </v-layout>
                 </v-list-item-title>
               </v-list-item>
@@ -65,7 +65,7 @@
                     <v-list-item-icon>
                       <v-icon color="#fb8c00">mdi-printer</v-icon>
                     </v-list-item-icon>
-                    Print 12
+                    宛名出力12
                   </v-layout>
                 </v-list-item-title>
               </v-list-item>
@@ -100,7 +100,7 @@
             item-text="name"
             item-value="value"
             :items="industrys"
-            placeholder="search for industry"
+            placeholder="業種を選択してください"
             hide-details
             clearable
             @change="changeIndustrySearch"
@@ -112,7 +112,7 @@
             item-text="name"
             item-value="value"
             :items="trangThais"
-            placeholder="search for status"
+            placeholder="ステータスを選択してください"
             hide-details
             clearable
             @change="changeRoleSearch"
@@ -128,7 +128,7 @@
             <v-menu offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                  title="Tool"
+                  title="ステータス更新"
                   color="pink"
                   dark
                   v-bind="attrs"
@@ -140,7 +140,7 @@
                 </v-btn>
               </template>
               <v-list dense>
-                <div class="pa-2" style="font-size: 14px;font-weight: bold;">Update status</div>
+                <div class="pa-2" style="font-size: 14px;font-weight: bold;">ステータス更新</div>
                 <v-list-item
                   style="cursor: pointer"
                   @click="signCustomer(true)"
@@ -239,7 +239,7 @@
     </div>
     <v-dialog v-model="printForm" width="600">
       <v-card>
-        <v-card-title>Customer Temp Information</v-card-title>
+        <v-card-title>宛名出力</v-card-title>
         <v-card-text v-if="viewPrint">
           <v-img :src="print8pic" v-if="printRow == 4"></v-img>
           <v-img :src="print12pic" v-else></v-img>
@@ -258,12 +258,12 @@
         <v-card-actions class="pb-4">
           <v-btn color="orange" @click="printForm = false" class="ml-3" dark>
             <v-icon left> mdi-close</v-icon>
-            Close</v-btn
+            キャンセル</v-btn
           >
           <v-spacer> </v-spacer>
           <v-btn color="primary" @click="submitPrint" class="mr-3">
             <v-icon left> mdi-printer</v-icon>
-            Print</v-btn
+            出力</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -329,29 +329,29 @@ export default {
       trang_thai: null,
       headers: [
         {
-          text: "Company name",
+          text: "会社名/店名",
           value: "company_name",
           sortable: false,
           width: "220",
         },
         {
-          text: "Address",
+          text: "住所",
           align: "start",
           sortable: false,
           value: "address",
           width: "350",
         },
         {
-          text: "Phone number",
+          text: "電話番号",
           align: "start",
           sortable: false,
           value: "phone_number",
         },
-        { text: "Manager name", value: "manager_name" },
-        { text: "Industry", value: "industry.name" },
-        { text: "Representative name", value: "representative_name" },
-        { text: "Print count", align: "start", value: "print_count" },
-        { text: "Status", sortable: false, align: "center", value: "signed" },
+        { text: "管理者名", value: "manager_name" },
+        { text: "業種", value: "industry.name" },
+        { text: "代表者名", value: "representative_name" },
+        { text: "宛名出力回数", align: "start", value: "print_count" },
+        { text: "ステータス", sortable: false, align: "center", value: "signed" },
         { text: "", sortable: false, value: "action" },
       ],
     };
@@ -392,7 +392,7 @@ export default {
       let ids = this.selectedRow.map((el) => el.id);
       await setSinged({ ids: ids, status: status });
       this.getData();
-      this.$toast.info("Cập nhật thành công", {
+      this.$toast.info("更新は完了しました。", {
         position: "top-center",
         timeout: 2000,
         closeOnClick: true,

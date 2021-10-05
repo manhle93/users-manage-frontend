@@ -4,7 +4,7 @@
       <v-card-title style="height: 45px; background-color: #3f51b5">
         <v-layout align-center class="fill-height">
           <span style="font-size: 14px; font-weight: bold; color: white">
-            Edit comment
+            コメント編集
           </span>
           <v-spacer />
           <v-btn icon small @click="editDialog = false"
@@ -32,7 +32,7 @@
       <v-divider />
       <v-card-actions>
         <v-spacer />
-        <v-btn width="100" color="primary" @click="submitEdit">Submit</v-btn>
+        <v-btn width="100" color="primary" @click="submitEdit">更新</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -44,10 +44,10 @@ export default {
   name: "update",
   data() {
     return {
-      rulesLength: (v) => v&& v.length <= 255 || "Max 255 characters",
+      rulesLength: (v) => v&& v.length <= 255 || "最大255文字で入力してください",
       rules: {
         required: (value) =>
-          (!!value && value.trim().length >= 2) || "Total character >= 2",
+          (!!value && value.trim().length >= 2) || "２文字以上で入力してください",
       },
       valid: false,
       editDialog: false,
@@ -67,7 +67,7 @@ export default {
       await editComment(this.form);
       this.$emit("get-comment");
       this.editDialog = false;
-      this.$toast.info("Cập nhật thành công", {
+      this.$toast.info("更新は完了しました。", {
         position: "top-center",
         timeout: 2000,
         closeOnClick: true,

@@ -17,7 +17,7 @@
                         alt="ManhLe"
                     />
                   </v-avatar>
-                  <div class="pl-3">Customer Infomation</div>
+                  <div class="pl-3">顧客詳細情報</div>
                   <v-spacer/>
                   <v-btn
                       @click="gotoLink('/customer/edit/' + customerId)"
@@ -34,9 +34,9 @@
                     <template v-slot:default>
                       <tbody>
                       <tr>
-                        <td width="240px">Company name:</td>
+                        <td width="240px">会社名/店名:</td>
                         <td style="font-weight: bold">{{ form.company_name }}</td>
-                        <td width="240px">Industry:</td>
+                        <td width="240px">業種:</td>
                         <td style="font-weight: bold">
                           {{
                             Industries.some((val) => val.id === form.industry_id)
@@ -48,23 +48,23 @@
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">Postal Code:</td>
+                        <td width="240px">郵便番号:</td>
                         <td style="font-weight: bold">{{ form.postal_code }}</td>
-                        <td width="240px">Representative name:</td>
+                        <td width="240px">代表者名:</td>
                         <td style="font-weight: bold">
                           {{ form.representative_name }}
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">Address:</td>
+                        <td width="240px">住所:</td>
                         <td style="font-weight: bold">{{ form.address }}</td>
-                        <td width="240px">Phone number:</td>
+                        <td width="240px">電話番号:</td>
                         <td style="font-weight: bold">{{ form.phone_number }}</td>
                       </tr>
                       <tr>
-                        <td width="240px">Home page Url:</td>
+                        <td width="240px">HPのURL:</td>
                         <td style="font-weight: bold">{{ form.homepage_url }}</td>
-                        <td width="240px">Status:</td>
+                        <td width="240px">ステータス:</td>
                         <td style="font-weight: bold">
                           {{
                             status.some((val) => val.value === form.signed)
@@ -75,43 +75,27 @@
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">Manager name:</td>
+                        <td width="240px">管理者名:</td>
                         <td style="font-weight: bold">{{ form.manager_name }}</td>
-                        <td width="240px">Manager email:</td>
+                        <td width="240px">管理者Eメールアドレス:</td>
                         <td style="font-weight: bold">
                           {{ form.manager_email }}
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">Manager phone:</td>
-                        <td style="font-weight: bold">
-                          {{ form.manager_phone }}
-                        </td>
-                        <td width="240px"></td>
-                        <td style="font-weight: bold"></td>
-                      </tr>
-                      <tr>
-                        <td width="240px">Person in charge nam:e</td>
+                        <td width="240px">担当者名:</td>
                         <td style="font-weight: bold">
                           {{ form.person_in_charge_name }}
                         </td>
-                        <td width="240px">Person in charge email:</td>
+                        <td width="240px">担当者Eメールアドレス:</td>
                         <td style="font-weight: bold">
                           {{ form.person_in_charge_email }}
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">Person in charge phone:</td>
-                        <td style="font-weight: bold">
-                          {{ form.person_in_charge_phone }}
-                        </td>
-                        <td width="240px"></td>
-                        <td style="font-weight: bold"></td>
-                      </tr>
-                      <tr>
-                        <td width="240px">Print count:</td>
+                        <td width="240px">宛名出力回数:</td>
                         <td style="font-weight: bold">{{ form.print_count }}</td>
-                        <td width="240px">Last print date:</td>
+                        <td width="240px">最新宛名出力日:</td>
                         <td style="font-weight: bold">
                           {{
                             form.last_printed_date
@@ -121,19 +105,19 @@
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">Note:</td>
+                        <td width="240px">メモ:</td>
                         <td style="font-weight: bold" colspan="3">
                           {{ form.note }}
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">Created at:</td>
+                        <td width="240px">登録日:</td>
                         <td style="font-weight: bold">
                           {{
                             form.created_at ? form.created_at.substr(0, 10) : ""
                           }}
                         </td>
-                        <td width="240px">Updated at:</td>
+                        <td width="240px">更新日:</td>
                         <td style="font-weight: bold">
                           {{
                             form.updated_at ? form.updated_at.substr(0, 10) : ""
@@ -151,7 +135,7 @@
             <v-col sm="12" lg="4" md="4" xs="12" class="px-0">
               <v-layout class="pa-2" align-center>
                 <v-card-title class="pl-6"
-                >Comments
+                >コメント
                   <span class="pl-3" style="color: red; font-weight: bold"
                   >({{ comments ? comments.length : 0 }})</span
                   ></v-card-title
@@ -165,7 +149,7 @@
                     v-if="editing && form.comment && form.comment.length > 0"
                     small
                 >
-                  Comment
+                  コメント
                 </v-btn>
               </v-layout>
               <v-layout column class="px-2">
