@@ -22,7 +22,7 @@
           </v-btn>
         </div>
         <div class="pl-3 pt-3">
-          <v-menu offset-y>
+          <v-menu offset-y class="menu_print">
             <template v-slot:activator="{ on, attrs }">
               <v-btn title="Tool" color="indigo" dark v-bind="attrs" v-on="on">
                 <v-icon>mdi-toolbox</v-icon>
@@ -33,7 +33,7 @@
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
-                      <v-icon>mdi-database-import</v-icon>
+                      <v-icon color="green">mdi-database-import</v-icon>
                     </v-list-item-icon>
                     Import data
                   </v-layout>
@@ -43,7 +43,7 @@
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
-                      <v-icon>mdi-database-export</v-icon>
+                      <v-icon color="#3949ab">mdi-database-export</v-icon>
                     </v-list-item-icon>
                     <download-csv :data="tableData"> Export data </download-csv>
                   </v-layout>
@@ -53,7 +53,7 @@
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
-                      <v-icon>mdi-printer</v-icon>
+                      <v-icon color="#fb8c00">mdi-printer</v-icon>
                     </v-list-item-icon>
                     Print 8
                   </v-layout>
@@ -63,7 +63,7 @@
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
-                      <v-icon>mdi-printer</v-icon>
+                      <v-icon color="#fb8c00">mdi-printer</v-icon>
                     </v-list-item-icon>
                     Print 12
                   </v-layout>
@@ -94,7 +94,31 @@
             hide-details
           ></v-text-field
         ></v-col>
-        <v-col cols="8">
+        <v-col cols="2">
+          <v-select
+            v-model="industry_search"
+            item-text="name"
+            item-value="value"
+            :items="industrys"
+            placeholder="search for industry"
+            hide-details
+            clearable
+            @change="changeIndustrySearch"
+          ></v-select
+        ></v-col>
+        <v-col cols="2">
+          <v-select
+            v-model="search_status"
+            item-text="name"
+            item-value="value"
+            :items="trangThais"
+            placeholder="search for status"
+            hide-details
+            clearable
+            @change="changeRoleSearch"
+          ></v-select
+        ></v-col>
+        <v-col cols="4">
           <v-layout
             justify-end
             align-end
@@ -116,14 +140,14 @@
                 </v-btn>
               </template>
               <v-list dense>
-                <div class="pa-2" style="font-size: 14px">Update status</div>
+                <div class="pa-2" style="font-size: 14px;font-weight: bold;">Update status</div>
                 <v-list-item
                   style="cursor: pointer"
                   @click="signCustomer(true)"
                 >
                   <v-list-item-title>
                     <v-layout align-center>
-                      <v-icon class="mr-4">mdi-pencil</v-icon>
+                      <v-icon class="mr-4" color="green"> mdi-comment-check</v-icon>
                       契約済
                     </v-layout>
                   </v-list-item-title>
@@ -131,7 +155,7 @@
                 <v-list-item>
                   <v-list-item-title @click="signCustomer(false)">
                     <v-layout align-center>
-                      <v-icon class="mr-4">mdi-open-in-new</v-icon>
+                      <v-icon class="mr-4" color="pink">mdi-comment-remove-outline</v-icon>
                       未契約
                     </v-layout>
                   </v-list-item-title>
@@ -215,7 +239,7 @@
     </div>
     <v-dialog v-model="printForm" width="600">
       <v-card>
-        <v-card-title>Print List Customers</v-card-title>
+        <v-card-title>Customer Temp Information</v-card-title>
         <v-card-text v-if="viewPrint">
           <v-img :src="print8pic" v-if="printRow == 4"></v-img>
           <v-img :src="print12pic" v-else></v-img>
@@ -277,8 +301,14 @@ export default {
       itemsPerPage: 10,
       options: {},
       trangThais: [
-        { name: "有効", value: true },
-        { name: "無効", value: false },
+        { name: "未契約", value: false },
+        { name: "契約済", value: true },
+      ],
+      industrys : [
+        { name: "新規事業", value: 1 },
+        { name: "美容サロン", value: 2 },
+        { name: "美容院", value: 3 },
+        { name: "マッサージ", value: 4 },
       ],
       totalDesserts: 0,
       tableData: [],
@@ -287,6 +317,8 @@ export default {
       selectedRow: [],
       loading: false,
       search: "",
+      industry_search: null,
+      search_status: null,
       roleId: null,
       imageEndpoint: process.env.VUE_APP_BASE,
       roles: [],
@@ -389,6 +421,8 @@ export default {
         page: this.page,
         perPage: this.itemsPerPage,
         search: this.search,
+        search_industry: this.industry_search,
+        search_status: this.search_status,
       });
       this.tableData = data.data;
       this.loading = false;
@@ -447,6 +481,9 @@ export default {
     async changeRoleSearch() {
       this.getData();
     },
+    async changeIndustrySearch() {
+      this.getData();
+    },
     goToImport() {
       this.$router.push("/customer/import/");
     },
@@ -462,5 +499,11 @@ export default {
   .btn-add {
     display: none;
   }
+
 }
+</style>
+<style>
+  .menu_print.v-menu__content{
+    box-shadow: 0 3px 11px 0 #101756, 0 3px 3px -2px #b2b2b21a, 0 1px 8px 0 #9a9a9a1a !important;
+  }
 </style>
