@@ -10,9 +10,7 @@
           class="mr-4"
         ></v-img>
         <v-list-item-content>
-          <v-list-item-title class="headline mb-1">
-            顧客</v-list-item-title
-          >
+          <v-list-item-title class="headline mb-1"> 顧客</v-list-item-title>
           <v-list-item-subtitle>顧客管理</v-list-item-subtitle>
         </v-list-item-content>
         <div class="pt-3">
@@ -24,7 +22,13 @@
         <div class="pl-3 pt-3">
           <v-menu offset-y class="menu_print">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn title="ツール" color="indigo" dark v-bind="attrs" v-on="on">
+              <v-btn
+                title="ツール"
+                color="indigo"
+                dark
+                v-bind="attrs"
+                v-on="on"
+              >
                 <v-icon>mdi-toolbox</v-icon>
               </v-btn>
             </template>
@@ -45,7 +49,9 @@
                     <v-list-item-icon>
                       <v-icon color="#3949ab">mdi-database-export</v-icon>
                     </v-list-item-icon>
-                    <download-csv :data="tableData"> エクスポート </download-csv>
+                    <download-csv :data="tableData">
+                      エクスポート
+                    </download-csv>
                   </v-layout>
                 </v-list-item-title>
               </v-list-item>
@@ -140,14 +146,18 @@
                 </v-btn>
               </template>
               <v-list dense>
-                <div class="pa-2" style="font-size: 14px;font-weight: bold;">ステータス更新</div>
+                <div class="pa-2" style="font-size: 14px; font-weight: bold">
+                  ステータス更新
+                </div>
                 <v-list-item
                   style="cursor: pointer"
                   @click="signCustomer(true)"
                 >
                   <v-list-item-title>
                     <v-layout align-center>
-                      <v-icon class="mr-4" color="green"> mdi-comment-check</v-icon>
+                      <v-icon class="mr-4" color="green">
+                        mdi-comment-check</v-icon
+                      >
                       契約済
                     </v-layout>
                   </v-list-item-title>
@@ -155,7 +165,9 @@
                 <v-list-item>
                   <v-list-item-title @click="signCustomer(false)">
                     <v-layout align-center>
-                      <v-icon class="mr-4" color="pink">mdi-comment-remove-outline</v-icon>
+                      <v-icon class="mr-4" color="pink"
+                        >mdi-comment-remove-outline</v-icon
+                      >
                       未契約
                     </v-layout>
                   </v-list-item-title>
@@ -273,7 +285,7 @@
         <PrintView :data="dataPrint" :row="printRow" />
       </div>
     </div>
-    <popupdetail ref="detail"/>
+    <popupdetail ref="detail" />
   </v-container>
 </template>
 <script>
@@ -289,7 +301,7 @@ import print12pic from "@/assets/print12.png";
 import PrintView from "./print.vue";
 import Popupdetail from "@/pages/Customers/management/popupdetail";
 export default {
-  components: {Popupdetail, PrintView },
+  components: { Popupdetail, PrintView },
   data() {
     return {
       print8pic,
@@ -304,7 +316,7 @@ export default {
         { name: "未契約", value: false },
         { name: "契約済", value: true },
       ],
-      industrys : [
+      industrys: [
         { name: "新規事業", value: 1 },
         { name: "美容サロン", value: 2 },
         { name: "美容院", value: 3 },
@@ -329,29 +341,60 @@ export default {
       trang_thai: null,
       headers: [
         {
+          text: "REP名ID",
+          value: "user_id",
+          sortable: false,
+          width: "100",
+        },
+        {
+          text: "REP店名",
+          value: "user.company_name",
+          sortable: false,
+          width: "150",
+        },
+        {
+          text: "業種",
+          value: "industry.name",
+          sortable: false,
+          width: "100",
+        },
+        {
           text: "会社名/店名",
           value: "company_name",
           sortable: false,
-          width: "220",
+          width: "200",
+        },
+        {
+          text: "代表者名",
+          value: "representative_name",
+          sortable: false,
+          width: "100",
         },
         {
           text: "住所",
           align: "start",
           sortable: false,
           value: "address",
-          width: "350",
+          width: "200",
         },
         {
-          text: "電話番号",
+          text: "登録日",
           align: "start",
           sortable: false,
-          value: "phone_number",
+          value: "created_at",
+          width: "150",
         },
-        { text: "管理者名", value: "manager_name" },
-        { text: "業種", value: "industry.name" },
-        { text: "代表者名", value: "representative_name" },
-        { text: "宛名出力回数", align: "start", value: "print_count" },
-        { text: "ステータス", sortable: false, align: "center", value: "signed" },
+        { text: "宛名出力回数", 
+          align: "start", 
+          value: "print_count",
+          width: "150",
+        },
+        {
+          text: "ステータス",
+          sortable: false,
+          align: "center",
+          value: "signed",
+        },
         { text: "", sortable: false, value: "action" },
       ],
     };
@@ -433,7 +476,7 @@ export default {
       this.getData();
     },
     editMenu(item) {
-      this.$refs.detail.openDialog(item.id)
+      this.$refs.detail.openDialog(item.id);
       // this.$router.push("/customer/show/" + item.id);
     },
     goToEditForm(item) {
@@ -499,11 +542,11 @@ export default {
   .btn-add {
     display: none;
   }
-
 }
 </style>
 <style>
-  .menu_print.v-menu__content{
-    box-shadow: 0 3px 11px 0 #101756, 0 3px 3px -2px #b2b2b21a, 0 1px 8px 0 #9a9a9a1a !important;
-  }
+.menu_print.v-menu__content {
+  box-shadow: 0 3px 11px 0 #101756, 0 3px 3px -2px #b2b2b21a,
+    0 1px 8px 0 #9a9a9a1a !important;
+}
 </style>
