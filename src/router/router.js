@@ -60,13 +60,13 @@ export const routes = [
       },
       {
         path: "customer",
-        name: "Customers",
+        name: "顧客情報",
         component: Blank,
         children: [
           {
             path: "manage",
             component: () => import("@/pages/Customers/management/index"),
-            name: "Customers manage",
+            name: "顧客管理",
           },
           {
             path: "add",
