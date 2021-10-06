@@ -77,9 +77,9 @@
                       </td>
                     </tr>
                     <tr>
-                      <td width="240px">Manager phone:</td>
+                      <td width="240px">担当者2Eメールアドレス:</td>
                       <td style="font-weight: bold">
-                        {{ form.manager_phone }}
+                        {{ form.person_in_charge_email_2 }}
                       </td>
                       <td width="240px"></td>
                       <td style="font-weight: bold"></td>
@@ -95,9 +95,9 @@
                       </td>
                     </tr>
                     <tr>
-                      <td width="240px">Person in charge phone:</td>
+                      <td width="240px">担当者名2:</td>
                       <td style="font-weight: bold">
-                        {{ form.person_in_charge_phone }}
+                        {{ form.person_in_charge_name_2 }}
                       </td>
                       <td width="240px"></td>
                       <td style="font-weight: bold"></td>
@@ -340,10 +340,10 @@ export default {
       signed: false,
       manager_name: null,
       manager_email: null,
-      manager_phone: null,
+      person_in_charge_email_2: null,
       person_in_charge_name: null,
       person_in_charge_email: null,
-      person_in_charge_phone: null,
+      person_in_charge_name_2: null,
       comment: null,
       url_image: null,
       note: null,

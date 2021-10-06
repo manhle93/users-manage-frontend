@@ -152,16 +152,16 @@
                     prepend-inner-icon="mdi-email"
                   ></v-text-field>
                 </v-col>
-                <!-- <v-col cols="3" class="zero-vertical">
-                  <div class="label-form">Manager phone</div>
+                <v-col cols="3" class="zero-vertical">
+                  <div class="label-form">担当者名2</div>
                   <v-text-field
-                    v-model="form.manager_phone"
+                    v-model="form.person_in_charge_name_2"
                     placeholder="Manager Phone"
                     outlined
                     dense
                     prepend-inner-icon="mdi-phone"
                   ></v-text-field>
-                </v-col> -->
+                </v-col>
 
                 <v-col cols="5" class="zero-vertical">
                   <div class="label-form">担当者名</div>
@@ -183,16 +183,16 @@
                     prepend-inner-icon="mdi-email"
                   ></v-text-field>
                 </v-col>
-                <!-- <v-col cols="3" class="zero-vertical">
-                  <div class="label-form">Person in charge phone</div>
+                <v-col cols="3" class="zero-vertical">
+                  <div class="label-form">担当者2Eメールアドレス</div>
                   <v-text-field
-                    v-model="form.person_in_charge_phone"
+                    v-model="form.person_in_charge_email_2"
                     placeholder="Manager Phone"
                     outlined
                     dense
                     prepend-inner-icon="mdi-phone"
                   ></v-text-field>
-                </v-col> -->
+                </v-col>
               </v-row>
             </v-layout>
             <br />
@@ -349,10 +349,10 @@ export default {
       signed: false,
       manager_name: null,
       manager_email: null,
-      manager_phone: null,
+      person_in_charge_name_2: null,
       person_in_charge_name: null,
       person_in_charge_email: null,
-      person_in_charge_phone: null,
+      person_in_charge_email_2: null,
       comment: null,
       url_image: null,
       note: null,
