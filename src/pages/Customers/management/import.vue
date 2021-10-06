@@ -11,16 +11,16 @@
         ></v-img>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            Import Customer Data</v-list-item-title
+            顧客情報インポート</v-list-item-title
           >
           <v-list-item-subtitle>
-            Dowload example File and import from excel file
+            サンプルファイルをダウンロードして、インポートする
           </v-list-item-subtitle>
         </v-list-item-content>
         <div class="pt-3">
           <v-btn color="indigo" dark @click="downloadFile">
             <v-icon left> mdi-download</v-icon>
-            Example File
+            サンプルファイル
           </v-btn>
         </div>
       </v-layout>
@@ -59,8 +59,8 @@
             @click="clickUpload"
           >
             <v-card-text>
-              <p class="text-h4 text--white">Import customer data from your Excel File</p>
-              <p>Click and chose your file to upload</p>
+              <p class="text-h4 text--white">顧客情報ファイルをインポート</p>
+              <p>こちらにクリックしてローカルファイルを選択してください</p>
               <v-layout align-center justify-center style="height: 200px">
                 <v-icon size="80">mdi-upload</v-icon>
               </v-layout>
@@ -71,12 +71,12 @@
       <div v-else class="pt-6">
         <v-layout class="pb-4">
           <v-btn depressed color="error" @click="closeImport">
-            <v-icon left> mdi-close </v-icon> Hủy bỏ
+            <v-icon left> mdi-close </v-icon> キャンセル
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn depressed color="primary" @click="importData">
             <v-icon left> mdi-import </v-icon>
-            Nhập
+            インポート
           </v-btn>
         </v-layout>
         <v-data-table
@@ -90,7 +90,7 @@
             <div class="pt-3" v-if="item.duplicate_email">
               <div>{{ item.manager_email }}</div>
               <p style="font-weight: bold; color: #e91e63">
-                Email đã tồn tại, không thể Import
+                エクセルのデータに不備があります。入力項目を確認してください。
               </p>
             </div>
             <div v-else>{{ item.manager_email }}</div>
@@ -131,7 +131,7 @@ export default {
     validateImport: true,
     loadingImport: false,
     headers: [
-      { text: "Industry", value: "industry" },
+      { text: "業種", value: "industry" },
       {
         text: "会社名/店名",
         value: "company_name",
@@ -235,7 +235,7 @@ export default {
     },
     async importData() {
       if (!this.validateImport) {
-        this.$toast.error("Dữ liệu không hợp lệ", {
+        this.$toast.error("エクセルのデータに不備があります", {
           position: "top-center",
           timeout: 2000,
           closeOnClick: true,
@@ -252,7 +252,7 @@ export default {
       this.loadingImport = true;
       try {
         await importCustomer({ data: this.dataTable });
-        this.$toast.info("Thành công", {
+        this.$toast.info("インポートは完了しました", {
           position: "top-center",
           timeout: 2000,
           closeOnClick: true,

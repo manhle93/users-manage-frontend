@@ -4,7 +4,7 @@
       <v-card-title style="height: 45px; background-color: #3f51b5">
         <v-layout align-center class="fill-height">
           <span style="font-size: 14px; font-weight: bold; color: white">
-            Delete comment
+            コメント削除
           </span>
           <v-spacer />
           <v-btn icon small @click="deleteDialog = false"
@@ -16,14 +16,14 @@
       <v-card-text class="pa-4">
         <v-layout column>
           <span style="font-size: 14px; font-weight: 500; color: #000000"
-            >Are you sure you want to delete this comment?</span
+            >コメントを削除します。よろしいですか？</span
           >
         </v-layout>
       </v-card-text>
       <v-divider />
       <v-card-actions>
         <v-spacer />
-        <v-btn width="100" color="error" @click="submitDelete">Delete</v-btn>
+        <v-btn width="100" color="error" @click="submitDelete">削除</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -49,7 +49,7 @@ export default {
       await deleteComment({ id: this.currentComment.id });
       this.$emit('get-comment')
       this.deleteDialog = false;
-      this.$toast.info("Xóa thành công", {
+      this.$toast.info("削除は完了しました。", {
         position: "top-center",
         timeout: 2000,
         closeOnClick: true,
