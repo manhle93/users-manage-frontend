@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-form ref="form">
       <v-row>
-        <v-col lg="8" sm="12" md="8" xs="12">
+        <v-col lg="12" sm="12" md="8" xs="12">
           <v-card style="height: 100%;">
             <v-card-title class="pt-4 pl-6 mb-2">
               <v-btn class="mr-2" @click="gotoLink('/customer/manage')" fab color="primary" x-small><v-icon>mdi-chevron-left</v-icon></v-btn>
@@ -82,7 +82,19 @@
                     prepend-inner-icon="mdi-home-modern"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="7" class="zero-vertical">
+                <v-col cols="4" class="zero-vertical">
+                  <div class="label-form">
+                    Eメールアドレス
+                  </div>
+                  <v-text-field
+                    v-model="form.email"
+                    placeholder="Eメールアドレス"
+                    outlined
+                    dense
+                    prepend-inner-icon="mdi-email"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="3" class="zero-vertical">
                   <div class="label-form">
                     住所 <span style="color: red">(*)</span>
                   </div>
@@ -95,6 +107,7 @@
                     prepend-inner-icon="mdi-map"
                   ></v-text-field>
                 </v-col>
+
                 <v-col cols="5" class="zero-vertical">
                   <div class="label-form">電話番号</div>
                   <v-text-field
@@ -265,7 +278,7 @@
               <br />
             </v-layout>
           </v-card> -->
-          <v-card class="mx-auto mt-3">
+          <!-- <v-card class="mx-auto mt-3">
             <v-card-title>メモ</v-card-title>
             <v-card-text>
               <v-textarea
@@ -276,7 +289,7 @@
                 prepend-icon="mdi-note"
               ></v-textarea>
             </v-card-text>
-          </v-card>
+          </v-card> -->
         </v-col>
       </v-row>
     </v-form>
@@ -465,7 +478,7 @@ export default {
         let data = await getCustomerInfo({ customer_id: id });
         this.form = { ...data };
         this.form.user_name = data.user.user_name;
-        this.form.email = data.user.email;
+        // this.form.email = data.user.email;
         this.fetchComments()
       } else return;
     },
