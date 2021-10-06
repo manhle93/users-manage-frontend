@@ -291,7 +291,7 @@
 <script>
 import { debounce } from "lodash";
 import { activeUser } from "@/api/user";
-import { getCustomers, setSinged } from "@/api/customer";
+import { getCustomers, setSinged, countPrint} from "@/api/customer";
 import { getRoles } from "@/api/menu";
 import CustomerPic from "@/assets/images/customers.svg";
 import print8pic from "@/assets/print8.jpg";
@@ -311,6 +311,7 @@ export default {
       page: 1,
       pageCount: 1,
       itemsPerPage: 10,
+      customerPrint: [],
       options: {},
       trangThais: [
         { name: "未契約", value: false },
@@ -449,6 +450,11 @@ export default {
       });
     },
     submitPrint() {
+      let printId = []
+      this.selectedRow.forEach(el => {
+        printId.push(el.id)
+      })
+      this.addPrint(printId)
       var divContents = document.getElementById("printbody").innerHTML;
       var a = window.open("", "", "height=800, width=1200", "_self");
       a.document.write("<html>");
@@ -471,8 +477,13 @@ export default {
       this.loading = false;
       this.pageCount = data.last_page;
     },
+
     changePage(val) {
       this.page = val;
+      this.getData();
+    },
+    async addPrint(val) {
+      await countPrint({countprint: val})
       this.getData();
     },
     editMenu(item) {

@@ -199,7 +199,7 @@
           </v-card>
         </v-col>
         <v-col sm="12" lg="4" md="4" xs="12">
-          <v-card>
+          <!-- <v-card>
             <v-img height="230px" :src="masterialPic">
               <v-card-text>
                 <v-layout column class="align-center">
@@ -263,14 +263,8 @@
                 <span style="color: red" class="pl-6">(*)</span>
               </v-layout>
               <br />
-              <!-- <div class="pb-4 pt-6">
-                Mật khẩu đăng nhập mặc định:
-                <span style="font-weight: bold; font-style: italic"
-                  >12345678</span
-                >
-              </div> -->
             </v-layout>
-          </v-card>
+          </v-card> -->
           <v-card class="mx-auto mt-3">
             <v-card-title>メモ</v-card-title>
             <v-card-text>

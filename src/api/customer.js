@@ -37,6 +37,15 @@ export function addComment(data) {
         data,
     });
 }
+
+export function countPrint(data) {
+    return request({
+        url: "countprint",
+        method: "post",
+        data,
+    });
+}
+
 export function getComments(params) {
     return request({
         url: "getcomment",
