@@ -152,7 +152,7 @@
                     prepend-inner-icon="mdi-email"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="3" class="zero-vertical">
+                <!-- <v-col cols="3" class="zero-vertical">
                   <div class="label-form">Manager phone</div>
                   <v-text-field
                     v-model="form.manager_phone"
@@ -161,7 +161,7 @@
                     dense
                     prepend-inner-icon="mdi-phone"
                   ></v-text-field>
-                </v-col>
+                </v-col> -->
 
                 <v-col cols="5" class="zero-vertical">
                   <div class="label-form">担当者名</div>
@@ -183,7 +183,7 @@
                     prepend-inner-icon="mdi-email"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="3" class="zero-vertical">
+                <!-- <v-col cols="3" class="zero-vertical">
                   <div class="label-form">Person in charge phone</div>
                   <v-text-field
                     v-model="form.person_in_charge_phone"
@@ -192,7 +192,7 @@
                     dense
                     prepend-inner-icon="mdi-phone"
                   ></v-text-field>
-                </v-col>
+                </v-col> -->
               </v-row>
             </v-layout>
             <br />

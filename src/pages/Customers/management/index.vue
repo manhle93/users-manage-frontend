@@ -195,7 +195,7 @@
       >
         <template v-slot:[`item.company_name`]="{ item }">
           <v-layout align-center>
-            <v-avatar color="indigo" size="38">
+            <!-- <v-avatar color="indigo" size="38">
               <img
                 v-if="item && item.url_image"
                 :src="imageEndpoint + item.url_image"
@@ -207,9 +207,9 @@
                 >{{ item.company_name.charAt(0).toUpperCase() }}</span
               >
               <v-icon v-else dark>mdi-account</v-icon>
-            </v-avatar>
+            </v-avatar> -->
             <v-layout column class="pl-3">
-              <div style="font-size: 15px; font-weight: bold">
+              <div style="font-size: 15px;">
                 {{ item.company_name }}
               </div>
             </v-layout>
@@ -230,7 +230,7 @@
         </template>
         <template v-slot:[`item.signed`]="{ item }">
           <v-chip dark :color="item.signed ? 'green' : 'red'" small>
-            {{ item.signed ? "Signed" : "Not sign" }}
+            {{ item.signed ? "契約済" : "未契約" }}
           </v-chip>
         </template>
         <template v-slot:[`item.action`]="{ item }">
