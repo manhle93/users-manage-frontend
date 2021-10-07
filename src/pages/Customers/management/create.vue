@@ -29,7 +29,7 @@
             </v-card-title>
             <v-layout column class="pl-6 pr-6">
               <v-row>
-                <v-col cols="5" class="zero-vertical">
+                <v-col cols="4" class="zero-vertical">
                   <div class="label-form">
                     会社名/店名 <span style="color: red">(*)</span>
                   </div>
@@ -58,7 +58,7 @@
                   >
                   </v-select>
                 </v-col>
-                <v-col cols="3" class="zero-vertical">
+                <v-col cols="4" class="zero-vertical">
                   <div class="label-form">
                     郵便番号 <span style="color: red">(*)</span>
                   </div>
@@ -72,7 +72,7 @@
                     prepend-inner-icon="mdi-map-marker"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="5" class="zero-vertical">
+                <v-col cols="4" class="zero-vertical">
                   <div class="label-form">代表者名</div>
                   <v-text-field
                     v-model="form.representative_name"
@@ -94,7 +94,7 @@
                     prepend-inner-icon="mdi-email"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="3" class="zero-vertical">
+                <v-col cols="4" class="zero-vertical">
                   <div class="label-form">
                     住所 <span style="color: red">(*)</span>
                   </div>
@@ -108,7 +108,7 @@
                   ></v-text-field>
                 </v-col>
 
-                <v-col cols="5" class="zero-vertical">
+                <v-col cols="4" class="zero-vertical">
                   <div class="label-form">電話番号</div>
                   <v-text-field
                     v-model="form.phone_number"
@@ -128,7 +128,7 @@
                     prepend-inner-icon="mdi-web"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="3" class="zero-vertical">
+                <v-col cols="4" class="zero-vertical">
                   <div class="label-form">
                     ステータス <span style="color: red">(*)</span>
                   </div>
@@ -145,7 +145,7 @@
                   </v-select>
                 </v-col>
 
-                <v-col cols="5" class="zero-vertical">
+                <v-col cols="4" class="zero-vertical">
                   <div class="label-form">管理者名</div>
                   <v-text-field
                     v-model="form.manager_name"
@@ -165,18 +165,18 @@
                     prepend-inner-icon="mdi-email"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="3" class="zero-vertical">
+                <v-col cols="4" class="zero-vertical">
                   <div class="label-form">担当者名2</div>
                   <v-text-field
                     v-model="form.person_in_charge_name_2"
-                    placeholder="Manager Phone"
+                    placeholder="担当者名2"
                     outlined
                     dense
                     prepend-inner-icon="mdi-phone"
                   ></v-text-field>
                 </v-col>
 
-                <v-col cols="5" class="zero-vertical">
+                <v-col cols="4" class="zero-vertical">
                   <div class="label-form">担当者名</div>
                   <v-text-field
                     v-model="form.person_in_charge_name"
@@ -196,11 +196,11 @@
                     prepend-inner-icon="mdi-email"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="3" class="zero-vertical">
+                <v-col cols="4" class="zero-vertical">
                   <div class="label-form">担当者2Eメールアドレス</div>
                   <v-text-field
                     v-model="form.person_in_charge_email_2"
-                    placeholder="Manager Phone"
+                    placeholder="担当者2Eメールアドレス"
                     outlined
                     dense
                     prepend-inner-icon="mdi-phone"
