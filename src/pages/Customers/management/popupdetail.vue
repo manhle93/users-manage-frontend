@@ -48,6 +48,12 @@
                         </td>
                       </tr>
                       <tr>
+                        <td width="240px">Eメールアドレス:</td>
+                        <td style="font-weight: bold" colspan="3">
+                          {{ form.email }}
+                        </td>
+                      </tr>
+                      <tr>
                         <td width="240px">郵便番号:</td>
                         <td style="font-weight: bold">{{ form.postal_code }}</td>
                         <td width="240px">代表者名:</td>
@@ -102,12 +108,6 @@
                                 ? form.last_printed_date.substr(0, 10)
                                 : ""
                           }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td width="240px">メモ:</td>
-                        <td style="font-weight: bold" colspan="3">
-                          {{ form.note }}
                         </td>
                       </tr>
                       <tr>
@@ -386,7 +386,7 @@ export default {
         this.form = {...data};
         console.log(this.form)
         this.form.user_name = data.user.user_name;
-        this.form.email = data.user.email;
+        this.form.email = data.email;
         this.form.url_image = data.user.url_image ? data.user.url_image : null
         this.fetchComments();
       } else return;
