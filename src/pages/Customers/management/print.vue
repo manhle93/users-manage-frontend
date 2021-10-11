@@ -36,13 +36,13 @@
           :key="item.id"
         >
           <div style="position: absolute; bottom: 20px; right: 20px">
-            {{ item.user_id }} {{ item.user ? item.user.company_name : "" }}
+            担当者 {{ item.user_id }} {{ item.user ? item.user.company_name : "" }}
           </div>
           <div style="width: 100%" v-if="item.user_id">
             <div>
-              <div>{{ item.postal_code }}</div>
-              <div>{{ item.address }}</div>
-              <div>{{ item.company_name }}</div>
+              <div style="font-family:MS P明朝,MS 明朝, serif">{{ item.postal_code }}</div>
+              <div style="font-family:MS P明朝,MS 明朝, serif">{{ item.address }}</div>
+              <div style="font-weight: bold; font-size:18px !important;font-family:HG行書体,HGP行書体,cursive">{{ item.company_name }} </div>
             </div>
           </div>
           <div v-else></div>
