@@ -1,6 +1,7 @@
 import axios from "axios";
 // import store from '@/store'
-import {getToken, setToken, removeToken} from "@/utils/auth";
+// import {getToken, setToken, removeToken} from "@/utils/auth";
+import {getToken, removeToken} from "@/utils/auth";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import Vue from "vue";

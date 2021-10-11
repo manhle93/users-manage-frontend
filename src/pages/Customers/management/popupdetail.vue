@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialogDetail" width="1100">
+  <v-dialog v-model="dialogDetail" width="1300">
     <v-card>
       <v-container fluid>
         <v-form ref="form">
@@ -34,9 +34,9 @@
                     <template v-slot:default>
                       <tbody>
                       <tr>
-                        <td width="240px">会社名/店名:</td>
+                        <td width="120px">会社名/店名:</td>
                         <td style="font-weight: bold">{{ form.company_name }}</td>
-                        <td width="240px">業種:</td>
+                        <td width="150px">業種:</td>
                         <td style="font-weight: bold">
                           {{
                             Industries.some((val) => val.id === form.industry_id)
@@ -48,29 +48,29 @@
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">Eメールアドレス:</td>
+                        <td width="150px">Eメールアドレス:</td>
                         <td style="font-weight: bold" colspan="3">
                           {{ form.email }}
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">郵便番号:</td>
+                        <td width="120px">郵便番号:</td>
                         <td style="font-weight: bold">{{ form.postal_code }}</td>
-                        <td width="240px">代表者名:</td>
+                        <td width="150px">代表者名:</td>
                         <td style="font-weight: bold">
                           {{ form.representative_name }}
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">住所:</td>
-                        <td style="font-weight: bold">{{ form.address }}</td>
-                        <td width="240px">電話番号:</td>
-                        <td style="font-weight: bold">{{ form.phone_number }}</td>
+                        <td width="50px">住所:</td>
+                        <td width="250px" style="font-weight: bold">{{ form.address }}</td>
+                        <td width="100px">電話番号:</td>
+                        <td width="150px" style="font-weight: bold">{{ form.phone_number }}</td>
                       </tr>
                       <tr>
-                        <td width="240px">HPのURL:</td>
+                        <td width="150px">HPのURL:</td>
                         <td style="font-weight: bold">{{ form.homepage_url }}</td>
-                        <td width="240px">ステータス:</td>
+                        <td width="150px">ステータス:</td>
                         <td style="font-weight: bold">
                           {{
                             status.some((val) => val.value === form.signed)
@@ -81,27 +81,27 @@
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">管理者名:</td>
+                        <td width="150px">管理者名:</td>
                         <td style="font-weight: bold">{{ form.manager_name }}</td>
-                        <td width="240px">管理者Eメールアドレス:</td>
+                        <td width="150px">管理者Eメールアドレス:</td>
                         <td style="font-weight: bold">
                           {{ form.manager_email }}
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">担当者名:</td>
+                        <td width="150px">担当者名:</td>
                         <td style="font-weight: bold">
                           {{ form.person_in_charge_name }}
                         </td>
-                        <td width="240px">担当者Eメールアドレス:</td>
+                        <td width="150px">担当者Eメールアドレス:</td>
                         <td style="font-weight: bold">
                           {{ form.person_in_charge_email }}
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">宛名出力回数:</td>
+                        <td width="150px">宛名出力回数:</td>
                         <td style="font-weight: bold">{{ form.print_count }}</td>
-                        <td width="240px">最新宛名出力日:</td>
+                        <td width="150px">最新宛名出力日:</td>
                         <td style="font-weight: bold">
                           {{
                             form.last_printed_date
@@ -111,13 +111,13 @@
                         </td>
                       </tr>
                       <tr>
-                        <td width="240px">登録日:</td>
+                        <td width="150px">登録日:</td>
                         <td style="font-weight: bold">
                           {{
                             form.created_at ? form.created_at.substr(0, 10) : ""
                           }}
                         </td>
-                        <td width="240px">更新日:</td>
+                        <td width="150px">更新日:</td>
                         <td style="font-weight: bold">
                           {{
                             form.updated_at ? form.updated_at.substr(0, 10) : ""
@@ -416,5 +416,9 @@ export default {
 .zero-vertical {
   padding-top: 0px !important;
   padding-bottom: 0px !important;
+}
+.td {
+  padding: 0 6px !important;
+
 }
 </style>
