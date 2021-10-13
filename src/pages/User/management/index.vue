@@ -193,7 +193,7 @@ export default {
       trang_thai: null,
       headers: [
         // { text: "STT", width: "100", sortable: false, value: "stt" },
-        { text: "ユーザー", value: "name", sortable: false, width: "220", },
+        { text: "ユーザー", value: "user_name", sortable: false, width: "220", },
         {
           text: "ID",
           align: "start",
@@ -204,7 +204,7 @@ export default {
           text: "代表者名",
           align: "start",
           sortable: false,
-          value: "user_name",
+          value: "name",
         },
         {
           text: "Eメールアドレス",

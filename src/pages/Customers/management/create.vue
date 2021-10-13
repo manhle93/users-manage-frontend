@@ -145,16 +145,38 @@
                   </v-select>
                 </v-col>
 
+
                 <v-col cols="4" class="zero-vertical">
                   <div class="label-form">管理者名</div>
                   <v-text-field
-                    v-model="form.manager_name"
-                    placeholder="管理者名"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-account"
+                          v-model="form.manager_name"
+                          placeholder="管理者名"
+                          outlined
+                          dense
+                          prepend-inner-icon="mdi-account"
                   ></v-text-field>
                 </v-col>
+                <v-col cols="4" class="zero-vertical">
+                  <div class="label-form">担当者名</div>
+                  <v-text-field
+                          v-model="form.person_in_charge_name"
+                          placeholder="担当者名"
+                          outlined
+                          dense
+                          prepend-inner-icon="mdi-account"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="4" class="zero-vertical">
+                  <div class="label-form">担当者名2</div>
+                  <v-text-field
+                          v-model="form.person_in_charge_name_2"
+                          placeholder="担当者名2"
+                          outlined
+                          dense
+                          prepend-inner-icon="mdi-phone"
+                  ></v-text-field>
+                </v-col>
+
                 <v-col cols="4" class="zero-vertical">
                   <div class="label-form">管理者Eメールアドレス</div>
                   <v-text-field
@@ -163,27 +185,6 @@
                     outlined
                     dense
                     prepend-inner-icon="mdi-email"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">担当者名2</div>
-                  <v-text-field
-                    v-model="form.person_in_charge_name_2"
-                    placeholder="担当者名2"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-phone"
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">担当者名</div>
-                  <v-text-field
-                    v-model="form.person_in_charge_name"
-                    placeholder="担当者名"
-                    outlined
-                    dense
-                    prepend-inner-icon="mdi-account"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="4" class="zero-vertical">

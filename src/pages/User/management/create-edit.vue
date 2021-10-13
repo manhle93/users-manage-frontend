@@ -64,8 +64,8 @@
                 <v-text-field
                   placeholder="代表者名"
                   prepend-inner-icon="mdi-account"
-                  v-model="form.user_name"
-                  :rules="formValidate.user_name"
+                  v-model="form.name"
+                  :rules="formValidate.name"
                 ></v-text-field>
               </v-layout>
             </v-col>
@@ -73,11 +73,11 @@
               <div class="label-form">ユーザー名</div>
               <v-text-field
                 placeholder="ユーザー名を入力してください。"
-                :rules="formValidate.name"
+                :rules="formValidate.user_name"
                 outlined
                 dense
                 prepend-inner-icon="mdi-account"
-                v-model="form.name"
+                v-model="form.user_name"
               ></v-text-field>
               <div class="label-form">権限</div>
               <v-select

@@ -64,7 +64,7 @@
               <p>認証コードの有効期限は6分となります</p>
               <div class="input-group">
                 <i class="bx bxs-key"></i>
-                <input v-model="code" placeholder="郵便番号" />
+                <input v-model="code" placeholder="認証コード" />
               </div>
             </div>
             <div v-else>
@@ -115,31 +115,31 @@
               ></v-progress-circular>
               <span v-else>ログイン</span>
             </v-btn>
-            <p>
-              <b class="pointer">Forgot password ?</b>
-            </p>
-            <p>
-              <span style="margin-right: 5px">Do you have an account?</span>
-              <b @click="sign" class="pointer">登録</b>
-            </p>
+            <!--<p>-->
+              <!--<b class="pointer">Forgot password ?</b>-->
+            <!--</p>-->
+            <!--<p>-->
+              <!--<span style="margin-right: 5px">Do you have an account?</span>-->
+              <!--<b @click="sign" class="pointer">登録</b>-->
+            <!--</p>-->
           </div>
         </div>
-        <div class="form-wrapper">
-          <div class="social-list align-items-center sign-in">
-            <div class="align-items-center facebook-bg">
-              <i class="bx bxl-facebook"></i>
-            </div>
-            <div class="align-items-center google-bg">
-              <i class="bx bxl-google"></i>
-            </div>
-            <div class="align-items-center twitter-bg">
-              <i class="bx bxl-twitter"></i>
-            </div>
-            <div class="align-items-center insta-bg">
-              <i class="bx bxl-instagram-alt"></i>
-            </div>
-          </div>
-        </div>
+        <!--<div class="form-wrapper">-->
+          <!--<div class="social-list align-items-center sign-in">-->
+            <!--<div class="align-items-center facebook-bg">-->
+              <!--<i class="bx bxl-facebook"></i>-->
+            <!--</div>-->
+            <!--<div class="align-items-center google-bg">-->
+              <!--<i class="bx bxl-google"></i>-->
+            <!--</div>-->
+            <!--<div class="align-items-center twitter-bg">-->
+              <!--<i class="bx bxl-twitter"></i>-->
+            <!--</div>-->
+            <!--<div class="align-items-center insta-bg">-->
+              <!--<i class="bx bxl-instagram-alt"></i>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
       <!-- END SIGN IN -->
     </div>

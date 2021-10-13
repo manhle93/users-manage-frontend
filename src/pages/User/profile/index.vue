@@ -86,13 +86,10 @@
               登録日: <strong>{{ formatDate(USER.created_at) }}</strong>
             </div>
             <div class="mb-2">
-              代表者名: <strong>{{ USER.user_name }}</strong>
-            </div>
-            <div class="mb-2">
               権限:
               {{
                 USER && USER.role
-                  ? USER.role.name + " - " + USER.role.description
+                  ? USER.role.name
                   : ""
               }}
             </div>
