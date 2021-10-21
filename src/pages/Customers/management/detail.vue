@@ -43,7 +43,7 @@
                     </tr>
                     <tr>
                       <td width="240px">Postal Code:</td>
-                      <td style="font-weight: bold">{{ form.postal_code }}</td>
+                      <td style="font-weight: bold">〒  {{ form.postal_code }}</td>
                       <td width="240px">Representative name:</td>
                       <td style="font-weight: bold">
                         {{ form.representative_name }}
@@ -317,8 +317,8 @@ export default {
       (v) => !!v || "Address không thể bỏ trống",
       (v) => (v && v.length >= 5) || "Address tối thiểu 5 ký tự",
     ],
-    statusRules: [(v) => v != null || "Hãy chọn một loại hình!"],
-    industryRules: [(v) => !!v || "Hãy chọn một loại hình!"],
+    statusRules: [(v) => v != null || "空白にしないでください!"],
+    industryRules: [(v) => !!v || "空白にしないでください!"],
     userNameRules: [
       (v) => !!v || "Tên đăng nhập không thể bỏ trống",
       (v) => (v && v.length >= 3) || "Tên đăng nhập tối thiểu 3 ký tự",

@@ -40,7 +40,7 @@
           </div>
           <div style="width: 100%" v-if="item.user_id">
             <div>
-              <div style="font-family:MS P明朝,MS 明朝, serif">{{ item.postal_code }}</div>
+              <div style="font-family:MS P明朝,MS 明朝, serif">〒 {{ item.postal_code }}</div>
               <div style="font-family:MS P明朝,MS 明朝, serif">{{ item.address }}</div>
               <div style="font-weight: bold; font-size:22px !important;font-family:HG行書体,HGP行書体,cursive">{{ item.company_name }} {{ item.representative_name ? "" : "御中"}}</div>
               <div style="font-size:18px !important;font-family:HG行書体,HGP行書体,cursive">{{ item.representative_name ? item.representative_name + ' 様' : ""}} </div>

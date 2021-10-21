@@ -61,7 +61,7 @@
                     <v-list-item-icon>
                       <v-icon color="#fb8c00">mdi-printer</v-icon>
                     </v-list-item-icon>
-                    宛名出力8
+                    宛名出力8分割
                   </v-layout>
                 </v-list-item-title>
               </v-list-item>
@@ -71,7 +71,7 @@
                     <v-list-item-icon>
                       <v-icon color="#fb8c00">mdi-printer</v-icon>
                     </v-list-item-icon>
-                    宛名出力12
+                    宛名出力12分割
                   </v-layout>
                 </v-list-item-title>
               </v-list-item>
