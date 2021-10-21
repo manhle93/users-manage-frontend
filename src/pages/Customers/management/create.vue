@@ -111,6 +111,7 @@
                   <div class="label-form">電話番号</div>
                   <v-text-field
                     v-model="form.phone_number"
+                    :rules="phoneNumber"
                     placeholder="電話番号"
                     outlined
                     dense
@@ -333,6 +334,9 @@ export default {
     addressRules: [
       (v) => !!v || "住所を入力してください",
       (v) => (v && v.length >= 5) || "住所は５文字以上で入力してください",
+    ],
+    phoneNumber: [
+      (v) => !!v || "空白にしないでください!"
     ],
     statusRules: [(v) => v != null || "空白にしないでください!"],
     industryRules: [(v) => !!v || "空白にしないでください!"],
