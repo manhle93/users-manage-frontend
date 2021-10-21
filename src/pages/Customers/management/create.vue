@@ -334,8 +334,8 @@ export default {
       (v) => !!v || "住所を入力してください",
       (v) => (v && v.length >= 5) || "住所は５文字以上で入力してください",
     ],
-    statusRules: [(v) => v != null || "Hãy chọn một loại hình!"],
-    industryRules: [(v) => !!v || "Hãy chọn một loại hình!"],
+    statusRules: [(v) => v != null || "空白にしないでください!"],
+    industryRules: [(v) => !!v || "空白にしないでください!"],
     userNameRules: [
       (v) => !!v || "Tên đăng nhập không thể bỏ trống",
       (v) => (v && v.length >= 3) || "Tên đăng nhập tối thiểu 3 ký tự",
