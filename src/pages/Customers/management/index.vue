@@ -341,12 +341,12 @@ export default {
       loadingPrint: false,
       trang_thai: null,
       headers: [
-        {
-          text: "REP名ID",
-          value: "user_id",
-          sortable: false,
-          width: "100",
-        },
+        // {
+        //   text: "REP名ID",
+        //   value: "user_id",
+        //   sortable: false,
+        //   width: "100",
+        // },
         {
           text: "REP店名",
           value: "user.company_name",
