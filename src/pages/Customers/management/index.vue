@@ -396,7 +396,7 @@ export default {
           align: "center",
           value: "signed",
         },
-        { text: "", sortable: false, value: "action" },
+        { text: "編集", sortable: false, value: "action" },
       ],
     };
   },
