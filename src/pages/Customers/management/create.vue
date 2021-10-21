@@ -67,7 +67,6 @@
                     placeholder="郵便番号"
                     :rules="poscodeRules"
                     outlined
-                    type="number"
                     dense
                     prepend-inner-icon="mdi-map-marker"
                   ></v-text-field>
@@ -329,6 +328,7 @@ export default {
     poscodeRules: [
       (v) => !!v || "郵便番号を入力してください",
       (v) => (v && v.length >= 2) || "郵便番号は２文字以上で入力してください",
+      (v) => /.+.-.+/.test(v) || "文字が含まれている必要があります -",
     ],
     addressRules: [
       (v) => !!v || "住所を入力してください",
