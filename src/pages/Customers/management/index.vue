@@ -43,7 +43,7 @@
                   </v-layout>
                 </v-list-item-title>
               </v-list-item>
-              <v-list-item style="cursor: pointer">
+              <!-- <v-list-item style="cursor: pointer">
                 <v-list-item-title>
                   <v-layout align-center>
                     <v-list-item-icon>
@@ -54,7 +54,7 @@
                     </download-csv>
                   </v-layout>
                 </v-list-item-title>
-              </v-list-item>
+              </v-list-item> -->
               <v-list-item @click="printPDF(4)">
                 <v-list-item-title>
                   <v-layout align-center>
