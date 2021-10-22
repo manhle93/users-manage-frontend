@@ -18,7 +18,7 @@
       "
     >
       <tr
-        style="border: 1px solid black; border-collapse: collapse"
+        style="border: 5px solid black; border-collapse: collapse"
         :style="{ height: `calc(95vh /${row}) ` }"
         v-for="(items, key) in tableData"
         :key="key"
