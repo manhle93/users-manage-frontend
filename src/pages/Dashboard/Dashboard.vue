@@ -39,18 +39,17 @@
             <div class="d-flex flex-no-wrap justify-space-between">
               <div class="mr-6">
                 <v-card-title class="headline pt-6"
-                  ><span style="font-size: 40px"
-                    >Hello {{ USER.name }}!</span
+                  ><span style="font-size: 10px"
+                    >こんにちは {{ USER.name }}!</span
                   ></v-card-title
                 >
                 <v-card-subtitle class="mt-1"
-                  >Chào ngày mới! Bạn nhớ thực hiện chấm công trước 9h sáng
-                  nhé!</v-card-subtitle
+                  ></v-card-subtitle
                 >
 
                 <v-card-actions>
                   <v-btn class="ml-2 mt-5 mb-3" outlined rounded small>
-                    Chấm Công
+                  計時
                   </v-btn>
                 </v-card-actions>
               </div>
@@ -61,7 +60,7 @@
         <v-col lg="3" sm="6" md="7" cols="12">
           <v-card class="mx-1 mb-1">
             <v-card-title class="pa-6 pb-3">
-              <p>Thông tin thời tiết</p>
+              <p>天気情報</p>
               <v-spacer></v-spacer>
               <v-menu>
                 <template v-slot:activator="{ on, attrs }">
@@ -129,7 +128,7 @@
         <v-col lg="3" sm="6" md="5" cols="12">
           <v-card class="mx-1 mb-1">
             <v-card-title class="flex-nowrap pa-6 pb-3">
-              <p class="text-truncate">Phân bố nhân sự</p>
+              <p class="text-truncate">人員配置</p>
               <v-spacer></v-spacer>
               <v-menu>
                 <template v-slot:activator="{ on, attrs }">
@@ -169,7 +168,7 @@
         <v-col lg="3" sm="6" md="5" cols="12">
           <v-card class="mx-1 mb-1">
             <v-card-title class="pa-6 pb-3">
-              <p>Lượng truy cập hôm nay</p>
+              <p>アクセス数</p>
               <v-spacer></v-spacer>
               <v-menu>
                 <template v-slot:activator="{ on, attrs }">
@@ -239,7 +238,7 @@
         <v-col lg="3" sm="6" md="7" cols="12">
           <v-card class="mx-1 mb-1">
             <v-card-title class="pa-6 pb-3">
-              <p>Năng suất làm việc</p>
+              <p>その他の情報</p>
               <v-spacer></v-spacer>
               <v-menu>
                 <template v-slot:activator="{ on, attrs }">
@@ -274,7 +273,7 @@
               <v-row no-gutters class="pb-3">
                 <v-col>
                   <div class="text-h6 card-light-grey font-weight-regular">
-                    Phòng Nhân Sự
+                    デパートメント
                   </div>
                   <v-progress-linear
                     :value="value"
@@ -286,7 +285,7 @@
               <v-row no-gutters class="pb-1">
                 <v-col>
                   <div class="text-h6 card-light-grey font-weight-regular">
-                    Phòng Sản Xuất
+                    デパートメント
                   </div>
                   <v-progress-linear
                     :value="value2"
@@ -301,7 +300,7 @@
         <v-col lg="3" sm="6" md="7" cols="12">
           <v-card class="mx-1 mb-1">
             <v-card-title class="pa-6 pb-3">
-              <p>Thông tin thời tiết tại Hà Nội</p>
+              <p>天気情報</p>
               <v-spacer></v-spacer>
               <v-menu>
                 <template v-slot:activator="{ on, attrs }">
@@ -369,7 +368,7 @@
         <v-col lg="3" sm="6" md="5" cols="12">
           <v-card class="mx-1 mb-1">
             <v-card-title class="flex-nowrap pa-6 pb-3">
-              <p class="text-truncate">Phân bố lương tháng 01/2021</p>
+              <p class="text-truncate">その他の情報</p>
               <v-spacer></v-spacer>
               <v-menu>
                 <template v-slot:activator="{ on, attrs }">
@@ -414,7 +413,7 @@
                   lg="5"
                   class="d-flex align-center"
                 >
-                  <p>Chi tiết truy cập hệ thống</p>
+                  <p>その他の情報</p>
                 </v-col>
                 <v-col
                   sm="6"
@@ -485,7 +484,7 @@
         <v-col lg="4" sm="6" cols="12">
           <v-card class="mx-1 mb-1">
             <v-card-title class="pa-6 pb-3">
-              <p>Kinh Doanh</p>
+              <p>デパートメント</p>
               <v-spacer></v-spacer>
               <v-menu>
                 <template v-slot:activator="{ on, attrs }">
@@ -547,7 +546,7 @@
         <v-col lg="4" sm="6" cols="12">
           <v-card class="mx-1 mb-1">
             <v-card-title class="pa-6 pb-3">
-              <p>Sản Xuất</p>
+              <p>デパートメント</p>
               <v-spacer></v-spacer>
               <v-menu>
                 <template v-slot:activator="{ on, attrs }">
@@ -609,7 +608,7 @@
         <v-col lg="4" sm="6" cols="12">
           <v-card class="mx-1 mb-1">
             <v-card-title class="pa-6 pb-3">
-              <p>Bán Hàng</p>
+              <p>デパートメント</p>
               <v-spacer></v-spacer>
               <v-menu>
                 <template v-slot:activator="{ on, attrs }">
@@ -671,7 +670,7 @@
         <v-col cols="12">
           <v-card class="support-requests mx-1 mb-1">
             <v-card-title class="pa-6 pb-0">
-              <p>Sản phẩm bán chạy nhất</p>
+              <p>その他の情報</p>
               <v-spacer></v-spacer>
               <v-menu>
                 <template v-slot:activator="{ on, attrs }">
