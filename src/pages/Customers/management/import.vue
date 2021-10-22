@@ -247,7 +247,7 @@ export default {
       if (!this.validateImport) {
         this.$toast.error("エクセルのデータに不備があります", {
           position: "top-center",
-          timeout: 2000,
+          timeout: 5000,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,

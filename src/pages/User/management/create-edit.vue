@@ -159,8 +159,7 @@
                   ></v-text-field
                 ></v-col>
                 <div class="pl-3" v-if="showText">
-                  Mật khẩu tối thiểu 8 ký tự bao gồm chữ viết hoa, chữ thường,
-                  ký thự đặc biệt và số
+                  パスワードは8文字以上で入力してください。「英大文字・英小文字・数字・記号」それぞれを最低い１文字ずつ含む必要があります。
                 </div>
               </v-row>
             </v-col>

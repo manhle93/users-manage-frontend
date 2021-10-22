@@ -108,7 +108,7 @@
                 </v-col>
 
                 <v-col cols="4" class="zero-vertical">
-                  <div class="label-form">電話番号</div>
+                  <div class="label-form">電話番号 <span style="color: red">(*)</span></div>
                   <v-text-field
                     v-model="form.phone_number"
                     :rules="phoneNumber"
