@@ -131,12 +131,15 @@ export default {
     validateImport: true,
     loadingImport: false,
     headers: [
-      { text: "業種", value: "industry" },
+      { text: "業種", 
+        value: "industry",
+        width: "100",
+      },
       {
         text: "会社名/店名",
         value: "company_name",
         sortable: false,
-        width: "220",
+        width: "150",
       },
       { text: "代表者名", value: "representative_name" },
       {
@@ -150,6 +153,12 @@ export default {
         align: "start",
         sortable: false,
         value: "phone_number",
+      },
+      {
+        text: "郵便番号",
+        align: "start",
+        sortable: false,
+        value: "postal_code",
       },
       { text: "HPのURL", align: "start", value: "homepage_url" },
       { text: "Eメールアドレス", sortable: false, value: "manager_email" },
@@ -215,6 +224,7 @@ export default {
                 homepage_url: el[5],
                 manager_email: el[6],
                 duplicate_email: duplicateEmail,
+                postal_code: el[7],
               };
               this.dataTable.push(item);
               if (!industry || !el[1] || !el[3] || !el[6] || duplicateEmail) {
