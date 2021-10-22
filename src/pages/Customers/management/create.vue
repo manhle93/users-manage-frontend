@@ -36,7 +36,7 @@
                   <v-text-field
                     v-model="form.company_name"
                     :rules="nameRules"
-                    placeholder="REP店名"
+                    placeholder="会社名/店名"
                     outlined
                     dense
                     prepend-inner-icon="mdi-account"
