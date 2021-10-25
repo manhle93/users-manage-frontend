@@ -1,14 +1,5 @@
 <template>
-  <!-- <div
-    style="display: flex; flex-direction: row; height: 100%; flex-wrap: wrap; justify-content:  space-between"
-  >
-    <div
-      style="width: 49%; height: 21%; border: 1px solid red"
-      v-for="i in 8"
-      :key="i"
-    ></div>
-  </div> -->
-  <div style="height: 100%; width: 100%">
+  <div style="height: 100%; width: 100%;">
     <table
       style="
         width: 100%;
@@ -84,18 +75,13 @@ export default {
     },
   },
   mounted() {
-    // const data = [...this.data];
-    //   if (data.length % 2 == 1) {
-    //     data.push({});
-    //   }
-    //   for (let i = 0; i < data.length; i = i + 2) {
-    //     this.tableData.push([data[i], data[i + 1]]);
-    // }
+
   },
 };
 </script>
 
 <style>
+@page { size: auto;  margin: 0mm; }
 .d-flex {
   display: flex;
   flex-direction: row;
@@ -111,8 +97,5 @@ export default {
   float: left;
   margin: 5px;
 }
-@page {
-    size: auto;   /* auto is the initial value */
-    margin: 0;  /* this affects the margin in the printer settings */
-}
+
 </style>

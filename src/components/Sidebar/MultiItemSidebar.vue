@@ -52,10 +52,12 @@
     </template> -->
 
     <template v-slot:activator>
-      <v-layout align-center>
-        <v-icon v-text="item.icon" />
-        <div class="text-body-2 text-truncate pl-3" v-text="item.name" />
-      </v-layout>
+      <v-list-item-content>
+        <v-layout align-center>
+          <v-icon v-text="item.icon" />
+          <div class="text-body-2 text-truncate pl-3" v-text="item.name" style="flex: 1" />
+        </v-layout>
+      </v-list-item-content>
     </template>
 
     <v-list-item

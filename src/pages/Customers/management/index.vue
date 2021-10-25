@@ -310,7 +310,7 @@ export default {
       CustomerPic,
       page: 1,
       pageCount: 1,
-      itemsPerPage: 10,
+      itemsPerPage: 20,
       customerPrint: [],
       options: {},
       trangThais: [

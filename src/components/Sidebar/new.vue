@@ -8,6 +8,7 @@
     floating
     color="rgb(244, 245, 247)"
     :class="{ 'drawer-mini': !DRAWER_STATE }"
+    class="scroll-sidebar"
   >
     <v-list class="pa-0 pt-3" :class="{'px-3': isMini }" dense nav>
       <template v-for="(item, key) in menus.filter((el) => !el.hidden)">
@@ -80,4 +81,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+    .scroll-sidebar {
+        overflow-y: hidden
+    }
+    .scroll-sidebar:hover {
+        overflow-y: auto
+    }
+</style>
 <style src="./Sidebar.scss" lang="scss" />
