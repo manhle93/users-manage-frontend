@@ -96,12 +96,18 @@
             <div v-else>{{ item.manager_email }}</div>
           </template>
           <template v-slot:[`item.action`]="{ item }">
-          <div>
-            <v-btn color="pink" fab x-small dark @click="removeCustomer(item)">
-              <v-icon small>mdi-close</v-icon>
-            </v-btn>
-          </div>
-        </template>
+            <div>
+              <v-btn
+                color="pink"
+                fab
+                x-small
+                dark
+                @click="removeCustomer(item)"
+              >
+                <v-icon small>mdi-close</v-icon>
+              </v-btn>
+            </div>
+          </template>
         </v-data-table>
       </div>
     </div>
@@ -131,10 +137,7 @@ export default {
     validateImport: true,
     loadingImport: false,
     headers: [
-      { text: "業種", 
-        value: "industry",
-        width: "100",
-      },
+      { text: "業種", value: "industry", width: "100" },
       {
         text: "会社名/店名",
         value: "company_name",
@@ -162,7 +165,7 @@ export default {
       },
       { text: "HPのURL", align: "start", value: "homepage_url" },
       { text: "Eメールアドレス", sortable: false, value: "manager_email" },
-        { text: "Action", sortable: false, value: "action" },
+      { text: "Action", sortable: false, value: "action" },
     ],
   }),
   mounted() {
@@ -227,9 +230,9 @@ export default {
                 postal_code: el[7],
               };
               this.dataTable.push(item);
-              if (!industry || !el[1] || !el[3] || !el[6] || duplicateEmail) {
-                this.validateImport = false;
-              }
+              // if (!industry || !el[1] || !el[3] || !el[6] || duplicateEmail) {
+              //   this.validateImport = false;
+              // }
             }
           });
         };
@@ -237,13 +240,23 @@ export default {
         reader.readAsBinaryString(this.file);
       }
     },
-    removeCustomer(item) {
-         this.dataTable  =  this.dataTable.filter(el => el.id !== item.id)
+
+    checkDataImport() {
+      this.validateImport = true;
+      this.dataTable.forEach((el) => {
+        if (!el.industry || !el.company_name || !el.address || !el.manager_email|| el.duplicateEmail) {
+          this.validateImport = false;
+        }
+      });
     },
-    downloadFile(){
-        window.open('/importTenTen.xlsx')
+    removeCustomer(item) {
+      this.dataTable = this.dataTable.filter((el) => el.id !== item.id);
+    },
+    downloadFile() {
+      window.open("/importTenTen.xlsx");
     },
     async importData() {
+      this.checkDataImport()
       if (!this.validateImport) {
         this.$toast.error("エクセルのデータに不備があります", {
           position: "top-center",
