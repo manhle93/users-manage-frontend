@@ -46,7 +46,7 @@ export default {
       this.deleteDialog = true;
     },
     async submitDelete() {
-      await deleteComment({ id: this.currentComment.id });
+      await deleteComment({ comment_id: this.currentComment.id });
       this.$emit('get-comment')
       this.deleteDialog = false;
       this.$toast.info("削除は完了しました。", {

@@ -3,7 +3,7 @@
     <v-card>
       <v-container fluid>
         <v-form ref="form">
-          <v-row>
+          <v-row v-if="!loadingData">
             <v-col lg="8" sm="12" md="8" xs="12">
               <v-card>
                 <v-card-title class="pt-4 pl-6">
@@ -304,6 +304,14 @@
               <!--              </v-card>-->
             </v-col>
           </v-row>
+          <v-layout v-else justify-center align-center style="height: 400px">
+            <v-progress-circular
+              :size="70"
+              :width="7"
+              color="purple"
+              indeterminate
+            ></v-progress-circular>
+          </v-layout>
         </v-form>
         <UpdateComment ref="editCommentForm" @get-comment="fetchComments" />
         <DeleteComment ref="deleteCommentForm" @get-comment="fetchComments" />
@@ -366,6 +374,7 @@ export default {
       (v) => !!v || "E-Mail không thể bỏ trống",
       (v) => /.+@.+\..+/.test(v) || "E-mail không hợp lệ",
     ],
+    loadingData: false,
     form: {
       email: "",
       user_name: "",
@@ -389,21 +398,20 @@ export default {
     },
   }),
 
-  mounted() {
-    // this.getDanhMuc();
-    // this.getNhanVienEdit();
-  },
   computed: {
     currentUser() {
       return this.$store.state.User.me;
     },
   },
   methods: {
-    openDialog(customerId) {
+    async openDialog(customerId) {
       this.customerId = customerId;
       this.dialogDetail = true;
-      this.getIndustries();
-      this.getCustomer();
+      this.loadingData = true;
+      await this.getIndustries();
+      await this.getCustomer();
+      await this.fetchComments()
+      this.loadingData = false;
     },
     gotoLink(link) {
       this.$router.push(link);
@@ -413,7 +421,10 @@ export default {
       this.Industries = data;
     },
     async fetchComments() {
-      let data = await getComments({ user_id: this.form.user_id });
+      let data = await getComments({
+        user_id: this.form.user_id,
+        customer_id: this.customerId,
+      });
       this.comments = data;
     },
     async getCustomer() {
@@ -425,7 +436,6 @@ export default {
         this.form.user_name = data.user.user_name;
         this.form.email = data.email;
         this.form.url_image = data.user.url_image ? data.user.url_image : null;
-        this.fetchComments();
       } else return;
     },
     async pushComment() {
@@ -434,6 +444,7 @@ export default {
         await addComment({
           user_id: this.form.user_id,
           content: this.form.comment,
+          customer_id: this.customerId,
         });
         this.form.comment = null;
         this.fetchComments();
