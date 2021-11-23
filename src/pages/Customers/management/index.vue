@@ -298,7 +298,7 @@ import print8pic from "@/assets/print8.jpg";
 
 import print12pic from "@/assets/print12.png";
 
-import PrintView from "./print.vue";
+import PrintView from "./print8.vue";
 import Popupdetail from "@/pages/Customers/management/popupdetail";
 export default {
   components: { Popupdetail, PrintView },
@@ -430,6 +430,7 @@ export default {
       this.loadingPrint = false;
 
       this.dataPrint = this.selectedRow;
+
       this.printRow = row;
     },
     async signCustomer(status) {
