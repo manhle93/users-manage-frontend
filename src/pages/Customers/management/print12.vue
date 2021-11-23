@@ -8,7 +8,7 @@
       "
     >
       <tr
-        :style="{ height: '23.9vh' }"
+        :style="{ height: '15.73vh' }"
         v-for="(items, key) in tableData"
         :key="key"
       >
@@ -25,14 +25,14 @@
           :key="item.id"
         >
           <div style="position: absolute; bottom: 20px; right: 20px">
-            担当者 {{ item.user_id }} {{ item.user ? item.user.company_name : "" }}
+            {{ item.user_id }} {{ item.user ? item.user.company_name : "" }}
           </div>
           <div style="width: 100%" v-if="item.user_id">
             <div>
               <div style="font-family:MS P明朝,MS 明朝, serif">〒 {{ item.postal_code }}</div>
               <div style="font-family:MS P明朝,MS 明朝, serif">{{ item.address }}</div>
-              <div style="font-weight: bold; font-size:22px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.company_name }} {{ item.representative_name ? "" : "御中"}}</div>
-              <div style="font-weight: bold; font-size:22px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.representative_name ? item.representative_name + ' 様' : ""}} </div>
+              <div style="font-weight: bold; font-size:14px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.company_name }} {{ item.representative_name ? "" : "御中"}}</div>
+              <div style="font-weight: bold; font-size:14px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.representative_name ? item.representative_name + ' 様' : ""}} </div>
             </div>
           </div>
           <div v-else></div>
@@ -47,7 +47,7 @@
       "
     >
       <tr
-        :style="{ height: '261px' }"
+        :style="{ height: '16.59vh' }"
         v-for="(items, key) in tableData1"
         :key="key"
       >
@@ -70,8 +70,8 @@
             <div>
               <div style="font-family:MS P明朝,MS 明朝, serif">〒 {{ item.postal_code }}</div>
               <div style="font-family:MS P明朝,MS 明朝, serif">{{ item.address }}</div>
-              <div style="font-weight: bold; font-size:22px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.company_name }} {{ item.representative_name ? "" : "御中"}}</div>
-              <div style="font-weight: bold; font-size:22px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.representative_name ? item.representative_name + ' 様' : ""}} </div>
+              <div style="font-weight: bold; font-size:14px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.company_name }} {{ item.representative_name ? "" : "御中"}}</div>
+              <div style="font-weight: bold; font-size:14px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.representative_name ? item.representative_name + ' 様' : ""}} </div>
             </div>
           </div>
           <div v-else></div>
@@ -86,8 +86,8 @@
       "
     >
       <tr
-        :style="{ height: `calc(95vh /4) ` }"
-        v-for="(items, key) in tableData2"
+        :style="{ height: '16.59vh' }"
+        v-for="(items, key) in tableData"
         :key="key"
       >
         <td
@@ -109,8 +109,8 @@
             <div>
               <div style="font-family:MS P明朝,MS 明朝, serif">〒 {{ item.postal_code }}</div>
               <div style="font-family:MS P明朝,MS 明朝, serif">{{ item.address }}</div>
-              <div style="font-weight: bold; font-size:22px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.company_name }} {{ item.representative_name ? "" : "御中"}}</div>
-              <div style="font-weight: bold; font-size:22px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.representative_name ? item.representative_name + ' 様' : ""}} </div>
+              <div style="font-weight: bold; font-size:14px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.company_name }} {{ item.representative_name ? "" : "御中"}}</div>
+              <div style="font-weight: bold; font-size:14px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.representative_name ? item.representative_name + ' 様' : ""}} </div>
             </div>
           </div>
           <div v-else></div>
@@ -145,20 +145,21 @@ export default {
       this.tableData = []
       this.tableData1 = []
       this.tableData2 = []
+
       const data = [...val];
       if (data.length % 2 == 1) {
         data.push({});
       }
-      for (let i = 0; i < 7; i = i + 2) {
+      for (let i = 0; i < 12; i = i + 2) {
         this.tableData.push([data[i], data[i + 1]]);
       }
-      if(data.length >=7){
-        for (let i = 7; i < 14; i = i + 2) {
+      if(data.length >=12){
+        for (let i = 12; i < 24; i = i + 2) {
           this.tableData1.push([data[i], data[i + 1]]);
         }
       }
-      if(data.length >=14){
-        for (let i = 14; i < data.length; i = i + 2) {
+      if(data.length >=24){
+        for (let i = 24; i < data.length; i = i + 2) {
           this.tableData2.push([data[i], data[i + 1]]);
         }
       }

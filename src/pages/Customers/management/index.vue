@@ -273,16 +273,25 @@
             キャンセル</v-btn
           >
           <v-spacer> </v-spacer>
-          <v-btn color="primary" @click="submitPrint" class="mr-3">
+          <v-btn color="primary" v-if="printRow == 4" @click="submitPrint" class="mr-3">
             <v-icon left> mdi-printer</v-icon>
-            出力</v-btn
-          >
+            出力
+          </v-btn>
+          <v-btn color="primary" v-else @click="submitPrint12" class="mr-3">
+            <v-icon left> mdi-printer</v-icon>
+            出力
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <div v-show="false">
       <div id="printbody">
         <PrintView :data="dataPrint" :row="printRow" />
+      </div>
+    </div>
+    <div v-show="false">
+      <div id="printbody12">
+        <PrintView12 :data="dataPrint" :row="printRow" />
       </div>
     </div>
     <popupdetail ref="detail" />
@@ -299,9 +308,10 @@ import print8pic from "@/assets/print8.jpg";
 import print12pic from "@/assets/print12.png";
 
 import PrintView from "./print8.vue";
+import PrintView12 from "./print12.vue";
 import Popupdetail from "@/pages/Customers/management/popupdetail";
 export default {
-  components: { Popupdetail, PrintView },
+  components: { Popupdetail, PrintView, PrintView12 },
   data() {
     return {
       print8pic,
@@ -457,6 +467,23 @@ export default {
       })
       this.addPrint(printId)
       var divContents = document.getElementById("printbody").innerHTML;
+      
+      var a = window.open("", "", "height=800, width=1200", "_self");
+      a.document.write("<html>");
+      a.document.write("<body > <h1><br>");
+      a.document.write(divContents);
+      a.document.write("</body></html>");
+      a.document.close();
+      a.print();
+    },
+    submitPrint12() {
+      let printId = []
+      this.selectedRow.forEach(el => {
+        printId.push(el.id)
+      })
+      this.addPrint(printId)
+      var divContents = document.getElementById("printbody12").innerHTML;
+      
       var a = window.open("", "", "height=800, width=1200", "_self");
       a.document.write("<html>");
       a.document.write("<body > <h1><br>");
