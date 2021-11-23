@@ -78,45 +78,6 @@
         </td>
       </tr>
     </table>
-    <table
-      style="
-        width: 100%;
-        max-height: 100%;
-        border-collapse: collapse;
-      "
-    >
-      <tr
-        :style="{ height: '16.59vh' }"
-        v-for="(items, key) in tableData"
-        :key="key"
-      >
-        <td
-          style="
-            border: 1px solid black;
-            border-collapse: collapse;
-            width: 50%;
-            vertical-align: top !important;
-            position: relative;
-            padding: 20px;
-          "
-          v-for="item in items"
-          :key="item.id"
-        >
-          <div style="position: absolute; bottom: 20px; right: 20px">
-            担当者 {{ item.user_id }} {{ item.user ? item.user.company_name : "" }}
-          </div>
-          <div style="width: 100%" v-if="item.user_id">
-            <div>
-              <div style="font-family:MS P明朝,MS 明朝, serif">〒 {{ item.postal_code }}</div>
-              <div style="font-family:MS P明朝,MS 明朝, serif">{{ item.address }}</div>
-              <div style="font-weight: bold; font-size:14px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.company_name }} {{ item.representative_name ? "" : "御中"}}</div>
-              <div style="font-weight: bold; font-size:14px !important;font-family:HG行書体, HGP行書体,cursive">{{ item.representative_name ? item.representative_name + ' 様' : ""}} </div>
-            </div>
-          </div>
-          <div v-else></div>
-        </td>
-      </tr>
-    </table>
   </div>
 </template>
 
@@ -154,13 +115,8 @@ export default {
         this.tableData.push([data[i], data[i + 1]]);
       }
       if(data.length >=12){
-        for (let i = 12; i < 24; i = i + 2) {
+        for (let i = 12; i < data.length; i = i + 2) {
           this.tableData1.push([data[i], data[i + 1]]);
-        }
-      }
-      if(data.length >=24){
-        for (let i = 24; i < data.length; i = i + 2) {
-          this.tableData2.push([data[i], data[i + 1]]);
         }
       }
     },
