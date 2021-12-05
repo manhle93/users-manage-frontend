@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%; width: 100%;">
+  <div style="height: 90%; width: 100%;">
     <table
       style="
         width: 100%;
