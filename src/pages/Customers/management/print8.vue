@@ -149,10 +149,16 @@ export default {
       if (data.length % 2 == 1) {
         data.push({});
       }
-      for (let i = 0; i < 7; i = i + 2) {
-        this.tableData.push([data[i], data[i + 1]]);
+      if(data.length <7){
+        for (let i = 0; i < data.length -1; i = i + 2) {
+          this.tableData.push([data[i], data[i + 1]]);
+        }
       }
       if(data.length >=7){
+        for (let i = 0; i < 7; i = i + 2) {
+          this.tableData.push([data[i], data[i + 1]]);
+        }
+
         for (let i = 7; i < 14; i = i + 2) {
           this.tableData1.push([data[i], data[i + 1]]);
         }
